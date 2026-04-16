@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useWidgetData } from '@/lib/hooks/use-workspace';
 import WidgetWrapper from '../widget-wrapper';
 import {
@@ -187,9 +188,9 @@ export default function CustomMyCard({ code }: { code: string }) {
   const footer = data ? (
     <>
       <span>Assunzione: {formatDate(data.hire_date)}</span>
-      <a href="/portal/profile" className="text-primary hover:underline">
+      <Link href="/portal/profile" className="text-primary hover:underline">
         Vedi profilo completo &rarr;
-      </a>
+      </Link>
     </>
   ) : undefined;
 
