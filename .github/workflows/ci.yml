@@ -40,6 +40,7 @@ jobs:
   test:
     name: Test
     runs-on: [self-hosted, heuresys, linux]
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -47,7 +48,15 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci --workspaces --include-workspace-root
-      - run: npm test --workspaces --if-present -- --passWithNoTests
+      - name: Run tests
+        env:
+          NODE_OPTIONS: '--experimental-vm-modules'
+        run: |
+          npm test --workspaces --if-present -- \
+            --passWithNoTests \
+            --forceExit \
+            --detectOpenHandles \
+            --testTimeout=60000
 
   commitlint:
     name: Commitlint (PR title + commits)
