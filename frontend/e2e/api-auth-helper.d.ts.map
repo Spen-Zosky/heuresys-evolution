@@ -1,0 +1,1 @@
+{"version":3,"file":"api-auth-helper.d.ts","sourceRoot":"","sources":["api-auth-helper.ts"],"names":[],"mappings":"AAAA;;;GAGG;AAMH,wBAAsB,YAAY,IAAI,OAAO,CAAC,MAAM,CAAC,CAqBpD;AAED,wBAAgB,cAAc,CAAC,UAAU,GAAE,MAAmB,GAAG,MAAM,CAAC,MAAM,EAAE,MAAM,CAAC,CAKtF;AAED;;GAEG;AACH,wBAAsB,uBAAuB,CAAC,UAAU,GAAE,MAAmB,GAAG,OAAO,CAAC,MAAM,CAAC,MAAM,EAAE,MAAM,CAAC,CAAC,CAO9G"}

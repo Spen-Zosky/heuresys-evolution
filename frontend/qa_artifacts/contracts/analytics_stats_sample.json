@@ -1,0 +1,182 @@
+{
+  "success": true,
+  "data": {
+    "kpis": [
+      {
+        "label": "Headcount",
+        "value": "156",
+        "change": 4.2,
+        "trend": "up",
+        "icon": "users"
+      },
+      {
+        "label": "Tenure Media",
+        "value": "12.7a",
+        "change": 0.5,
+        "trend": "up",
+        "icon": "clock"
+      },
+      {
+        "label": "Budget HR",
+        "value": "€22.3M",
+        "change": 2.1,
+        "trend": "up",
+        "icon": "dollar"
+      },
+      {
+        "label": "Produttivita",
+        "value": "71%",
+        "change": 3.8,
+        "trend": "up",
+        "icon": "zap"
+      }
+    ],
+    "headcountTrend": [
+      {
+        "month": "Lug",
+        "count": 141,
+        "target": 161
+      },
+      {
+        "month": "Ago",
+        "count": 144,
+        "target": 161
+      },
+      {
+        "month": "Set",
+        "count": 147,
+        "target": 161
+      },
+      {
+        "month": "Ott",
+        "count": 150,
+        "target": 161
+      },
+      {
+        "month": "Nov",
+        "count": 153,
+        "target": 161
+      },
+      {
+        "month": "Dic",
+        "count": 156,
+        "target": 161
+      }
+    ],
+    "costAnalysis": [
+      {
+        "category": "IT & Digital",
+        "amount": 5500000,
+        "percentage": 25,
+        "color": "#00b4d8"
+      },
+      {
+        "category": "Operations Centro",
+        "amount": 4200000,
+        "percentage": 19,
+        "color": "#48bb78"
+      },
+      {
+        "category": "Risk Management",
+        "amount": 3500000,
+        "percentage": 16,
+        "color": "#9f7aea"
+      },
+      {
+        "category": "Rete Retail Nord",
+        "amount": 3200000,
+        "percentage": 14,
+        "color": "#ed8936"
+      },
+      {
+        "category": "Progetto Digital Banking",
+        "amount": 3000000,
+        "percentage": 13,
+        "color": "#f56565"
+      },
+      {
+        "category": "Corporate Banking",
+        "amount": 2900000,
+        "percentage": 13,
+        "color": "#4a5568"
+      }
+    ],
+    "productivityMetrics": [
+      {
+        "department": "Human Resources",
+        "productivity": 74,
+        "efficiency": 74,
+        "utilization": 100
+      },
+      {
+        "department": "Information Technology",
+        "productivity": 72,
+        "efficiency": 72,
+        "utilization": 100
+      },
+      {
+        "department": "Direzione Generale",
+        "productivity": 71,
+        "efficiency": 70,
+        "utilization": 100
+      },
+      {
+        "department": "Finance & Treasury",
+        "productivity": 71,
+        "efficiency": 70,
+        "utilization": 100
+      },
+      {
+        "department": "Legal & Compliance",
+        "productivity": 69,
+        "efficiency": 68,
+        "utilization": 94
+      },
+      {
+        "department": "Retail Banking",
+        "productivity": 68,
+        "efficiency": 68,
+        "utilization": 100
+      }
+    ],
+    "turnoverAnalysis": {
+      "voluntary": 0,
+      "involuntary": 0,
+      "retirement": 0,
+      "avgTenure": 12.7,
+      "riskEmployees": 0
+    },
+    "engagementScores": [
+      {
+        "dimension": "Leadership",
+        "score": 78,
+        "benchmark": 72
+      },
+      {
+        "dimension": "Growth",
+        "score": 82,
+        "benchmark": 75
+      },
+      {
+        "dimension": "Culture",
+        "score": 85,
+        "benchmark": 78
+      },
+      {
+        "dimension": "Rewards",
+        "score": 71,
+        "benchmark": 70
+      },
+      {
+        "dimension": "Wellbeing",
+        "score": 76,
+        "benchmark": 74
+      },
+      {
+        "dimension": "Purpose",
+        "score": 88,
+        "benchmark": 80
+      }
+    ]
+  }
+}

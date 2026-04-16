@@ -1,0 +1,32 @@
+[Unit]
+Description=Heuresys Enrichment Engine
+After=network.target postgresql@16-heuresys.service pgbouncer.service redis-server.service
+Requires=pgbouncer.service redis-server.service
+PartOf=heuresys.target
+
+[Service]
+Type=simple
+User=heuresys
+Group=heuresys
+WorkingDirectory=/opt/heuresys/backend/enrichment
+EnvironmentFile=/etc/heuresys/env
+Environment=NODE_ENV=production
+Environment=ENRICHMENT_PORT=8020
+ExecStart=/usr/bin/node --enable-source-maps dist/index.js
+Restart=on-failure
+RestartSec=5
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/log/heuresys/enrichment /var/lib/heuresys
+MemoryMax=512M
+CPUQuota=150%
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=heuresys-enrichment
+
+[Install]
+WantedBy=heuresys.target

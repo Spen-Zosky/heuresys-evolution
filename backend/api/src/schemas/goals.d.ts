@@ -1,0 +1,82 @@
+import { z } from 'zod';
+export declare const createGoalSchema: z.ZodObject<{
+    title: z.ZodString;
+    description: z.ZodOptional<z.ZodString>;
+    employee_id: z.ZodOptional<z.ZodString>;
+    parent_goal_id: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+    goal_type: z.ZodOptional<z.ZodEnum<["individual", "team", "department", "company"]>>;
+    priority: z.ZodOptional<z.ZodEnum<["low", "medium", "high", "critical"]>>;
+    status: z.ZodOptional<z.ZodEnum<["draft", "active", "completed", "cancelled", "on_hold"]>>;
+    start_date: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+    due_date: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+    weight: z.ZodOptional<z.ZodNumber>;
+    target_value: z.ZodNullable<z.ZodOptional<z.ZodNumber>>;
+    category: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    description?: string | undefined;
+    status?: "active" | "draft" | "completed" | "cancelled" | "on_hold" | undefined;
+    employee_id?: string | undefined;
+    start_date?: string | null | undefined;
+    parent_goal_id?: string | null | undefined;
+    goal_type?: "team" | "department" | "company" | "individual" | undefined;
+    priority?: "low" | "medium" | "high" | "critical" | undefined;
+    due_date?: string | null | undefined;
+    weight?: number | undefined;
+    target_value?: number | null | undefined;
+    category?: string | null | undefined;
+}, {
+    title: string;
+    description?: string | undefined;
+    status?: "active" | "draft" | "completed" | "cancelled" | "on_hold" | undefined;
+    employee_id?: string | undefined;
+    start_date?: string | null | undefined;
+    parent_goal_id?: string | null | undefined;
+    goal_type?: "team" | "department" | "company" | "individual" | undefined;
+    priority?: "low" | "medium" | "high" | "critical" | undefined;
+    due_date?: string | null | undefined;
+    weight?: number | undefined;
+    target_value?: number | null | undefined;
+    category?: string | null | undefined;
+}>;
+export declare const updateGoalSchema: z.ZodObject<{
+    title: z.ZodOptional<z.ZodString>;
+    description: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    employee_id: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    parent_goal_id: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
+    goal_type: z.ZodOptional<z.ZodOptional<z.ZodEnum<["individual", "team", "department", "company"]>>>;
+    priority: z.ZodOptional<z.ZodOptional<z.ZodEnum<["low", "medium", "high", "critical"]>>>;
+    status: z.ZodOptional<z.ZodOptional<z.ZodEnum<["draft", "active", "completed", "cancelled", "on_hold"]>>>;
+    start_date: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
+    due_date: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
+    weight: z.ZodOptional<z.ZodOptional<z.ZodNumber>>;
+    target_value: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodNumber>>>;
+    category: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
+}, "strip", z.ZodTypeAny, {
+    description?: string | undefined;
+    status?: "active" | "draft" | "completed" | "cancelled" | "on_hold" | undefined;
+    title?: string | undefined;
+    employee_id?: string | undefined;
+    start_date?: string | null | undefined;
+    parent_goal_id?: string | null | undefined;
+    goal_type?: "team" | "department" | "company" | "individual" | undefined;
+    priority?: "low" | "medium" | "high" | "critical" | undefined;
+    due_date?: string | null | undefined;
+    weight?: number | undefined;
+    target_value?: number | null | undefined;
+    category?: string | null | undefined;
+}, {
+    description?: string | undefined;
+    status?: "active" | "draft" | "completed" | "cancelled" | "on_hold" | undefined;
+    title?: string | undefined;
+    employee_id?: string | undefined;
+    start_date?: string | null | undefined;
+    parent_goal_id?: string | null | undefined;
+    goal_type?: "team" | "department" | "company" | "individual" | undefined;
+    priority?: "low" | "medium" | "high" | "critical" | undefined;
+    due_date?: string | null | undefined;
+    weight?: number | undefined;
+    target_value?: number | null | undefined;
+    category?: string | null | undefined;
+}>;
+//# sourceMappingURL=goals.d.ts.map

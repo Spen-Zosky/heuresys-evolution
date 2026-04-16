@@ -1,0 +1,45 @@
+name: Deploy
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Git ref to deploy (branch, tag, or sha)'
+        required: true
+        default: 'main'
+
+jobs:
+  deploy-vm-source:
+    name: Deploy to vm-source (bare-metal)
+    runs-on: [self-hosted, heuresys, linux, vm-source]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+
+      - name: Install deps
+        run: npm ci --workspaces --include-workspace-root
+
+      - name: Build workspaces
+        run: npm run build --workspaces --if-present
+
+      - name: Sync to app directory
+        run: |
+          # Runner runs as github-runner; app lives at /home/ubuntu/heuresys.com.evo
+          sudo rsync -a --delete --exclude='.env' --exclude='node_modules' \
+            ./ /home/ubuntu/heuresys.com.evo/
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/heuresys.com.evo/
+
+      - name: Restart services
+        run: sudo -u ubuntu /usr/local/bin/heuresys-restart all
+
+      - name: Smoke test
+        run: |
+          sleep 5
+          curl -fsS http://127.0.0.1:3000/health || exit 1
+          curl -fsS http://127.0.0.1:8020/health || exit 1
+          curl -fsS http://127.0.0.1:3012/ -o /dev/null || exit 1

@@ -1,0 +1,2308 @@
+{
+  "common": {
+    "save": "Salva",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "search": "Cerca",
+    "filter": "Filtra",
+    "export": "Esporta",
+    "back": "Indietro",
+    "add": "Aggiungi",
+    "create": "Crea",
+    "update": "Aggiorna",
+    "close": "Chiudi",
+    "confirm": "Conferma",
+    "loading": "Caricamento...",
+    "noData": "Nessun dato disponibile",
+    "actions": "Azioni",
+    "status": "Stato",
+    "name": "Nome",
+    "description": "Descrizione",
+    "date": "Data",
+    "all": "Tutti",
+    "active": "Attivo",
+    "inactive": "Inattivo",
+    "yes": "Sì",
+    "no": "No",
+    "error": "Errore",
+    "success": "Operazione completata",
+    "view": "Visualizza",
+    "details": "Dettagli",
+    "preview": "Anteprima",
+    "refresh": "Aggiorna",
+    "submit": "Invia",
+    "reset": "Reimposta",
+    "apply": "Applica",
+    "clear": "Pulisci",
+    "continue": "Continua",
+    "finish": "Fine",
+    "next": "Avanti",
+    "previous": "Precedente",
+    "approve": "Approva",
+    "reject": "Rifiuta",
+    "send": "Invia",
+    "download": "Scarica",
+    "upload": "Carica",
+    "copy": "Copia",
+    "duplicate": "Duplica",
+    "archive": "Archivia",
+    "restore": "Ripristina",
+    "deactivate": "Disattiva",
+    "activate": "Attiva",
+    "enable": "Abilita",
+    "disable": "Disabilita",
+    "required": "Obbligatorio",
+    "optional": "Opzionale",
+    "total": "Totale",
+    "results": "{count} risultati",
+    "noResults": "Nessun risultato trovato",
+    "searchPlaceholder": "Cerca...",
+    "emailPlaceholder": "email@esempio.it",
+    "selectPlaceholder": "Seleziona...",
+    "loadingData": "Caricamento dati...",
+    "savingData": "Salvataggio in corso...",
+    "errorLoading": "Errore nel caricamento dei dati",
+    "errorSaving": "Errore nel salvataggio",
+    "confirmDelete": "Sei sicuro di voler eliminare questo elemento?",
+    "deleteSuccess": "Elemento eliminato con successo",
+    "saveSuccess": "Modifiche salvate con successo",
+    "createSuccess": "Elemento creato con successo",
+    "updateSuccess": "Elemento aggiornato con successo",
+    "type": "Tipo",
+    "code": "Codice",
+    "email": "Email",
+    "phone": "Telefono",
+    "address": "Indirizzo",
+    "city": "Città",
+    "country": "Paese",
+    "notes": "Note",
+    "tags": "Tag",
+    "category": "Categoria",
+    "level": "Livello",
+    "order": "Ordine",
+    "version": "Versione",
+    "createdAt": "Creato il",
+    "updatedAt": "Aggiornato il",
+    "startDate": "Data Inizio",
+    "endDate": "Data Fine",
+    "dueDate": "Scadenza",
+    "period": "Periodo",
+    "year": "Anno",
+    "month": "Mese",
+    "week": "Settimana",
+    "day": "Giorno",
+    "hours": "Ore",
+    "minutes": "Minuti",
+    "unknown": "Sconosciuto",
+    "notAvailable": "N/D",
+    "viewAll": "Vedi tutti",
+    "showMore": "Mostra altro",
+    "showLess": "Mostra meno",
+    "collapse": "Comprimi",
+    "expand": "Espandi",
+    "openMenu": "Apri menu",
+    "closeMenu": "Chiudi menu",
+    "documentation": "Documentazione",
+    "support": "Supporto",
+    "feedback": "Feedback",
+    "share": "Condividi",
+    "print": "Stampa",
+    "import": "Importa",
+    "retry": "Riprova",
+    "featureInDevelopment": "Funzionalità in fase di sviluppo",
+    "viewDetails": "Vedi dettagli",
+    "saving": "Salvataggio in corso...",
+    "filters": "Filtri",
+    "deleting": "Eliminazione in corso..."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "processes": "Processi",
+    "structure": "Struttura",
+    "people": "Persone",
+    "governance": "Governance",
+    "admin": "Amministrazione",
+    "settings": "Impostazioni",
+    "profile": "Profilo",
+    "logout": "Esci",
+    "notifications": "Notifiche",
+    "noNotifications": "Nessuna nuova notifica",
+    "markAllRead": "Segna tutte come lette",
+    "search": "Cerca...",
+    "filterByTenant": "Filtra per Tenant",
+    "allTenants": "Tutti i Tenant",
+    "openMenu": "Apri/chiudi menu",
+    "skipToMain": "Vai al contenuto principale",
+    "home": "Home",
+    "overview": "Panoramica",
+    "analytics": "Analisi",
+    "reports": "Report",
+    "help": "Aiuto",
+    "employeePortal": "Portale Dipendente",
+    "userMenu": "Menu utente"
+  },
+  "portal": {
+    "processes": "Processi",
+    "structure": "Struttura",
+    "people": "Persone",
+    "governance": "Governance",
+    "switchLabel": "Selezione portale",
+    "myProfile": "Il Mio Profilo",
+    "myGoals": "I Miei Obiettivi",
+    "myLearning": "Il Mio Apprendimento",
+    "myDocuments": "I Miei Documenti",
+    "myReviews": "Le Mie Valutazioni",
+    "mySkills": "Le Mie Competenze",
+    "myCareer": "La Mia Carriera",
+    "myWorkspace": "La Mia Scrivania",
+    "myPayroll": "La Mia Busta Paga",
+    "myTimeOff": "Le Mie Assenze",
+    "myApprovals": "Le Mie Approvazioni",
+    "orgChart": {
+      "title": "Organigramma",
+      "description": "Struttura organizzativa dell'azienda",
+      "noUnits": "Nessuna unità organizzativa trovata"
+    },
+    "switchPortal": "Cambia Portale",
+    "personalView": "Vista personale",
+    "organizationView": "Vista organizzazione",
+    "profile": {
+      "title": "Il Mio Profilo",
+      "description": "Gestisci le tue informazioni personali e le preferenze",
+      "personalInfo": "Informazioni Personali",
+      "contactInfo": "Contatti",
+      "jobInfo": "Informazioni Lavorative",
+      "orgInfo": "Struttura Organizzativa",
+      "firstName": "Nome",
+      "lastName": "Cognome",
+      "jobTitle": "Ruolo",
+      "department": "Dipartimento",
+      "manager": "Manager",
+      "hireDate": "Data Assunzione",
+      "location": "Sede",
+      "employeeId": "Matricola",
+      "editProfile": "Modifica Profilo",
+      "enrichmentConsent": "Consenso Arricchimento Dati",
+      "enrichmentConsentDesc": "Autorizza l'arricchimento semantico del tuo profilo professionale",
+      "grantConsent": "Autorizza",
+      "revokeConsent": "Revoca Consenso",
+      "consentGranted": "Consenso concesso",
+      "consentRevoked": "Consenso revocato",
+      "revokeConsentTitle": "Revoca consenso arricchimento"
+    },
+    "workspace": {
+      "title": "La Mia Scrivania",
+      "description": "Dashboard personalizzata con widget configurabili",
+      "editLayout": "Modifica Layout",
+      "saveLayout": "Salva Layout",
+      "addWidget": "Aggiungi Widget",
+      "resetLayout": "Reimposta Layout",
+      "duplicateWorkspace": "Duplica Scrivania",
+      "exportWorkspace": "Esporta Scrivania",
+      "noWidgets": "Nessun widget aggiunto",
+      "dragDrop": "Trascina i widget per personalizzare la scrivania"
+    },
+    "goals": {
+      "title": "I Miei Obiettivi",
+      "description": "Monitora il progresso dei tuoi obiettivi",
+      "noGoals": "Nessun obiettivo definito",
+      "addGoal": "Aggiungi Obiettivo",
+      "progress": "Progresso",
+      "dueDate": "Scadenza",
+      "priority": "Priorità",
+      "status": "Stato"
+    },
+    "learning": {
+      "title": "Il Mio Apprendimento",
+      "description": "Percorsi formativi e corsi disponibili",
+      "myCourses": "I Miei Corsi",
+      "catalog": "Catalogo Corsi",
+      "inProgress": "In Corso",
+      "completed": "Completati",
+      "enrolled": "Iscritto",
+      "recommended": "Consigliati"
+    },
+    "documents": {
+      "title": "I Miei Documenti",
+      "description": "Documenti e archivio personale",
+      "noDocuments": "Nessun documento disponibile",
+      "upload": "Carica Documento",
+      "download": "Scarica"
+    },
+    "reviews": {
+      "title": "Le Mie Valutazioni",
+      "description": "Cicli di valutazione e performance review",
+      "active": "Valutazioni Attive",
+      "completed": "Valutazioni Completate",
+      "pending": "In Attesa",
+      "noReviews": "Nessuna valutazione attiva"
+    },
+    "skills": {
+      "title": "Le Mie Competenze",
+      "description": "Profilo competenze e skill assessment",
+      "mySkills": "Le Mie Competenze",
+      "addSkill": "Aggiungi Competenza",
+      "skillLevel": "Livello Competenza",
+      "certifications": "Certificazioni",
+      "noSkills": "Nessuna competenza registrata"
+    },
+    "career": {
+      "title": "La Mia Carriera",
+      "description": "Esplora percorsi di carriera e opportunità di crescita",
+      "paths": "Percorsi di Carriera",
+      "opportunities": "Opportunità",
+      "mentors": "Mentori",
+      "goals": "Obiettivi di Carriera"
+    },
+    "timeOff": {
+      "title": "Le Mie Assenze",
+      "description": "Gestione ferie, permessi e assenze",
+      "request": "Richiedi Assenza",
+      "balance": "Saldo Ferie",
+      "history": "Storico Assenze",
+      "pending": "In Attesa di Approvazione",
+      "approved": "Approvate",
+      "rejected": "Rifiutate",
+      "from": "Dal",
+      "to": "Al",
+      "days": "Giorni",
+      "type": "Tipo",
+      "requestDate": "Data Richiesta",
+      "status": "Stato",
+      "noBalance": "Nessun saldo disponibile",
+      "totalRequests": "{count} richieste totali"
+    },
+    "payroll": {
+      "title": "La Mia Busta Paga",
+      "description": "Buste paga e storico retributivo",
+      "period": "Periodo",
+      "grossAmount": "Lordo",
+      "netAmount": "Netto",
+      "deductions": "Detrazioni",
+      "download": "Scarica PDF",
+      "noPaystubs": "Nessuna busta paga disponibile",
+      "payslipsLabel": "Buste Paga",
+      "payslipsAvailable": "{count} cedolini disponibili"
+    },
+    "approvals": {
+      "title": "Le Mie Approvazioni",
+      "description": "Richieste in attesa della tua approvazione",
+      "pending": "In Attesa",
+      "approved": "Approvate",
+      "rejected": "Rifiutate",
+      "all": "Tutte",
+      "noApprovals": "Nessuna approvazione in attesa",
+      "approveAction": "Approva",
+      "rejectAction": "Rifiuta"
+    },
+    "analytics": {
+      "title": "Analytics",
+      "description": "KPI e metriche della forza lavoro"
+    },
+    "pageNotFound": "Pagina non trovata",
+    "composer": {
+      "title": "Personalizza Workspace",
+      "description": "Ogni dashboard ha un workspace indipendente. Seleziona il contesto, aggiungi widget, e usa \"Modifica Layout\" per trascinare e ridimensionare.",
+      "editLayout": "Modifica Layout",
+      "saveLayout": "Salva Layout",
+      "saving": "Salvataggio...",
+      "dashboardContext": "Contesto dashboard",
+      "currentWorkspace": "Workspace attuale",
+      "noWidgets": "Nessun widget nel workspace per questo contesto. Aggiungine dalla lista sottostante.",
+      "availableCatalog": "Catalogo disponibile ({count})"
+    },
+    "learningCatalog": {
+      "personalView": "Vista personale"
+    },
+    "common": {
+      "refresh": "Aggiorna",
+      "cancel": "Annulla",
+      "loading": "Caricamento..."
+    }
+  },
+  "auth": {
+    "login": "Accedi",
+    "logout": "Esci",
+    "username": "Nome utente",
+    "password": "Password",
+    "usernamePlaceholder": "Inserisci il nome utente",
+    "passwordPlaceholder": "Inserisci la password",
+    "rememberMe": "Ricordami",
+    "forgotPassword": "Password dimenticata?",
+    "loginTitle": "Accedi a Heuresys",
+    "loginSubtitle": "Inserisci le tue credenziali per accedere",
+    "loginButton": "Accedi",
+    "loggingIn": "Accesso in corso...",
+    "loginError": "Credenziali non valide",
+    "twoFactor": "Autenticazione a due fattori",
+    "twoFactorCode": "Codice di verifica",
+    "twoFactorPlaceholder": "000000",
+    "twoFactorDesc": "Inserisci il codice generato dalla tua app di autenticazione",
+    "verifyCode": "Verifica Codice",
+    "sessionExpired": "Sessione scaduta",
+    "sessionExpiredDesc": "La tua sessione è scaduta. Effettua nuovamente l'accesso.",
+    "sessionWarning": "La sessione scadrà tra poco",
+    "sessionWarningDesc": "Vuoi rimanere connesso?",
+    "stayConnected": "Rimani connesso",
+    "unauthorized": "Accesso non autorizzato",
+    "insufficientPermissions": "Non hai i permessi necessari per visualizzare questa pagina",
+    "usernameRequired": "Username obbligatorio",
+    "passwordRequired": "Password obbligatoria",
+    "demoCredentials": "Credenziali demo",
+    "themeLight": "Passa al tema chiaro",
+    "themeDark": "Passa al tema scuro",
+    "loginFooter": "Piattaforma HR con Intelligenza Artificiale.",
+    "reason": "Sessione scaduta"
+  },
+  "admin": {
+    "title": "Pannello Amministrativo",
+    "description": "Gestione completa del sistema HRMS",
+    "overview": "Panoramica",
+    "employees": {
+      "title": "Dipendenti",
+      "description": "Gestione anagrafica dipendenti",
+      "new": {
+        "title": "Nuovo Dipendente"
+      },
+      "edit": {
+        "title": "Modifica Dipendente"
+      },
+      "detail": "Dettaglio Dipendente",
+      "search": "Cerca per nome, email, ruolo...",
+      "filters": "Filtri",
+      "advancedFilters": "Filtri Avanzati",
+      "departments": "Tutti i dipartimenti",
+      "allDepartments": "Tutti i dipartimenti",
+      "allLocations": "Tutte le sedi",
+      "allUnits": "Tutte le unità",
+      "allStatus": "Stato",
+      "searchRole": "Cerca ruolo...",
+      "saveSearch": "Salva ricerca",
+      "saveSearchName": "Nome ricerca",
+      "saveSearchPlaceholder": "Es. Team Marketing Milano",
+      "savedSearches": "Ricerche salvate",
+      "clearFilters": "Pulisci filtri",
+      "exportSelected": "Esporta selezionati",
+      "emailSelected": "Invia email a selezionati",
+      "deactivateSelected": "Disattiva selezionati",
+      "activateSelected": "Attiva selezionati",
+      "deleteSelected": "Elimina selezionati",
+      "bulkActions": "Azioni di massa",
+      "selected": "{count} selezionati",
+      "noEmployees": "Nessun dipendente trovato",
+      "status": {
+        "active": "Attivo",
+        "inactive": "Inattivo",
+        "on_leave": "In congedo",
+        "terminated": "Terminato"
+      },
+      "tabs": {
+        "overview": "Panoramica",
+        "performance": "Performance",
+        "skills": "Competenze",
+        "contracts": "Contratti",
+        "training": "Formazione",
+        "attendance": "Presenze",
+        "goals": "Obiettivi",
+        "documents": "Documenti",
+        "careerRisk": "Carriera & Rischio",
+        "organization": "Organizzazione"
+      },
+      "fields": {
+        "firstName": "Nome",
+        "lastName": "Cognome",
+        "email": "Email",
+        "phone": "Telefono",
+        "mobile": "Cellulare",
+        "jobTitle": "Ruolo",
+        "department": "Dipartimento",
+        "hireDate": "Data Assunzione",
+        "location": "Sede",
+        "manager": "Manager",
+        "employmentStatus": "Stato",
+        "employeeId": "Matricola",
+        "personalData": "Dati Anagrafici",
+        "jobInfo": "Ruolo e Organizzazione",
+        "activation": "Attivazione Dipendente"
+      },
+      "cards": {
+        "skills": "Competenze",
+        "certifications": "Certificazioni",
+        "contracts": "Contratti",
+        "training": "Formazione",
+        "careerProfile": "Profilo Carriera",
+        "successionPlans": "Piani di Successione",
+        "wellbeing": "Benessere & Burnout",
+        "turnoverRisk": "Rischio Turnover"
+      },
+      "documents": {
+        "title": "Documenti Dipendente"
+      },
+      "skills": {
+        "title": "Competenze Dipendente"
+      },
+      "onboarding": {
+        "title": "Onboarding Dipendenti",
+        "description": "Gestione processo di onboarding nuovi dipendenti"
+      },
+      "newEmployee": "Nuovo Dipendente"
+    },
+    "onboarding": {
+      "title": "Onboarding",
+      "description": "Gestione processo di onboarding nuovi dipendenti"
+    },
+    "enrichment": {
+      "title": "Semantic Enrichment Engine",
+      "description": "Motore di arricchimento semantico dei dati",
+      "status": {
+        "pending": "In attesa",
+        "running": "In esecuzione",
+        "completed": "Completato",
+        "failed": "Fallito",
+        "paused": "In pausa"
+      },
+      "filterByStatus": "Filtra per stato",
+      "allStatuses": "Tutti gli stati",
+      "jobId": "ID Job",
+      "descriptor": "Descrittore",
+      "tenant": "Tenant",
+      "startedAt": "Avviato il",
+      "completedAt": "Completato il",
+      "commit": "Commit",
+      "rollback": "Rollback",
+      "viewDetail": "Vedi dettaglio"
+    },
+    "analytics": {
+      "title": "Analytics HR",
+      "description": "Analisi e metriche della forza lavoro",
+      "workforce": "Workforce Analytics",
+      "compensation": {
+        "description": "Analisi retribuzioni e benchmark salariali"
+      },
+      "attendance": {
+        "description": "Analisi presenze e orari dei dipendenti"
+      },
+      "predictions": {
+        "title": "Predizioni AI",
+        "loading": "Caricamento...",
+        "loadError": "Errore nel caricamento delle predizioni",
+        "noPredictions": "Nessuna predizione disponibile",
+        "refresh": "Aggiorna",
+        "retry": "Riprova"
+      },
+      "hrIntelligence": {
+        "title": "HR Intelligence",
+        "description": "Insight e raccomandazioni basati su AI",
+        "loading": "Caricamento...",
+        "loadError": "Errore nel caricamento degli insight",
+        "noInsights": "Nessun insight disponibile",
+        "refresh": "Aggiorna",
+        "retry": "Riprova"
+      },
+      "ai": {
+        "description": "Analisi basate su intelligenza artificiale"
+      },
+      "export": {
+        "title": "Esporta Report",
+        "description": "Genera e scarica report analitici personalizzati",
+        "generateReport": "Genera Report",
+        "configureReport": "Configura i parametri del report da generare",
+        "availableTemplates": "Template Disponibili",
+        "configuredTemplates": "Template di report preconfigurati",
+        "loadingTemplates": "Caricamento template...",
+        "generateError": "Errore nella generazione del report"
+      },
+      "kpis": {
+        "headcount": "Organico",
+        "turnoverRate": "Tasso di Turnover",
+        "newHires": "Nuove Assunzioni",
+        "engagement": "Coinvolgimento",
+        "riskScore": "Punteggio di Rischio"
+      },
+      "tables": {
+        "title": "Titolo",
+        "category": "Categoria",
+        "priority": "Priorità",
+        "employeesInvolved": "Dipendenti Coinvolti",
+        "confidence": "Confidenza",
+        "date": "Data",
+        "type": "Tipo",
+        "target": "Target",
+        "department": "Dipartimento",
+        "risk": "Rischio",
+        "predictionDate": "Data Predizione"
+      }
+    },
+    "candidates": {
+      "title": "Candidati",
+      "description": "Gestione candidature e pipeline di selezione",
+      "columns": {
+        "appliedDate": "Data Candidatura",
+        "email": "Email",
+        "name": "Nome",
+        "position": "Posizione",
+        "stage": "Fase"
+      },
+      "loading": "Caricamento...",
+      "noResults": "Nessun candidato trovato",
+      "searchPlaceholder": "Cerca candidati...",
+      "stats": {
+        "total": "Totale Candidati"
+      },
+      "loadError": "Errore nel caricamento dei candidati"
+    },
+    "career": {
+      "title": "Career Intelligence",
+      "description": "Percorsi di carriera basati sul grafo ESCO",
+      "goals": {
+        "title": "Obiettivi di Carriera",
+        "description": "Gestione obiettivi di carriera dei dipendenti",
+        "noResults": "Nessun obiettivo di carriera trovato",
+        "updateProgress": "Aggiorna Progresso",
+        "loadError": "Errore nel caricamento degli obiettivi"
+      },
+      "paths": {
+        "title": "Percorsi di Carriera",
+        "description": "Esplora e gestisci i percorsi di carriera",
+        "noResults": "Nessun percorso trovato"
+      },
+      "mentors": {
+        "title": "Mentori",
+        "description": "Programmi di mentoring e assegnazione mentori",
+        "searchPlaceholder": "Cerca mentori..."
+      },
+      "reports": {
+        "title": "Report Carriera",
+        "description": "Report e analisi sullo sviluppo di carriera",
+        "loadError": "Errore nel caricamento dei report"
+      },
+      "chat": {
+        "title": "AI Career Chat",
+        "description": "Assistente AI per consulenza di carriera",
+        "welcome": "Benvenuto nell'AI Career Coach",
+        "quickTopics": "Argomenti rapidi",
+        "inputPlaceholder": "Scrivi la tua domanda sulla carriera..."
+      },
+      "learning": {
+        "title": "Learning",
+        "description": "Raccomandazioni formative basate su AI"
+      },
+      "skills": {
+        "title": "Competenze",
+        "description": "Analisi e valutazione competenze"
+      },
+      "aiCoach": "AI Coach",
+      "explorePaths": "Esplora Percorsi"
+    },
+    "compensation": {
+      "title": "Compensation Design",
+      "description": "Gestione fasce retributive e budget",
+      "bands": "Fasce Retributive",
+      "salaryBands": {
+        "title": "Fasce Retributive",
+        "description": "Fasce salariali, gradi retributivi e benchmark",
+        "loading": "Caricamento...",
+        "noResults": "Nessuna fascia retributiva trovata",
+        "refresh": "Aggiorna",
+        "retry": "Riprova",
+        "loadError": "Errore nel caricamento delle fasce salariali"
+      },
+      "bonusPlans": {
+        "title": "Piani Bonus",
+        "description": "Strutture bonus e piani incentivi",
+        "loading": "Caricamento...",
+        "noResults": "Nessun piano bonus trovato",
+        "refresh": "Aggiorna",
+        "retry": "Riprova",
+        "loadError": "Errore nel caricamento dei piani bonus"
+      },
+      "meritCycles": {
+        "title": "Cicli di Merito",
+        "description": "Cicli di revisione merito e aumenti salariali",
+        "loading": "Caricamento...",
+        "noResults": "Nessun ciclo di merito trovato",
+        "refresh": "Aggiorna",
+        "retry": "Riprova",
+        "loadError": "Errore nel caricamento dei cicli di merito"
+      },
+      "benefits": {
+        "title": "Benefits",
+        "description": "Gestione benefit aziendali",
+        "loading": "Caricamento...",
+        "noResults": "Nessun benefit trovato",
+        "searchPlaceholder": "Cerca benefit...",
+        "loadError": "Errore nel caricamento dei benefit"
+      },
+      "equity": "Equità"
+    },
+    "compliance": {
+      "title": "Compliance",
+      "description": "Monitoraggio conformità e audit",
+      "audits": {
+        "title": "Audit",
+        "description": "Registro audit di conformità",
+        "loading": "Caricamento...",
+        "loadError": "Errore nel caricamento degli audit",
+        "noResults": "Nessun audit trovato",
+        "searchPlaceholder": "Cerca audit...",
+        "refresh": "Aggiorna",
+        "retry": "Riprova"
+      },
+      "policyViolations": {
+        "title": "Violazioni Policy",
+        "description": "Monitoraggio violazioni delle policy aziendali",
+        "loading": "Caricamento...",
+        "loadError": "Errore nel caricamento delle violazioni",
+        "noResults": "Nessuna violazione trovata",
+        "refresh": "Aggiorna",
+        "retry": "Riprova"
+      },
+      "whistleblowing": {
+        "title": "Segnalazioni",
+        "description": "Segnalazioni anonime e whistleblowing",
+        "loading": "Caricamento...",
+        "loadError": "Errore nel caricamento delle segnalazioni",
+        "noResults": "Nessuna segnalazione trovata",
+        "refresh": "Aggiorna",
+        "retry": "Riprova"
+      },
+      "items": {
+        "audits": {
+          "name": "Audit",
+          "description": "Gestione audit interni e di conformità"
+        },
+        "policyViolations": {
+          "name": "Violazioni Policy",
+          "description": "Monitoraggio e gestione violazioni delle policy aziendali"
+        },
+        "whistleblowing": {
+          "name": "Segnalazioni",
+          "description": "Canale segnalazioni anonime e whistleblowing"
+        }
+      }
+    },
+    "courses": {
+      "title": "Corsi",
+      "description": "Gestione catalogo corsi e formazione",
+      "new": {
+        "title": "Nuovo Corso",
+        "description": "Crea un nuovo corso di formazione",
+        "detailsTitle": "Dettagli Corso",
+        "createError": "Errore nella creazione del corso"
+      },
+      "enrollments": {
+        "title": "Iscrizioni",
+        "description": "Gestione iscrizioni ai corsi",
+        "searchPlaceholder": "Cerca iscrizioni...",
+        "noResults": "Nessuna iscrizione trovata",
+        "loadError": "Errore nel caricamento delle iscrizioni"
+      },
+      "searchPlaceholder": "Cerca corsi...",
+      "noResults": "Nessun corso trovato",
+      "loadError": "Errore nel caricamento dei corsi",
+      "fields": {
+        "title": "Titolo",
+        "category": "Categoria",
+        "level": "Livello",
+        "duration": "Durata",
+        "provider": "Provider",
+        "enrolled": "Iscritti",
+        "status": "Stato",
+        "employee": "Dipendente",
+        "course": "Corso",
+        "enrollDate": "Data Iscrizione",
+        "completionDate": "Data Completamento"
+      }
+    },
+    "certifications": {
+      "title": "Certificazioni",
+      "description": "Gestione certificazioni e qualifiche",
+      "columns": {
+        "issuer": "Ente Certificatore"
+      },
+      "loading": "Caricamento...",
+      "noResults": "Nessuna certificazione trovata",
+      "searchPlaceholder": "Cerca certificazioni...",
+      "loadError": "Errore nel caricamento delle certificazioni"
+    },
+    "costCenters": {
+      "title": "Centri di Costo",
+      "description": "Gestione centri di costo aziendali",
+      "new": {
+        "description": "Crea un nuovo centro di costo"
+      },
+      "edit": {
+        "title": "Modifica Centro di Costo"
+      },
+      "fields": {
+        "name": "Nome",
+        "code": "Codice",
+        "type": "Tipo Costo",
+        "budget": "Budget Annuale (€)",
+        "description": "Descrizione",
+        "parent": "Centro di Costo Padre",
+        "noParent": "Nessuno (Centro Root)",
+        "orgUnit": "Unità Organizzativa",
+        "noOrgUnit": "Nessuna unità",
+        "responsible": "Responsabile",
+        "noResponsible": "Nessun responsabile",
+        "identification": "Nome e identificativo del centro di costo",
+        "hierarchy": "Posizione nella struttura dei centri di costo",
+        "activation": "Attivazione del centro di costo"
+      },
+      "filters": "Filtri",
+      "noResults": "Nessun centro di costo trovato",
+      "searchPlaceholder": "Cerca centri di costo...",
+      "loadError": "Errore nel caricamento dei centri di costo"
+    },
+    "engagement": {
+      "title": "Engagement",
+      "description": "Benessere e coinvolgimento dei dipendenti",
+      "mentorship": {
+        "title": "Mentorship",
+        "description": "Programmi di mentoring e tutoraggio",
+        "loading": "Caricamento...",
+        "noResults": "Nessun programma di mentorship trovato",
+        "refresh": "Aggiorna",
+        "retry": "Riprova",
+        "loadError": "Errore nel caricamento dei programmi di mentorship"
+      },
+      "social": {
+        "description": "Feed sociale e interazione tra dipendenti",
+        "loading": "Caricamento...",
+        "noResults": "Nessun contenuto sociale trovato",
+        "refresh": "Aggiorna",
+        "retry": "Riprova",
+        "loadError": "Errore nel caricamento dei dati sociali"
+      },
+      "wellbeing": {
+        "description": "Monitoraggio benessere e prevenzione burnout",
+        "loading": "Caricamento...",
+        "refresh": "Aggiorna",
+        "retry": "Riprova",
+        "loadError": "Errore nel caricamento dei dati di benessere"
+      },
+      "items": {
+        "social": {
+          "name": "Social",
+          "description": "Feed sociale e interazione tra dipendenti"
+        },
+        "wellbeing": {
+          "name": "Benessere",
+          "description": "Monitoraggio benessere e prevenzione burnout"
+        },
+        "mentorship": {
+          "name": "Mentorship",
+          "description": "Programmi di mentoring e tutoraggio"
+        }
+      }
+    },
+    "feedback": {
+      "title": "Feedback",
+      "description": "Gestione feedback continuo",
+      "continuous": "Feedback Continuo",
+      "giver": "Da",
+      "anonymous": "Anonimo",
+      "types": "Tutti i tipi",
+      "allTypes": "Tutti i tipi",
+      "loading": "Caricamento...",
+      "noFeedback": "Nessun feedback trovato",
+      "noReviews": "Nessuna revisione trovata",
+      "tabs": {
+        "continuous": "Feedback Continuo",
+        "reviews360": "Revisioni 360"
+      },
+      "loadError": "Errore nel caricamento dei feedback",
+      "loadError360": "Errore nel caricamento delle review 360"
+    },
+    "goals": {
+      "title": "Obiettivi",
+      "description": "Gestione obiettivi aziendali",
+      "new": {
+        "description": "Crea un nuovo obiettivo aziendale"
+      },
+      "fields": {
+        "title": "Titolo",
+        "description": "Descrizione"
+      },
+      "cascading": {
+        "loading": "Caricamento..."
+      },
+      "error": "Errore nel caricamento degli obiettivi",
+      "noResults": "Nessun obiettivo trovato",
+      "loadError": "Errore nel caricamento degli obiettivi"
+    },
+    "locations": {
+      "title": "Sedi",
+      "description": "Gestione sedi aziendali",
+      "fields": {
+        "name": "Nome",
+        "code": "Codice",
+        "type": "Tipo Sede",
+        "capacity": "Capacità (persone)",
+        "address": "Indirizzo",
+        "city": "Città",
+        "province": "Provincia",
+        "country": "Paese",
+        "identification": "Nome e identificativo della sede",
+        "geography": "Posizione geografica della sede",
+        "settings": "Impostazioni della sede",
+        "status": "Stato"
+      },
+      "editLocation": "Modifica Sede",
+      "editingLocation": "Modifica sede in corso",
+      "detail": {
+        "address": "Indirizzo",
+        "details": "Dettagli",
+        "geographicPosition": "Posizione Geografica",
+        "locationInfo": "Informazioni Sede",
+        "statistics": "Statistiche",
+        "systemInfo": "Informazioni di Sistema"
+      },
+      "newLocation": "Nuova Sede",
+      "newLocationDescription": "Crea una nuova sede aziendale",
+      "listDescription": "Elenco sedi aziendali",
+      "stats": {
+        "active": "Sedi Attive",
+        "total": "Sedi Totali",
+        "totalCapacity": "Capacità Totale"
+      }
+    },
+    "marketplace": {
+      "title": "Marketplace Plugin",
+      "description": "Esplora e installa plugin per estendere le funzionalità",
+      "developer": "Area Developer",
+      "pricing": {
+        "free": "Gratuito",
+        "paid": "A Pagamento",
+        "freemium": "Freemium",
+        "subscription": "Abbonamento"
+      },
+      "tabs": {
+        "overview": "Panoramica",
+        "versions": "Versioni",
+        "reviews": "Recensioni",
+        "dependencies": "Dipendenze",
+        "screenshots": "Screenshot"
+      },
+      "pluginStatus": {
+        "draft": "Bozza",
+        "review": "In Revisione",
+        "approved": "Approvato",
+        "rejected": "Rifiutato",
+        "published": "Pubblicato"
+      }
+    },
+    "performance": {
+      "title": "Performance Management",
+      "description": "Gestione valutazioni e obiettivi",
+      "sections": {
+        "goals": {
+          "name": "Obiettivi",
+          "description": "Definizione e monitoraggio obiettivi aziendali e individuali"
+        },
+        "reviews": {
+          "name": "Valutazioni",
+          "description": "Cicli di valutazione delle performance"
+        },
+        "checkIns": {
+          "name": "Check-in",
+          "description": "Incontri periodici di verifica e allineamento"
+        },
+        "feedback": {
+          "name": "Feedback",
+          "description": "Feedback continuo e a 360 gradi"
+        },
+        "okrs": {
+          "name": "OKR",
+          "description": "Obiettivi e risultati chiave dell'organizzazione"
+        },
+        "calibration": {
+          "name": "Calibrazione",
+          "description": "Sessioni di calibrazione delle valutazioni"
+        },
+        "reviewCycles": {
+          "name": "Cicli di Valutazione",
+          "description": "Configurazione e gestione dei cicli di review"
+        }
+      },
+      "reviewCycles": "Cicli di Valutazione",
+      "calibration": "Calibrazione",
+      "okrs": "OKR",
+      "checkIns": "Check-in",
+      "fields": {
+        "name": "Nome",
+        "type": "Tipo",
+        "status": "Stato",
+        "startDate": "Data Inizio",
+        "endDate": "Data Fine",
+        "reviewCycle": "Ciclo di Revisione",
+        "owner": "Owner",
+        "deadline": "Scadenza"
+      }
+    },
+    "positions": {
+      "title": "Posizioni Aperte",
+      "description": "Gestione job posting e posizioni aperte",
+      "fields": {
+        "title": "Titolo",
+        "department": "Dipartimento",
+        "location": "Sede",
+        "status": "Stato",
+        "applications": "Candidature"
+      }
+    },
+    "skills": {
+      "title": "Competenze",
+      "description": "Gestione catalogo competenze ESCO",
+      "fields": {
+        "name": "Nome",
+        "category": "Categoria",
+        "type": "Tipo",
+        "escoUri": "ESCO URI",
+        "status": "Stato"
+      },
+      "newSkill": "Nuova Competenza"
+    },
+    "settings": {
+      "title": "Impostazioni",
+      "description": "Configurazione del sistema",
+      "generalInfo": "Informazioni Generali",
+      "tenantIdentification": "Identificazione Tenant",
+      "fields": {
+        "tenantName": "Nome Tenant",
+        "code": "Codice",
+        "description": "Descrizione",
+        "contactEmail": "Email di Contatto",
+        "phone": "Telefono",
+        "industry": "Settore",
+        "region": "Regione"
+      },
+      "savedSuccess": "Impostazioni salvate con successo",
+      "saveSettings": "Salva Impostazioni"
+    },
+    "talent": {
+      "title": "Talent Management",
+      "description": "Gestione talenti e successione",
+      "sections": {
+        "skills": {
+          "name": "Competenze",
+          "description": "Catalogo competenze e skill ESCO"
+        },
+        "skillProfiles": {
+          "name": "Profili Competenze",
+          "description": "Profili competenze dei dipendenti"
+        },
+        "careerPaths": {
+          "name": "Percorsi di Carriera",
+          "description": "Percorsi di sviluppo e progressione di carriera"
+        },
+        "assessments": {
+          "name": "Assessment",
+          "description": "Valutazione delle competenze e assessment center"
+        },
+        "succession": {
+          "name": "Successione",
+          "description": "Piani di successione e copertura ruoli chiave"
+        },
+        "escoExplorer": {
+          "name": "ESCO Explorer",
+          "description": "Esplorazione tassonomia europea delle competenze"
+        },
+        "gapAnalysis": {
+          "name": "Gap Analysis",
+          "description": "Analisi gap competenze tra ruolo e dipendente"
+        },
+        "internalMobility": {
+          "name": "Mobilità Interna",
+          "description": "Opportunità di mobilità interna e trasferimenti"
+        },
+        "payStubs": {
+          "name": "Buste Paga",
+          "description": "Consultazione buste paga dei dipendenti"
+        }
+      },
+      "assessments": "Assessment",
+      "mobility": "Mobilità",
+      "succession": "Successione",
+      "gapAnalysis": "Gap Analysis",
+      "careerPaths": "Career Path",
+      "escoExplorer": "ESCO Explorer",
+      "skillProfiles": "Skill Profile",
+      "payStubs": "Buste Paga",
+      "fields": {
+        "employee": "Dipendente",
+        "skill": "Competenza",
+        "score": "Punteggio",
+        "assessor": "Valutatore",
+        "from": "Da",
+        "to": "A",
+        "type": "Tipo",
+        "position": "Posizione",
+        "incumbent": "Titolare",
+        "successors": "Successori",
+        "readiness": "Readiness",
+        "risk": "Rischio",
+        "match": "Match",
+        "gap": "Gap",
+        "levels": "Livelli",
+        "roles": "Ruoli",
+        "escoTitle": "Titolo",
+        "escoType": "Tipo",
+        "escoDescription": "Descrizione",
+        "link": "Link",
+        "completeness": "Completezza",
+        "lastUpdated": "Ultimo Aggiornamento",
+        "period": "Periodo",
+        "netAmount": "Importo Netto"
+      },
+      "intent": {
+        "stay": "Vuole restare",
+        "neutral": "Neutrale",
+        "atRisk": "A rischio",
+        "leaving": "In uscita"
+      },
+      "skills": {
+        "owned": "Possedute",
+        "transferable": "Trasferibili",
+        "toLearn": "Da Apprendere"
+      }
+    },
+    "workspaceTemplates": {
+      "title": "Template Workspace",
+      "description": "Gestione template per workspace e dashboard",
+      "clone": "Clona template",
+      "roleTemplates": "Template per Ruolo",
+      "fields": {
+        "role": "Ruolo",
+        "templateName": "Nome Template",
+        "widgets": "Widget",
+        "scope": "Ambito",
+        "status": "Stato"
+      }
+    },
+    "reviews": {
+      "title": "Valutazioni",
+      "description": "Gestione valutazioni performance",
+      "searchPlaceholder": "Cerca valutazione...",
+      "noResults": "Nessuna valutazione trovata",
+      "newReview": "Nuova Valutazione",
+      "fields": {
+        "employee": "Dipendente",
+        "reviewer": "Valutatore",
+        "type": "Tipo",
+        "period": "Periodo",
+        "status": "Stato",
+        "rating": "Valutazione"
+      }
+    },
+    "users": {
+      "title": "Utenti",
+      "description": "Gestione utenti sistema",
+      "searchPlaceholder": "Cerca utente...",
+      "noResults": "Nessun utente trovato",
+      "newUser": "Nuovo Utente",
+      "fields": {
+        "username": "Username",
+        "name": "Nome",
+        "email": "Email",
+        "role": "Ruolo",
+        "status": "Stato",
+        "lastLogin": "Ultimo Accesso"
+      },
+      "editUser": "Modifica Utente"
+    },
+    "workforceIntelligence": {
+      "title": "Workforce Intelligence",
+      "description": "Analisi intelligente della forza lavoro",
+      "whatIf": "Analisi What-If",
+      "orgDashboard": "Dashboard Organizzativa",
+      "currentState": "Stato Attuale",
+      "fields": {
+        "employees": "Dipendenti",
+        "uniqueSkills": "Skill Uniche",
+        "criticalRisks": "Rischi Critici",
+        "avgCoverage": "Copertura Media"
+      }
+    },
+    "ai": {
+      "title": "AI & Semantica",
+      "description": "Strumenti di intelligenza artificiale",
+      "chat": {
+        "title": "AI Chat",
+        "description": "Conversazioni con assistente AI per ricerche HR",
+        "loading": "Caricamento...",
+        "loadError": "Errore nel caricamento delle sessioni",
+        "noSessions": "Nessuna sessione di chat trovata",
+        "sessionsCount": "{count} sessioni",
+        "columns": {
+          "topic": "Argomento",
+          "user": "Utente",
+          "messages": "Messaggi",
+          "status": "Stato",
+          "createdAt": "Creato il",
+          "updatedAt": "Aggiornato il"
+        },
+        "refresh": "Aggiorna",
+        "retry": "Riprova"
+      },
+      "documents": {
+        "title": "Documenti AI",
+        "description": "Documenti indicizzati per la ricerca semantica",
+        "loading": "Caricamento...",
+        "loadError": "Errore nel caricamento dei documenti",
+        "noDocuments": "Nessun documento trovato",
+        "documentsCount": "{count} documenti",
+        "columns": {
+          "name": "Nome",
+          "type": "Tipo",
+          "size": "Dimensione",
+          "chunks": "Frammenti",
+          "uploadDate": "Data Caricamento"
+        },
+        "refresh": "Aggiorna",
+        "retry": "Riprova"
+      },
+      "sessions": {
+        "title": "Sessioni AI",
+        "description": "Storico sessioni di intelligenza artificiale",
+        "loading": "Caricamento...",
+        "loadError": "Errore nel caricamento delle sessioni",
+        "noSessions": "Nessuna sessione trovata",
+        "sessionsCount": "{count} sessioni",
+        "columns": {
+          "title": "Titolo",
+          "user": "Utente",
+          "model": "Modello",
+          "provider": "Provider",
+          "createdAt": "Creato il",
+          "updatedAt": "Aggiornato il"
+        },
+        "refresh": "Aggiorna",
+        "retry": "Riprova"
+      },
+      "searching": "Sto cercando nei documenti...",
+      "items": {
+        "chat": {
+          "name": "AI Chat",
+          "description": "Assistente conversazionale AI per risorse umane"
+        },
+        "documents": {
+          "name": "Documenti AI",
+          "description": "Indicizzazione e ricerca semantica documenti"
+        },
+        "sessions": {
+          "name": "Sessioni AI",
+          "description": "Storico e monitoraggio sessioni AI"
+        }
+      }
+    },
+    "checkIns": {
+      "title": "Check-in",
+      "description": "Gestione check-in e presenze",
+      "error": "Errore nel caricamento",
+      "noResults": "Nessun check-in trovato",
+      "search": "Cerca",
+      "searchPlaceholder": "Cerca check-in...",
+      "loadError": "Errore nel caricamento dei check-in"
+    },
+    "hrCore": {
+      "title": "Core HR",
+      "description": "Gestione anagrafica e struttura organizzativa",
+      "sections": {
+        "employees": {
+          "name": "Dipendenti",
+          "description": "Anagrafica e gestione dipendenti"
+        },
+        "orgUnits": {
+          "name": "Unità Organizzative",
+          "description": "Struttura delle unità organizzative"
+        },
+        "orgStructure": {
+          "name": "Struttura Organizzativa",
+          "description": "Organigramma e gerarchia aziendale"
+        },
+        "locations": {
+          "name": "Sedi",
+          "description": "Gestione sedi e uffici aziendali"
+        },
+        "costCenters": {
+          "name": "Centri di Costo",
+          "description": "Gestione centri di costo e budget"
+        }
+      }
+    },
+    "learning": {
+      "title": "Formazione",
+      "description": "Gestione formazione e sviluppo professionale",
+      "sections": {
+        "courses": {
+          "name": "Corsi",
+          "description": "Catalogo corsi e gestione formazione"
+        },
+        "certifications": {
+          "name": "Certificazioni",
+          "description": "Gestione certificazioni e qualifiche"
+        },
+        "learningPaths": {
+          "name": "Percorsi Formativi",
+          "description": "Percorsi di apprendimento strutturati"
+        }
+      }
+    },
+    "recruiting": {
+      "title": "Recruiting",
+      "description": "Gestione selezione e reclutamento personale",
+      "sections": {
+        "candidates": {
+          "name": "Candidati",
+          "description": "Gestione candidature e profili candidati"
+        },
+        "jobPostings": {
+          "name": "Annunci di Lavoro",
+          "description": "Pubblicazione e gestione offerte di lavoro"
+        },
+        "requisitions": {
+          "name": "Requisizioni",
+          "description": "Richieste di personale e approvazioni"
+        }
+      }
+    },
+    "knowledgeBase": {
+      "title": "Knowledge Base",
+      "description": "Base di conoscenza aziendale",
+      "loadError": "Errore nel caricamento degli articoli",
+      "newArticle": "Nuovo Articolo",
+      "articles": "Articoli",
+      "fields": {
+        "title": "Titolo",
+        "category": "Categoria",
+        "author": "Autore",
+        "views": "Visite",
+        "status": "Stato",
+        "date": "Data"
+      }
+    },
+    "design": {
+      "title": "Design System",
+      "description": "Componenti UI e wireframe",
+      "items": {
+        "wireframes": {
+          "title": "Wireframe",
+          "description": "Prototipi e wireframe delle interfacce"
+        },
+        "designSystem": {
+          "title": "Design System",
+          "description": "Componenti, colori e tipografia del sistema"
+        },
+        "uiComponents": {
+          "title": "Componenti UI",
+          "description": "Libreria componenti riutilizzabili"
+        }
+      },
+      "wireframes": {
+        "description": "Prototipi e wireframe delle interfacce utente"
+      }
+    },
+    "orgChart": {
+      "title": "Organigramma",
+      "description": "Visualizzazione dell'organigramma aziendale",
+      "organizationalStructure": "Struttura Organizzativa"
+    },
+    "orgUnits": {
+      "newUnit": "Nuova Unità",
+      "detail": {
+        "details": "Dettagli",
+        "unitInfo": "Informazioni Unità",
+        "relationships": "Relazioni",
+        "entityLinks": "Collegamenti Entita",
+        "childUnits": "Unità Figlie",
+        "childUnitsDescription": "Unità organizzative subordinate",
+        "statistics": "Statistiche",
+        "employees": "Dipendenti",
+        "systemInfo": "Informazioni di Sistema"
+      },
+      "editUnit": "Modifica Unità",
+      "stats": {
+        "title": "Statistiche Unità Organizzativa"
+      },
+      "newUnitDescription": "Crea una nuova unita organizzativa"
+    },
+    "learningPaths": {
+      "title": "Percorsi Formativi",
+      "description": "Gestione dei percorsi di apprendimento e sviluppo",
+      "fields": {
+        "name": "Nome",
+        "courses": "Corsi",
+        "duration": "Durata",
+        "level": "Livello"
+      }
+    }
+  },
+  "platform": {
+    "title": "Platform Admin",
+    "description": "Amministrazione della piattaforma",
+    "overview": "Panoramica Piattaforma",
+    "tenants": {
+      "title": "Tenant",
+      "description": "Gestione tenant della piattaforma",
+      "fields": {
+        "name": "Nome",
+        "code": "Codice",
+        "status": "Stato",
+        "employees": "Dipendenti",
+        "users": "Utenti",
+        "createdAt": "Creato il",
+        "description": "Descrizione"
+      },
+      "metrics": "Metriche strutturali per ciascun tenant",
+      "crossTenant": "Entità strutturali cross-tenant",
+      "operationalRecords": "Record nelle tabelle operative chiave",
+      "edit": {
+        "title": "Modifica Tenant"
+      }
+    },
+    "users": {
+      "title": "Utenti",
+      "description": "Gestione utenti della piattaforma",
+      "fields": {
+        "tenant": "Tenant",
+        "status": "Stato",
+        "date": "Data",
+        "action": "Azione",
+        "resource": "Risorsa",
+        "outcome": "Esito"
+      },
+      "detail": {
+        "actions": "Azioni",
+        "profile": "Profilo"
+      },
+      "subtitle": "Gestione utenti della piattaforma"
+    },
+    "database": {
+      "title": "Database",
+      "description": "Informazioni e stato del database",
+      "techInfo": "Informazioni tecniche",
+      "extensions": "Estensioni installate",
+      "backupStatus": "Stato dei backup automatici del database",
+      "details": "Dettagli",
+      "installedExtensions": "Estensioni Installate",
+      "subtitle": "Stato e informazioni del database PostgreSQL",
+      "technicalInfo": "Informazioni Tecniche"
+    },
+    "security": {
+      "title": "Security & Audit",
+      "description": "Log di sicurezza e audit trail",
+      "allDates": "Tutte le date",
+      "last24h": "Ultime 24h",
+      "last7d": "Ultimi 7 giorni",
+      "last30d": "Ultimi 30 giorni",
+      "fields": {
+        "timestamp": "Timestamp",
+        "user": "Utente",
+        "action": "Azione",
+        "resource": "Risorsa",
+        "ip": "IP",
+        "status": "Stato"
+      }
+    },
+    "systemHealth": {
+      "title": "System Health",
+      "description": "Stato dei servizi e della piattaforma",
+      "allServicesActive": "Tutti i servizi sono attivi",
+      "operatingSystem": "Sistema operativo"
+    },
+    "blueprint": {
+      "title": "Blueprint",
+      "description": "Generazione blueprint organizzativo",
+      "new": "Nuovo Blueprint",
+      "fields": {
+        "date": "Data",
+        "mode": "Modalità",
+        "status": "Stato"
+      },
+      "runDetail": "Dettaglio Esecuzione Blueprint"
+    },
+    "navigator": {
+      "title": "Panoramica Piattaforma",
+      "description": "Mappa navigabile di tutte le pagine della piattaforma",
+      "allPages": "Tutte",
+      "statusActive": "Attive",
+      "statusLegacy": "Legacy",
+      "statusExperimental": "Sperimentali"
+    },
+    "settings": {
+      "title": "Impostazioni Piattaforma",
+      "description": "Configurazione globale della piattaforma",
+      "subtitle": "Configurazione globale della piattaforma"
+    },
+    "error": {
+      "title": "Errore Piattaforma",
+      "description": "Si è verificato un errore nella sezione platform"
+    },
+    "common": {
+      "refresh": "Aggiorna",
+      "loadingError": "Errore nel caricamento dei dati",
+      "retry": "Riprova"
+    }
+  },
+  "performance": {
+    "title": "Performance Management",
+    "dashboard": "Dashboard Performance",
+    "reviewCycles": "Cicli di Revisione",
+    "goals": "Obiettivi",
+    "feedback": "Feedback",
+    "activeReviews": "Revisioni Attive",
+    "completedReviews": "Revisioni Completate",
+    "pendingReviews": "Revisioni in Attesa",
+    "averageScore": "Punteggio Medio",
+    "activeGoals": "Obiettivi Attivi",
+    "recentFeedback": "Feedback Recenti",
+    "startReview": "Avvia Revisione",
+    "newGoal": "Nuovo Obiettivo",
+    "giveFeedback": "Dai Feedback",
+    "viewAll": "Vedi tutti",
+    "noReviews": "Nessuna revisione attiva",
+    "noGoals": "Nessun obiettivo definito",
+    "reviewPeriod": "Periodo di Valutazione",
+    "dueDate": "Scadenza",
+    "phases": {
+      "self_assessment": "Self-Assessment",
+      "manager_review": "Manager Review",
+      "calibration": "Calibration",
+      "feedback": "Feedback",
+      "goal_setting": "Goal Setting"
+    },
+    "goalStatus": {
+      "draft": "Bozza",
+      "active": "Attivo",
+      "completed": "Completato",
+      "cancelled": "Annullato",
+      "on_hold": "In Pausa"
+    },
+    "goalType": {
+      "individual": "Individuale",
+      "team": "Team",
+      "company": "Aziendale",
+      "okr": "OKR"
+    },
+    "reviewStatus": {
+      "draft": "Bozza",
+      "active": "Attivi",
+      "completed": "Completati",
+      "archived": "Archiviati"
+    },
+    "allStatuses": "Tutti gli stati",
+    "allTypes": "Tutti i tipi",
+    "progress": "Progresso"
+  },
+  "learning": {
+    "title": "Learning & Development",
+    "dashboard": "Dashboard L&D",
+    "paths": "Percorsi Formativi",
+    "certifications": "Certificazioni",
+    "catalog": "Catalogo Corsi",
+    "enrolledCourses": "Corsi Iscritti",
+    "completedCourses": "Corsi Completati",
+    "inProgress": "In Corso",
+    "upcomingDeadlines": "Scadenze Imminenti",
+    "explore": "Esplora",
+    "myLearning": "Il Mio Apprendimento",
+    "hours": "Ore",
+    "credits": "Crediti",
+    "certificate": "Certificato",
+    "enroll": "Iscriviti",
+    "continue": "Continua",
+    "allAreas": "Tutte le aree",
+    "certStatus": {
+      "active": "Attive",
+      "expiring": "In scadenza",
+      "expired": "Scadute",
+      "pending": "In attesa",
+      "allStatuses": "Tutti gli stati"
+    },
+    "recommended": "Consigliati ({count})",
+    "all": "Tutte ({count})"
+  },
+  "compensation": {
+    "title": "Compensation Design",
+    "bands": "Fasce Retributive",
+    "budgets": "Budget",
+    "proposals": "Proposte",
+    "equity": "Equità",
+    "benchmark": "Benchmark",
+    "salary": "Stipendio",
+    "bonus": "Bonus",
+    "totalComp": "Compensazione Totale",
+    "review": "Revisione Retributiva",
+    "approve": "Approva",
+    "reject": "Rifiuta",
+    "band": "Banda",
+    "department": "Reparto",
+    "compaRatio": "Compa-Ratio medio"
+  },
+  "recruiting": {
+    "title": "Recruiting Governance",
+    "positions": "Posizioni Aperte",
+    "candidates": "Candidati",
+    "pipeline": "Pipeline",
+    "interviews": "Colloqui",
+    "offers": "Offerte",
+    "hired": "Assunti",
+    "newPosition": "Nuova Posizione",
+    "addCandidate": "Aggiungi Candidato",
+    "scheduleInterview": "Pianifica Colloquio",
+    "makeOffer": "Fai Offerta",
+    "openPositions": "Posizioni Aperte",
+    "activeApplications": "Candidature Attive",
+    "requisitionStatus": {
+      "draft": "Bozza",
+      "open": "Aperto",
+      "in_progress": "In corso",
+      "on_hold": "In pausa",
+      "filled": "Riempita",
+      "cancelled": "Annullata",
+      "allStatuses": "Tutti gli stati"
+    },
+    "priority": {
+      "low": "Bassa",
+      "medium": "Media",
+      "high": "Alta",
+      "urgent": "Urgente"
+    },
+    "stages": {
+      "application": "Candidatura",
+      "screening": "Screening",
+      "interview": "Colloquio",
+      "offer": "Offerta",
+      "hired": "Assunto"
+    }
+  },
+  "blueprint": {
+    "title": "Blueprint",
+    "wizard": "Wizard",
+    "generate": "Genera",
+    "configure": "Configura",
+    "preview": "Anteprima",
+    "deploy": "Distribuisci",
+    "step": "Passo",
+    "next": "Avanti",
+    "previous": "Precedente",
+    "finish": "Fine",
+    "orgType": "Tipo Organizzazione",
+    "industry": "Settore",
+    "size": "Dimensione",
+    "orgTypes": {
+      "functional": "Funzionale",
+      "divisional": "Divisionale",
+      "matrix": "A Matrice",
+      "flat": "Piatta"
+    },
+    "sizes": {
+      "micro": "Micro (1-9)",
+      "small": "Piccola (10-49)",
+      "medium": "Media (50-249)",
+      "large": "Grande (250-999)",
+      "enterprise": "Enterprise (1000+)"
+    },
+    "severities": {
+      "all": "Tutte le severity",
+      "critical": "Critical",
+      "warning": "Warning",
+      "info": "Info"
+    },
+    "allTypes": "Tutti i tipi",
+    "results": "Risultati",
+    "orgChart": "Org Chart"
+  },
+  "theme": {
+    "light": "Attiva tema chiaro",
+    "dark": "Attiva tema scuro"
+  },
+  "widgets": {
+    "title": "Widget",
+    "addWidget": "Aggiungi Widget",
+    "configure": "Configura Widget",
+    "removeWidget": "Rimuovi Widget",
+    "noData": "Nessun dato disponibile",
+    "loading": "Caricamento widget...",
+    "stale": "Dati non aggiornati",
+    "types": {
+      "kpiCard": "KPI Card",
+      "chart": "Grafico",
+      "table": "Tabella",
+      "list": "Lista",
+      "calendar": "Calendario",
+      "feed": "Feed",
+      "shortcut": "Collegamento",
+      "custom": "Personalizzato"
+    },
+    "myCard": {
+      "hireDate": "Assunzione",
+      "contractTypes": {
+        "permanent": "Indeterminato",
+        "fixed_term": "Determinato",
+        "part_time": "Part-time",
+        "consultant": "Consulente",
+        "apprenticeship": "Apprendistato"
+      },
+      "ccnl": {
+        "metal": "Metalmeccanici",
+        "commerce": "Commercio",
+        "it": "Settore IT",
+        "banking": "Bancari"
+      }
+    },
+    "leaveBalance": {
+      "year": "Anno {year}"
+    }
+  },
+  "errors": {
+    "403": {
+      "title": "Accesso Negato",
+      "description": "Non hai i permessi necessari per visualizzare questa pagina",
+      "action": "Torna alla Dashboard",
+      "roleMessage": "Il tuo ruolo attuale ({role}) non consente l'accesso a questa risorsa.",
+      "contactAdmin": "Se ritieni di dover avere accesso, contatta l'amministratore di sistema."
+    },
+    "generic": "Si è verificato un errore imprevisto",
+    "notFound": "Pagina non trovata",
+    "notFoundDesc": "La pagina che stai cercando non esiste o è stata spostata",
+    "unauthorized": "Accesso non autorizzato",
+    "unauthorizedDesc": "Non hai i permessi necessari per accedere a questa risorsa",
+    "forbidden": "Accesso negato",
+    "forbiddenDesc": "Non sei autorizzato a visualizzare questa pagina",
+    "serverError": "Errore del server",
+    "serverErrorDesc": "Si è verificato un errore interno del server",
+    "networkError": "Errore di rete",
+    "networkErrorDesc": "Impossibile connettersi al server. Verifica la connessione.",
+    "loadFailed": "Caricamento fallito",
+    "saveFailed": "Salvataggio fallito",
+    "deleteFailed": "Eliminazione fallita",
+    "validationError": "Errore di validazione",
+    "sessionExpired": "Sessione scaduta",
+    "tryAgain": "Riprova",
+    "goHome": "Torna alla Home",
+    "goBack": "Torna indietro",
+    "contactSupport": "Contatta il supporto",
+    "apology": "Ci scusiamo per l'inconveniente. Il nostro team è stato notificato.",
+    "unknownError": "Errore sconosciuto",
+    "errorId": "ID Errore",
+    "whatYouCanDo": "Cosa puoi fare",
+    "tryReloadPage": "Prova a ricaricare la pagina",
+    "returnToDashboard": "Torna alla dashboard e riprova",
+    "contactSupportIfPersists": "Se il problema persiste, contatta il supporto",
+    "reloadPage": "Ricarica pagina"
+  },
+  "landing": {
+    "title": "Heuresys HRMS",
+    "subtitle": "La piattaforma HR enterprise per la gestione intelligente del capitale umano",
+    "badge": "AI-Native HRMS Orchestration Suite",
+    "heroDescription": "Da pattern nascosti a conoscenza strategica. Trasforma la gestione delle risorse umane con intelligenza artificiale, tassonomie europee e analytics avanzate.",
+    "cta": "Inizia ora",
+    "ctaSecondary": "Scopri di più",
+    "featuresTitle": "Piattaforma HR Completa",
+    "featuresSubtitle": "Tutto ciò di cui hai bisogno per gestire il capitale umano in modo efficiente e intelligente",
+    "featureItems": {
+      "employees": {
+        "title": "Gestione Dipendenti",
+        "description": "Centralizza i dati dei dipendenti, monitora le performance e gestisci lo sviluppo di carriera."
+      },
+      "analytics": {
+        "title": "Analytics & Performance",
+        "description": "Dashboard in tempo reale, tracciamento obiettivi e valutazioni complete delle performance."
+      },
+      "ai": {
+        "title": "Intelligenza AI",
+        "description": "Raccomandazioni talent, analisi gap competenze e pianificazione predittiva della forza lavoro."
+      },
+      "security": {
+        "title": "Sicurezza Enterprise",
+        "description": "Architettura multi-tenant con RBAC, audit logging e crittografia end-to-end."
+      },
+      "taxonomies": {
+        "title": "Tassonomie ESCO & NACE",
+        "description": "Integrazione nativa con gli standard europei per competenze e attività economiche."
+      },
+      "careerPaths": {
+        "title": "Percorsi di Carriera",
+        "description": "Mappatura intelligente dei percorsi di sviluppo con suggerimenti AI personalizzati."
+      }
+    },
+    "stats": {
+      "dbTables": "Tabelle Database",
+      "apiEndpoints": "Endpoint API",
+      "frontendPages": "Pagine Frontend",
+      "aiEntities": "Entità Semantiche AI"
+    },
+    "ai": {
+      "badge": "Intelligenza Semantica",
+      "title": "Comprensione Semantica del Capitale Umano",
+      "description": "Heuresys utilizza embeddings AI avanzati per comprendere le relazioni tra competenze, ruoli e percorsi di carriera.",
+      "capabilities": {
+        "aiCap1": "Integrazione tassonomie ESCO e NACE",
+        "aiCap2": "Analisi gap competenze e raccomandazioni",
+        "aiCap3": "Predizioni percorsi di carriera",
+        "aiCap4": "Query HR in linguaggio naturale"
+      },
+      "vectorDimensions": "Dimensioni Vettoriali",
+      "indexedEntities": "Entità Indicizzate",
+      "entityTypes": "Tipi Entità"
+    },
+    "dualInterface": {
+      "title": "Interfaccia Duale",
+      "subtitle": "Esperienze progettate su misura per amministratori HR e dipendenti",
+      "admin": {
+        "title": "Dashboard Admin",
+        "description": "Design desktop-first ottimizzato per manager HR con supervisione completa e strumenti avanzati.",
+        "goals": "Gestione Obiettivi & OKR",
+        "learning": "Formazione & Sviluppo",
+        "analytics": "Analytics & Reportistica"
+      },
+      "portal": {
+        "title": "Portale Dipendenti",
+        "description": "Portale self-service mobile-first per gestire le proprie esigenze HR da qualsiasi dispositivo.",
+        "goals": "Obiettivi personali",
+        "learning": "Progresso formativo",
+        "payroll": "Buste paga & Ferie"
+      }
+    },
+    "ctaSection": {
+      "title": "Pronto a Trasformare le Tue Operazioni HR?",
+      "description": "Unisciti alle organizzazioni che si affidano a Heuresys per gestire il capitale umano con intelligenza.",
+      "button": "Inizia Oggi"
+    },
+    "features": {
+      "blueprint": "Blueprint Generator",
+      "processGovernance": "Process Governance",
+      "orgDesign": "Org Design",
+      "workforceIntelligence": "Workforce Intelligence",
+      "careerIntelligence": "Career Intelligence",
+      "security": "Enterprise Security"
+    },
+    "roles": {
+      "processOwner": "Process Owner",
+      "hrDirector": "HR Director"
+    },
+    "footer": {
+      "privacy": "Privacy Policy",
+      "terms": "Termini di Servizio",
+      "cookie": "Cookie Policy",
+      "copyright": "Tutti i diritti riservati. | AI-Native HRMS Orchestration Suite"
+    }
+  },
+  "hr": {
+    "leave": {
+      "title": "Gestione Assenze",
+      "description": "Ferie, permessi e gestione assenze",
+      "request": "Richiedi Assenza",
+      "approve": "Approva",
+      "reject": "Rifiuta",
+      "types": {
+        "vacation": "Ferie",
+        "sick": "Malattia",
+        "personal": "Permesso personale",
+        "parental": "Congedo parentale",
+        "other": "Altro"
+      }
+    },
+    "contracts": {
+      "title": "Contratti",
+      "description": "Gestione contratti di lavoro",
+      "new": "Nuovo Contratto",
+      "types": {
+        "permanent": "Indeterminato",
+        "fixed_term": "Determinato",
+        "part_time": "Part-time",
+        "consultant": "Consulente",
+        "apprenticeship": "Apprendistato"
+      },
+      "naturalExpiry": "Scadenza naturale per raggiungimento requisiti pensionistici"
+    }
+  },
+  "structure": {
+    "orgUnits": {
+      "title": "Unità Organizzative",
+      "description": "Struttura organizzativa aziendale",
+      "new": "Nuova Unità",
+      "edit": "Modifica Unità",
+      "detail": "Dettaglio Unità Organizzativa",
+      "rootUnit": "Nessuna (Unità Root)",
+      "noSpecificType": "Nessun tipo specifico",
+      "noParent": "Nessun parent",
+      "noDepartment": "Nessun dipartimento",
+      "noManager": "Nessun manager",
+      "noDefaultLocation": "Nessuna sede di default",
+      "fields": {
+        "name": "Nome",
+        "code": "Codice",
+        "description": "Descrizione",
+        "parent": "Unità Padre",
+        "level": "Livello Organizzativo",
+        "type": "Tipo Unità",
+        "department": "Dipartimento",
+        "manager": "Manager",
+        "defaultLocation": "Sede di Default",
+        "sortOrder": "Ordine Visualizzazione",
+        "identification": "Nome e identificativo dell'unità organizzativa",
+        "hierarchy": "Posizione nell'organigramma aziendale",
+        "associations": "Collegamenti con altre entità aziendali",
+        "activation": "Attivazione dell'unità organizzativa"
+      },
+      "types": {
+        "DIREZIONE": "Direzione",
+        "DIVISIONE": "Divisione",
+        "AREA": "Area",
+        "UFFICIO": "Ufficio",
+        "TEAM": "Team"
+      },
+      "tabs": {
+        "overview": "Panoramica",
+        "people": "Persone",
+        "skills": "Competenze",
+        "gapAnalysis": "Gap Analysis"
+      },
+      "tableHeaders": {
+        "name": "Nome",
+        "type": "Tipo",
+        "email": "Email",
+        "role": "Ruolo"
+      }
+    }
+  },
+  "onboarding": {
+    "title": "Onboarding",
+    "description": "Configura la tua organizzazione",
+    "steps": {
+      "industry": "Settore",
+      "structure": "Struttura",
+      "employees": "Dipendenti",
+      "blueprint": "Blueprint",
+      "complete": "Completato"
+    },
+    "industry": {
+      "title": "Seleziona il Settore",
+      "naceLabel": "Settore (NACE L4)",
+      "sizeLabel": "Dimensione aziendale"
+    },
+    "structure": {
+      "title": "Struttura Organizzativa"
+    },
+    "employees": {
+      "title": "Importa Dipendenti",
+      "uploadDone": "Caricamento completato"
+    },
+    "blueprint": {
+      "title": "Genera Blueprint",
+      "orgTypes": {
+        "functional": "Funzionale",
+        "divisional": "Divisionale",
+        "matrix": "A Matrice",
+        "flat": "Piatta"
+      },
+      "sizes": {
+        "micro": "Micro",
+        "small": "Piccola",
+        "medium": "Media",
+        "large": "Grande",
+        "enterprise": "Enterprise"
+      }
+    },
+    "complete": {
+      "title": "Setup Completato!",
+      "description": "La tua organizzazione è pronta"
+    }
+  },
+  "companyPet": {
+    "title": "Analisi PET Aziendale",
+    "common": {
+      "loadingError": "Errore nel caricamento dei dati",
+      "retry": "Riprova",
+      "loading": "Caricamento..."
+    },
+    "orgChart": {
+      "title": "Organigramma",
+      "description": "Organigramma dell'organizzazione",
+      "fullAdminView": "Vista Completa Admin",
+      "departmentCount": "Conteggio Dipartimenti",
+      "departments": "Dipartimenti",
+      "noDepartmentsFound": "Nessun dipartimento trovato"
+    },
+    "ontology": {
+      "title": "Ontology Explorer",
+      "description": "Esplorazione dell'ontologia aziendale",
+      "skillClusters": "Cluster di Competenze",
+      "processSkillImpact": "Impatto Competenze sui Processi",
+      "careerPathways": "Percorsi di Carriera"
+    },
+    "sessions": {
+      "title": "Sessioni di Analisi",
+      "description": "Gestione sessioni di analisi PET",
+      "completedCount": "Completate",
+      "inProgress": "In Corso",
+      "newSession": "Nuova Sessione",
+      "totalFindings": "Risultati Totali"
+    },
+    "structure": {
+      "title": "Struttura Organizzativa",
+      "detail": "Dettaglio Unità Organizzativa",
+      "gapAnalysis": "Gap Analysis Competenze",
+      "breadcrumb": "Struttura",
+      "description": "Struttura organizzativa dell'azienda"
+    },
+    "processes": {
+      "title": "Processi Aziendali",
+      "detail": "Dettaglio Processo",
+      "tabs": {
+        "overview": "Panoramica",
+        "phases": "Fasi",
+        "roles": "Ruoli",
+        "skills": "Competenze"
+      },
+      "tableHeaders": {
+        "code": "Codice",
+        "name": "Nome",
+        "category": "Categoria"
+      },
+      "breadcrumb": "Processi",
+      "description": "Elenco processi aziendali"
+    },
+    "people": {
+      "title": "Porta Persone",
+      "detail": "Profilo Dipendente",
+      "allUnits": "Tutte le unità",
+      "tableHeaders": {
+        "name": "Nome",
+        "email": "Email",
+        "unit": "Unità Organizzativa",
+        "role": "Ruolo"
+      },
+      "breadcrumb": "Persone",
+      "description": "Elenco dipendenti dell'organizzazione"
+    },
+    "hierarchy": {
+      "title": "Gerarchia Organizzativa",
+      "description": "Visualizzazione gerarchica dell'organizzazione",
+      "orgUnits": "Unità Organizzative",
+      "rootNodes": "Nodi Radice",
+      "distributedEmployees": "Dipendenti Distribuiti",
+      "expandCollapseHint": "Clicca per espandere/comprimere",
+      "noOrgUnitsFound": "Nessuna unità organizzativa trovata"
+    },
+    "workforce": {
+      "title": "Analisi Forza Lavoro",
+      "description": "Analytics sulla composizione e distribuzione della forza lavoro",
+      "byLocation": {
+        "title": "Forza Lavoro per Sede",
+        "description": "Distribuzione della forza lavoro per sede"
+      },
+      "demographics": {
+        "title": "Demografia Forza Lavoro",
+        "description": "Analisi demografica della forza lavoro"
+      }
+    },
+    "benchmarking": {
+      "title": "Benchmarking di Settore",
+      "description": "Confronto con benchmark di settore",
+      "overview": "Panoramica",
+      "comparisonTable": "Tabella Confronto",
+      "tabs": {
+        "overview": "Panoramica",
+        "comparison": "Tabella Confronto"
+      }
+    },
+    "staging": {
+      "title": "Confronto Scenari"
+    },
+    "breakdowns": {
+      "title": "Ripartizione Costi",
+      "description": "Analisi dei costi HR per dipartimento e centro di costo",
+      "totalHrCost": "Costo HR Totale",
+      "avgCostPerEmployee": "Costo Medio per Dipendente",
+      "analyzedDepartments": "Dipartimenti Analizzati",
+      "costsByDepartment": "Costi per Dipartimento",
+      "costsByDepartmentDesc": "Distribuzione dei costi HR per dipartimento",
+      "noDataAvailable": "Nessun dato disponibile"
+    },
+    "organization": {
+      "overview": {
+        "title": "Panoramica Organizzazione"
+      },
+      "analytics": {
+        "title": "Analisi Organizzativa",
+        "description": "Dashboard KPI dell'organizzazione"
+      },
+      "talent": {
+        "title": "Talenti Organizzazione",
+        "description": "Gestione e overview del pool di talenti"
+      },
+      "performance": {
+        "title": "Performance Organizzativa",
+        "description": "Metriche di performance organizzativa"
+      }
+    },
+    "reviewCycles": {
+      "title": "Cicli di Valutazione",
+      "description": "Gestione cicli di valutazione delle performance"
+    },
+    "reviewCycleDetail": {
+      "title": "Dettaglio Ciclo di Valutazione"
+    },
+    "goalTracker": {
+      "title": "Monitoraggio Obiettivi",
+      "description": "Tracciamento e gestione obiettivi aziendali"
+    },
+    "feedbackHub": {
+      "title": "Hub Feedback",
+      "description": "Centro raccolta e gestione feedback"
+    },
+    "learningDevelopment": {
+      "title": "Formazione e Sviluppo",
+      "description": "Panoramica formazione e sviluppo professionale"
+    },
+    "learningPathCatalog": {
+      "title": "Catalogo Percorsi Formativi",
+      "description": "Esplora i percorsi formativi disponibili"
+    },
+    "learningPathDetail": {
+      "title": "Dettaglio Percorso Formativo",
+      "backToCatalog": "Torna al catalogo"
+    },
+    "certifications": {
+      "title": "Certificazioni",
+      "description": "Gestione certificazioni e qualifiche professionali"
+    },
+    "compensationDesign": {
+      "title": "Design Retributivo",
+      "description": "Progettazione e gestione struttura retributiva"
+    },
+    "compensationAnalytics": {
+      "title": "Analytics Retributive",
+      "description": "Analisi e metriche sulla compensation"
+    },
+    "salaryBands": {
+      "title": "Fasce Retributive",
+      "description": "Gestione fasce retributive e bande salariali"
+    },
+    "performanceGovernance": {
+      "title": "Governance Performance",
+      "description": "Governance dei processi di performance management"
+    },
+    "recruitingGovernance": {
+      "title": "Governance Recruiting",
+      "description": "Governance dei processi di selezione"
+    },
+    "pipeline": {
+      "title": "Pipeline di Selezione",
+      "description": "Monitoraggio pipeline candidati e fasi di selezione"
+    },
+    "requisitions": {
+      "title": "Requisizioni",
+      "description": "Gestione richieste di personale"
+    },
+    "governance": {
+      "recruiting": {
+        "pipeline": "Pipeline di Selezione",
+        "requisitions": "Requisizioni"
+      },
+      "performance": {
+        "goals": "Obiettivi"
+      }
+    },
+    "orgAnalytics": {
+      "title": "Analisi Organizzativa",
+      "description": "Dashboard KPI dell'organizzazione"
+    },
+    "orgOverview": {
+      "title": "Panoramica Organizzazione",
+      "description": "Panoramica generale dell'organizzazione"
+    },
+    "orgPerformance": {
+      "title": "Performance Organizzativa",
+      "description": "Metriche di performance organizzativa"
+    },
+    "orgTalent": {
+      "title": "Talenti Organizzazione",
+      "description": "Gestione e overview del pool di talenti"
+    },
+    "petAnalysis": {
+      "title": "Analisi PET",
+      "description": "Analisi Process-Enterprise-Talent dell'organizzazione"
+    },
+    "breadcrumb": {
+      "companyPet": "Company PET"
+    },
+    "employeeProfile": {
+      "title": "Profilo Dipendente",
+      "breadcrumb": "Profilo Dipendente"
+    },
+    "processDetail": {
+      "title": "Dettaglio Processo",
+      "breadcrumb": "Dettaglio Processo"
+    },
+    "stagingComparison": {
+      "title": "Confronto Scenari",
+      "description": "Confronta scenari organizzativi alternativi",
+      "newScenario": "Nuovo Scenario"
+    },
+    "gapAnalysis": {
+      "title": "Gap Analysis Competenze",
+      "description": "Analisi gap competenze",
+      "descriptionWithUnit": "Analisi gap competenze per unità organizzativa",
+      "breadcrumb": "Gap Analysis",
+      "loadingError": "Errore nel caricamento dell'analisi gap"
+    },
+    "orgUnitDetail": {
+      "title": "Dettaglio Unità Organizzativa",
+      "breadcrumb": "Dettaglio Unità"
+    },
+    "demographics": {
+      "title": "Demografia Forza Lavoro",
+      "description": "Analisi demografica della forza lavoro"
+    },
+    "locations": {
+      "title": "Forza Lavoro per Sede",
+      "description": "Distribuzione della forza lavoro per sede"
+    }
+  },
+  "dashboards": {
+    "title": "Cruscotti",
+    "description": "Hub centrale per prototipazione dashboard ed esplorazione tassonomie",
+    "switchDashboard": "Cambia dashboard",
+    "availableDashboards": "Dashboard disponibili",
+    "labels": {
+      "admin": "Dashboard Admin",
+      "portal": "Portale Dipendente",
+      "employee_portal": "Portale Dipendente",
+      "platform_console": "Console Piattaforma",
+      "company_pet": "Company PET",
+      "hr_dashboard": "Dashboard HR",
+      "manager_dashboard": "Dashboard Manager"
+    },
+    "taxonomies": {
+      "title": "Taxonomy Explorer",
+      "description": "Esplora le tassonomie ESCO e NACE integrate nella piattaforma"
+    },
+    "prototyping": {
+      "title": "Prototipazione Cruscotti",
+      "description": "Costruisci e visualizza dashboard personalizzate con widget configurabili",
+      "preview": "Anteprima con layout selezionato e widget di esempio",
+      "drag": "Trascina i widget nella dashboard per personalizzarla",
+      "availableDashboards": "Dashboard disponibili"
+    },
+    "designEditor": {
+      "title": "Design Editor",
+      "description": "Editor visuale per il design system"
+    }
+  },
+  "analytics": {
+    "skillGap": {
+      "all": "Tutti",
+      "types": {
+        "skill": "Competenza",
+        "knowledge": "Conoscenza",
+        "attitude": "Attitudine"
+      }
+    },
+    "kpiCascade": {
+      "employeesWithGoals": "Dipendenti con obiettivi"
+    },
+    "turnover": {
+      "description": "Tasso di abbandono per area aziendale"
+    },
+    "headcount": {
+      "description": "Evoluzione headcount ultimi 12 mesi"
+    },
+    "timeRange": {
+      "select": "Seleziona periodo",
+      "last30days": "Ultimi 30 giorni",
+      "last90days": "Ultimi 90 giorni",
+      "last6months": "Ultimi 6 mesi",
+      "lastYear": "Ultimo anno",
+      "custom": "Personalizzato"
+    }
+  },
+  "ontology": {
+    "careerPathway": {
+      "toAcquire": "Da acquisire",
+      "notRequired": "Non richieste"
+    }
+  },
+  "sidebar": {
+    "collapse": "Comprimi",
+    "sections": {
+      "main": "Principale",
+      "career": "Carriera",
+      "time": "Tempo",
+      "docs": "Documenti",
+      "actions": "Azioni",
+      "social": "Sociale",
+      "explore": "Esplora",
+      "tools": "Strumenti",
+      "admin": "Amministrazione",
+      "hr": "Risorse Umane",
+      "analytics": "Analisi",
+      "perspectives": "Prospettive"
+    }
+  },
+  "footer": {
+    "operatingSystem": "Sistema operativo",
+    "allServicesActive": "Tutti i servizi sono attivi",
+    "poweredBy": "Powered by Heuresys",
+    "allRightsReserved": "Tutti i diritti riservati.",
+    "support": "Supporto"
+  },
+  "header": {
+    "search": "Cerca...",
+    "notifications": "Notifiche",
+    "userMenu": "Menu utente"
+  },
+  "forms": {
+    "required": "Obbligatorio",
+    "optional": "Opzionale",
+    "saveChanges": "Salva modifiche",
+    "discardChanges": "Annulla modifiche",
+    "validationErrors": "Ci sono errori nel modulo",
+    "fieldRequired": "Questo campo è obbligatorio",
+    "invalidEmail": "Indirizzo email non valido",
+    "passwordMismatch": "Le password non corrispondono",
+    "minLength": "Minimo {min} caratteri",
+    "maxLength": "Massimo {max} caratteri"
+  },
+  "pagination": {
+    "previous": "Precedente",
+    "next": "Successivo",
+    "page": "Pagina {current} di {total}",
+    "perPage": "Elementi per pagina",
+    "showing": "Mostrando {from}-{to} di {total}"
+  },
+  "time": {
+    "today": "Oggi",
+    "yesterday": "Ieri",
+    "thisWeek": "Questa settimana",
+    "thisMonth": "Questo mese",
+    "thisYear": "Quest'anno",
+    "last7days": "Ultimi 7 giorni",
+    "last30days": "Ultimi 30 giorni",
+    "last90days": "Ultimi 90 giorni",
+    "last6months": "Ultimi 6 mesi",
+    "lastYear": "Ultimo anno",
+    "custom": "Personalizzato"
+  },
+  "statusBadge": {
+    "active": "Attivo",
+    "inactive": "Inattivo",
+    "pending": "In attesa",
+    "approved": "Approvato",
+    "rejected": "Rifiutato",
+    "completed": "Completato",
+    "inProgress": "In corso",
+    "draft": "Bozza",
+    "archived": "Archiviato",
+    "terminated": "Terminato",
+    "onLeave": "In congedo",
+    "expiring": "In scadenza",
+    "expired": "Scaduto"
+  }
+}

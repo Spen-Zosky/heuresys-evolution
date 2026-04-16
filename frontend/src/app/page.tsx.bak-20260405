@@ -1,0 +1,831 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { HeuresysLogo } from '@/components/branding/HeuresysLogo';
+import { useTheme } from '@/contexts/ThemeContext';
+import { easing } from '@/lib/motion-presets';
+import { DotGrid, SectionDivider, ConcentricCircles } from '@/components/ui/decorative';
+import {
+  ArrowRight,
+  Users,
+  TrendingUp,
+  Sparkles,
+  LayoutDashboard,
+  Smartphone,
+  Brain,
+  Target,
+  GraduationCap,
+  Sun,
+  Moon,
+  ChevronDown,
+  Network,
+  BarChart3,
+  GitBranch,
+  Lock,
+  Globe,
+  Mail,
+  MapPin,
+} from 'lucide-react';
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: easing.out },
+  },
+};
+
+// Animated HR Network Visual for Hero
+function HeroNetworkVisual() {
+  const nodes = [
+    { cx: 200, cy: 150, r: 28, label: 'HR', primary: true },
+    { cx: 80, cy: 80, r: 18, label: 'AI' },
+    { cx: 320, cy: 80, r: 18, label: 'KPI' },
+    { cx: 60, cy: 220, r: 16, label: 'ESCO' },
+    { cx: 340, cy: 220, r: 16, label: 'OKR' },
+    { cx: 140, cy: 280, r: 14, label: 'LMS' },
+    { cx: 260, cy: 280, r: 14, label: 'RAG' },
+    { cx: 200, cy: 40, r: 12, label: 'NLP' },
+  ];
+
+  const edges = [
+    [0, 1],
+    [0, 2],
+    [0, 3],
+    [0, 4],
+    [0, 5],
+    [0, 6],
+    [0, 7],
+    [1, 7],
+    [2, 7],
+    [1, 3],
+    [2, 4],
+    [3, 5],
+    [4, 6],
+    [5, 6],
+  ];
+
+  return (
+    <svg viewBox="0 0 400 320" className="w-full h-full" aria-hidden="true">
+      <defs>
+        <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Edges */}
+      {edges.map(([from, to], i) => (
+        <motion.line
+          key={`edge-${i}`}
+          x1={nodes[from].cx}
+          y1={nodes[from].cy}
+          x2={nodes[to].cx}
+          y2={nodes[to].cy}
+          stroke="currentColor"
+          strokeWidth="1"
+          className="text-border"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.5 + i * 0.05 }}
+        />
+      ))}
+
+      {/* Animated pulses along edges */}
+      {[0, 2, 4].map((edgeIdx) => {
+        const [from, to] = edges[edgeIdx];
+        return (
+          <motion.circle
+            key={`pulse-${edgeIdx}`}
+            r="3"
+            fill="var(--color-primary)"
+            opacity="0.6"
+            initial={{ cx: nodes[from].cx, cy: nodes[from].cy }}
+            animate={{
+              cx: [nodes[from].cx, nodes[to].cx, nodes[from].cx],
+              cy: [nodes[from].cy, nodes[to].cy, nodes[from].cy],
+            }}
+            transition={{ duration: 3, repeat: Infinity, delay: edgeIdx * 0.8 }}
+          />
+        );
+      })}
+
+      {/* Nodes */}
+      {nodes.map((node, i) => (
+        <motion.g
+          key={`node-${i}`}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 + i * 0.08, ease: easing.out }}
+          style={{ transformOrigin: `${node.cx}px ${node.cy}px` }}
+        >
+          {node.primary && (
+            <circle cx={node.cx} cy={node.cy} r={node.r + 16} fill="url(#node-glow)" />
+          )}
+          <circle
+            cx={node.cx}
+            cy={node.cy}
+            r={node.r}
+            fill="var(--color-card)"
+            stroke="var(--color-primary)"
+            strokeWidth={node.primary ? 2.5 : 1.5}
+            opacity={node.primary ? 1 : 0.8}
+          />
+          <text
+            x={node.cx}
+            y={node.cy}
+            textAnchor="middle"
+            dominantBaseline="central"
+            fill="var(--color-primary)"
+            fontSize={node.primary ? 13 : 9}
+            fontWeight={node.primary ? 700 : 500}
+            fontFamily="var(--font-display)"
+          >
+            {node.label}
+          </text>
+        </motion.g>
+      ))}
+    </svg>
+  );
+}
+
+// Feature Card with enhanced hover
+function FeatureCard({
+  icon: Icon,
+  title,
+  description,
+  accent,
+  delay = 0,
+}: {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  accent?: string;
+  delay?: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.5, delay, ease: easing.out }}
+      whileHover={{ y: -6, transition: { duration: 0.25 } }}
+      className="group relative bg-card/80 backdrop-blur-sm border border-border/60 rounded-2xl p-6 hover:border-primary/40 hover:shadow-raised transition-all duration-300 overflow-hidden"
+    >
+      {/* Subtle gradient on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+      <div className="relative">
+        <div
+          className={`h-12 w-12 rounded-xl flex items-center justify-center mb-4 transition-colors ${accent || 'bg-primary/10 group-hover:bg-primary/20'}`}
+        >
+          <Icon className="h-6 w-6 text-primary" />
+        </div>
+        <h3 className="font-semibold text-lg text-foreground mb-2 font-display">{title}</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+// Animated Metric Counter
+function MetricCard({
+  value,
+  label,
+  suffix = '',
+  delay = 0,
+}: {
+  value: string;
+  label: string;
+  suffix?: string;
+  delay?: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay, ease: easing.out }}
+      className="text-center p-6 rounded-2xl bg-card/60 backdrop-blur-sm border border-border/40"
+    >
+      <div className="text-4xl md:text-5xl font-bold text-foreground font-display mb-1 tracking-tight">
+        {value}
+        <span className="text-primary">{suffix}</span>
+      </div>
+      <div className="text-sm text-muted-foreground">{label}</div>
+    </motion.div>
+  );
+}
+
+function HomeContent() {
+  const router = useRouter();
+  const { theme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { scrollY } = useScroll();
+  const prefersReducedMotion =
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const headerBg = useTransform(scrollY, [0, 100], [0, 1]);
+
+  useEffect(() => {
+    setMounted(true);
+    const token = localStorage.getItem('auth_token');
+    const userRole = localStorage.getItem('user_role');
+
+    if (token && userRole) {
+      setIsAuthenticated(true);
+      if (userRole === 'SUPERUSER') {
+        router.push('/platform');
+      } else if (['SYSADMIN', 'ADMIN', 'HR'].includes(userRole)) {
+        router.push('/admin');
+      } else {
+        router.push('/portal');
+      }
+    }
+  }, [router]);
+
+  // Loading/redirect states
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-mesh-hero" />
+        <div className="absolute inset-0 bg-grain" />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center relative z-10"
+        >
+          <HeuresysLogo size="large" animated />
+        </motion.div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-mesh-hero" />
+        <div className="absolute inset-0 bg-grain" />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center relative z-10"
+        >
+          <HeuresysLogo size="large" animated />
+          <p className="mt-4 text-muted-foreground">Reindirizzamento...</p>
+        </motion.div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Fixed Header */}
+      <motion.header
+        style={{ backgroundColor: `rgba(var(--card-rgb), ${headerBg})` }}
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-border/30"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link href="/" className="flex items-center">
+              <HeuresysLogo size="medium" />
+            </Link>
+
+            <nav className="hidden md:flex items-center gap-8">
+              <a
+                href="#funzionalita"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Funzionalità
+              </a>
+              <a
+                href="#piattaforma"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Piattaforma
+              </a>
+              <a
+                href="#ai"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Intelligenza AI
+              </a>
+            </nav>
+
+            <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                className="h-9 w-9"
+                aria-label={theme === 'dark' ? 'Passa al tema chiaro' : 'Passa al tema scuro'}
+              >
+                {theme === 'dark' ? (
+                  <Sun className="h-[18px] w-[18px]" />
+                ) : (
+                  <Moon className="h-[18px] w-[18px]" />
+                )}
+              </Button>
+              <Button asChild variant="ghost" size="sm" className="hidden sm:flex">
+                <Link href="/login">Accedi</Link>
+              </Button>
+              <Button asChild size="sm">
+                <Link href="/login">
+                  Inizia Ora <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* ====== HERO SECTION ====== */}
+      <section className="relative pt-24 pb-16 md:pt-36 md:pb-28 overflow-hidden">
+        {/* Background layers */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-mesh-hero" />
+          <div className="absolute inset-0 bg-grain" />
+          <DotGrid className="absolute inset-0 opacity-[0.025]" />
+          <ConcentricCircles className="absolute -right-40 top-20 w-[500px] h-[500px] opacity-[0.03]" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left: Text */}
+            <motion.div variants={containerVariants} initial="hidden" animate="visible">
+              <motion.div variants={itemVariants} className="flex justify-start mb-8">
+                <HeuresysLogo size="xlarge" animated showLoadAnimation />
+              </motion.div>
+
+              <motion.p
+                variants={itemVariants}
+                className="text-lg md:text-xl text-muted-foreground mb-3 font-display"
+              >
+                AI-Native HRMS Orchestration Suite
+              </motion.p>
+
+              <motion.h1
+                variants={itemVariants}
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 font-display leading-[1.1]"
+              >
+                <span className="text-foreground">Da Pattern Nascosti</span>
+                <br />
+                <span className="bg-gradient-to-r from-primary via-[var(--brand-accent)] to-[var(--accent-warm)] bg-clip-text text-transparent">
+                  A Conoscenza Strategica
+                </span>
+              </motion.h1>
+
+              <motion.p
+                variants={itemVariants}
+                className="text-lg text-muted-foreground max-w-xl mb-8 leading-relaxed"
+              >
+                Ispirato al greco <span className="italic text-primary">εὕρεσις</span> — scoperta.
+                Heuresys rivela ciò che è nascosto nella gestione delle risorse umane e lo trasforma
+                in intelligenza operativa.
+              </motion.p>
+
+              <motion.div
+                variants={itemVariants}
+                className="flex flex-col sm:flex-row items-start gap-4"
+              >
+                <Button asChild size="lg" className="text-base px-8 h-12 font-semibold">
+                  <Link href="/login">
+                    Prova Gratuita <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="text-base px-8 h-12">
+                  <Link href="/login">Richiedi Demo</Link>
+                </Button>
+              </motion.div>
+            </motion.div>
+
+            {/* Right: Interactive Network Visual */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: easing.out }}
+              className="hidden lg:block"
+            >
+              <div className="relative aspect-[5/4] max-w-lg mx-auto">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-[var(--accent-warm)]/10 rounded-3xl border border-border/40 backdrop-blur-sm" />
+                <div className="absolute inset-4">
+                  <HeroNetworkVisual />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+            className="mt-16 text-center lg:text-left"
+          >
+            <a
+              href="#metriche"
+              className="inline-flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <span className="text-xs mb-2">Scopri di più</span>
+              <motion.div
+                animate={prefersReducedMotion ? {} : { y: [0, 6, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <ChevronDown className="h-5 w-5" />
+              </motion.div>
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ====== METRICS SECTION ====== */}
+      <section id="metriche" className="py-20 border-y border-border/50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-card/30" />
+        <div className="absolute inset-0 bg-grain opacity-50" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <MetricCard value="504" suffix="+" label="Tabelle Database" delay={0} />
+            <MetricCard value="175" label="Pagine Frontend" delay={0.1} />
+            <MetricCard value="112" label="Endpoint API" delay={0.2} />
+            <MetricCard value="4.080" label="Entità Semantiche AI" delay={0.3} />
+          </div>
+        </div>
+      </section>
+
+      {/* ====== FEATURES GRID ====== */}
+      <section id="funzionalita" className="py-24 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-display">
+              Piattaforma HR Completa
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Tutto ciò di cui hai bisogno per gestire il tuo capitale umano in modo efficiente e
+              intelligente
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <FeatureCard
+              icon={Users}
+              title="Gestione Dipendenti"
+              description="Centralizza i dati dei dipendenti, monitora le performance e gestisci lo sviluppo di carriera con strumenti intuitivi."
+              delay={0}
+            />
+            <FeatureCard
+              icon={BarChart3}
+              title="Analytics & Performance"
+              description="Insight azionabili con dashboard in tempo reale, tracciamento obiettivi e valutazioni delle performance complete."
+              delay={0.1}
+            />
+            <FeatureCard
+              icon={Sparkles}
+              title="Intelligenza AI"
+              description="Sfrutta l'intelligenza artificiale per raccomandazioni talent, analisi gap competenze e pianificazione predittiva della forza lavoro."
+              delay={0.2}
+            />
+            <FeatureCard
+              icon={Lock}
+              title="Sicurezza Enterprise"
+              description="Architettura multi-tenant con controllo accessi basato su ruoli, audit logging e crittografia dei dati a riposo e in transito."
+              delay={0.3}
+            />
+            <FeatureCard
+              icon={Network}
+              title="Tassonomie ESCO & NACE"
+              description="Integrazione nativa con gli standard europei per competenze, occupazioni e attività economiche."
+              delay={0.4}
+            />
+            <FeatureCard
+              icon={GitBranch}
+              title="Percorsi di Carriera"
+              description="Mappatura intelligente dei percorsi di sviluppo professionale con AI che suggerisce le prossime mosse ottimali."
+              delay={0.5}
+            />
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider className="max-w-7xl mx-auto px-4" />
+
+      {/* ====== AI INTELLIGENCE ====== */}
+      <section id="ai" className="py-24 relative overflow-hidden">
+        <ConcentricCircles className="absolute -left-20 top-1/2 -translate-y-1/2 w-[300px] h-[300px] opacity-[0.03]" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: easing.out }}
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+                <Brain className="h-4 w-4" />
+                Intelligenza Semantica
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 font-display">
+                Comprensione Semantica del Tuo Capitale Umano
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Heuresys utilizza embeddings AI avanzati per comprendere le relazioni semantiche tra
+                competenze, ruoli e percorsi di carriera. Il nostro sistema intelligente ti aiuta a
+                prendere decisioni data-driven sulla gestione del talento.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  'Integrazione tassonomie ESCO e NACE',
+                  'Analisi gap competenze e raccomandazioni',
+                  'Predizioni percorsi di carriera',
+                  'Query HR in linguaggio naturale',
+                ].map((item, i) => (
+                  <motion.li
+                    key={item}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-center gap-3 text-muted-foreground"
+                  >
+                    <div className="h-2 w-2 rounded-full bg-primary shrink-0" />
+                    {item}
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: easing.out }}
+              className="relative"
+            >
+              <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-primary/15 via-[var(--brand-accent)]/10 to-[var(--accent-warm)]/15 rounded-3xl p-8 border border-border/40 shadow-raised">
+                <div className="h-full w-full flex items-center justify-center">
+                  <div className="text-center space-y-6">
+                    <div className="h-20 w-20 rounded-2xl bg-primary/15 flex items-center justify-center mx-auto">
+                      <Brain className="h-10 w-10 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-5xl font-bold text-foreground font-display">1.536</div>
+                      <div className="text-muted-foreground mt-1">Dimensioni Vettoriali</div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3 text-sm">
+                      <div className="p-3 rounded-xl bg-card/80 border border-border/40">
+                        <div className="font-bold text-xl font-display">4.080</div>
+                        <div className="text-muted-foreground text-xs">Entità Indicizzate</div>
+                      </div>
+                      <div className="p-3 rounded-xl bg-card/80 border border-border/40">
+                        <div className="font-bold text-xl font-display">11</div>
+                        <div className="text-muted-foreground text-xs">Tipi Entità</div>
+                      </div>
+                    </div>
+                    <div className="text-xs text-muted-foreground/70">
+                      OpenAI text-embedding-3-small
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider className="max-w-7xl mx-auto px-4" />
+
+      {/* ====== DUAL INTERFACE ====== */}
+      <section id="piattaforma" className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-display">
+              Interfaccia Duale
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Esperienze progettate su misura per amministratori HR e dipendenti
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-card/80 backdrop-blur-sm border border-border/60 rounded-2xl p-8 hover:border-primary/30 hover:shadow-raised transition-all duration-300"
+            >
+              <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                <LayoutDashboard className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="text-2xl font-semibold text-foreground mb-3 font-display">
+                Dashboard Admin
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Design desktop-first ottimizzato per manager HR e amministratori che necessitano di
+                supervisione completa e strumenti di gestione avanzati.
+              </p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <Target className="h-4 w-4 text-primary" /> Gestione Obiettivi & OKR
+                </li>
+                <li className="flex items-center gap-2">
+                  <GraduationCap className="h-4 w-4 text-primary" /> Formazione & Sviluppo
+                </li>
+                <li className="flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4 text-primary" /> Analytics & Reportistica
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-card/80 backdrop-blur-sm border border-border/60 rounded-2xl p-8 hover:border-primary/30 hover:shadow-raised transition-all duration-300"
+            >
+              <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                <Smartphone className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="text-2xl font-semibold text-foreground mb-3 font-display">
+                Portale Dipendenti
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Portale self-service mobile-first progettato per permettere ai dipendenti di gestire
+                le proprie esigenze HR in modo rapido ed efficiente da qualsiasi dispositivo.
+              </p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <Target className="h-4 w-4 text-primary" /> Tracciamento obiettivi personali
+                </li>
+                <li className="flex items-center gap-2">
+                  <GraduationCap className="h-4 w-4 text-primary" /> Progresso formativo
+                </li>
+                <li className="flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4 text-primary" /> Buste paga & Ferie
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ====== CTA ====== */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
+        <div className="absolute inset-0 bg-grain opacity-50" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-display">
+              Pronto a Trasformare le Tue Operazioni HR?
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Unisciti alle organizzazioni che si affidano a Heuresys per gestire il capitale umano
+              in modo efficiente e intelligente.
+            </p>
+            <Button asChild size="lg" className="text-base px-10 h-12 font-semibold">
+              <Link href="/login">
+                Inizia Oggi <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ====== FOOTER ====== */}
+      <footer className="border-t border-border/50 bg-card/30 relative">
+        <div className="absolute inset-0 bg-grain opacity-30" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {/* Brand */}
+            <div className="col-span-2 md:col-span-1">
+              <HeuresysLogo size="medium" />
+              <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+                AI-Native HRMS Orchestration Suite. Da pattern nascosti a conoscenza strategica.
+              </p>
+            </div>
+
+            {/* Piattaforma */}
+            <div>
+              <h4 className="font-semibold text-foreground mb-4 font-display text-sm">
+                Piattaforma
+              </h4>
+              <ul className="space-y-2.5 text-sm text-muted-foreground">
+                <li>
+                  <a href="#funzionalita" className="hover:text-foreground transition-colors">
+                    Funzionalità
+                  </a>
+                </li>
+                <li>
+                  <a href="#ai" className="hover:text-foreground transition-colors">
+                    Intelligenza AI
+                  </a>
+                </li>
+                <li>
+                  <a href="#piattaforma" className="hover:text-foreground transition-colors">
+                    Dashboard Admin
+                  </a>
+                </li>
+                <li>
+                  <a href="#piattaforma" className="hover:text-foreground transition-colors">
+                    Portale Dipendenti
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Risorse */}
+            <div>
+              <h4 className="font-semibold text-foreground mb-4 font-display text-sm">Risorse</h4>
+              <ul className="space-y-2.5 text-sm text-muted-foreground">
+                <li>
+                  <span className="hover:text-foreground transition-colors cursor-default">
+                    Documentazione API
+                  </span>
+                </li>
+                <li>
+                  <span className="hover:text-foreground transition-colors cursor-default">
+                    Guida Integrazione
+                  </span>
+                </li>
+                <li>
+                  <span className="hover:text-foreground transition-colors cursor-default">
+                    Tassonomia ESCO
+                  </span>
+                </li>
+                <li>
+                  <span className="hover:text-foreground transition-colors cursor-default">
+                    Sicurezza & Privacy
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contatti */}
+            <div>
+              <h4 className="font-semibold text-foreground mb-4 font-display text-sm">Contatti</h4>
+              <ul className="space-y-2.5 text-sm text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <Mail className="h-3.5 w-3.5" />
+                  info@heuresys.com
+                </li>
+                <li className="flex items-center gap-2">
+                  <MapPin className="h-3.5 w-3.5" />
+                  Milano, Italia
+                </li>
+                <li className="flex items-center gap-2">
+                  <Globe className="h-3.5 w-3.5" />
+                  heuresys.com
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-muted-foreground/70">
+              &copy; {new Date().getFullYear()} Heuresys. Tutti i diritti riservati.
+            </p>
+            <div className="flex items-center gap-6 text-xs text-muted-foreground/70">
+              <span>Privacy Policy</span>
+              <span>Termini di Servizio</span>
+              <span>Cookie Policy</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default function Home() {
+  return <HomeContent />;
+}

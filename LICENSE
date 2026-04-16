@@ -1,0 +1,58 @@
+Heuresys Evolution — Proprietary License
+
+Copyright (c) 2026 Enzo Spenuso. All Rights Reserved.
+
+This software and its documentation, including all source code, configurations,
+schemas, data models, designs, diagrams, and accompanying materials (collectively,
+"the Software"), are the exclusive intellectual property of Enzo Spenuso
+(hereinafter, "the Owner").
+
+NO LICENSE GRANTED BY DEFAULT
+
+Unless expressly authorized in writing by the Owner, no person or entity is
+permitted to:
+
+  1. Copy, reproduce, or duplicate the Software, in whole or in part.
+  2. Modify, adapt, translate, or create derivative works based on the Software.
+  3. Distribute, sublicense, rent, lease, lend, sell, or otherwise transfer
+     the Software or any portion thereof.
+  4. Publicly display, publicly perform, or make the Software available to any
+     third party.
+  5. Reverse-engineer, decompile, or disassemble the Software, except to the
+     extent such activity is expressly permitted by applicable law.
+  6. Use the Software for any commercial, production, or revenue-generating
+     purpose.
+  7. Use the Software to train, fine-tune, or evaluate any machine-learning
+     model, including large language models.
+
+CONFIDENTIALITY
+
+The Software is confidential and proprietary. Any unauthorized access,
+disclosure, or use constitutes a breach of confidentiality and may expose the
+violator to civil and criminal liability under applicable laws, including but
+not limited to the Italian Copyright Law (L. 633/1941), EU Directive 2019/790,
+and the laws of any other jurisdiction in which the Software is used.
+
+NO WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL THE OWNER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+OR OTHER DEALINGS IN THE SOFTWARE.
+
+GOVERNING LAW
+
+This license shall be governed by and construed in accordance with the laws of
+the Republic of Italy. Any dispute arising out of or in connection with this
+license shall be subject to the exclusive jurisdiction of the competent courts
+of Italy.
+
+CONTACT
+
+For licensing inquiries, authorizations, or commercial agreements, contact:
+  Enzo Spenuso — spen.zosky@gmail.com

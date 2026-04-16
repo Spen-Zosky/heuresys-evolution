@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Inspector v2 - Heuresys Platform</title>
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .nav-links {
+            margin-top: 1rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            background: rgba(255,255,255,0.1);
+            margin-right: 0.5rem;
+            font-size: 0.875rem;
+            transition: background 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .nav-links a.active {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-section h2 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        .filter-group select:disabled {
+            background: var(--gray-100);
+            cursor: not-allowed;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .employee-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .employee-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .employee-info {
+            flex: 1;
+        }
+
+        .employee-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.25rem;
+        }
+
+        .employee-title {
+            font-size: 1rem;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+        }
+
+        .employee-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .employee-meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .employee-meta-label {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .employee-meta-value {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--gray-800);
+        }
+
+        .employee-meta-value.resolved {
+            color: var(--success);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card .label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .data-section {
+            background: white;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 1rem 1.5rem;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-header:hover {
+            background: var(--gray-200);
+        }
+
+        .section-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-header .badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .section-header .toggle-icon {
+            transition: transform 0.2s;
+        }
+
+        .section-header.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            padding: 1.5rem;
+            max-height: 700px;
+            overflow-y: auto;
+        }
+
+        .section-content.collapsed {
+            display: none;
+        }
+
+        .record-card {
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .record-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .record-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .record-title .record-subtitle {
+            font-weight: 400;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .field-item {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0.75rem;
+            background: white;
+            border-radius: 0.375rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .field-item.fk-resolved {
+            border-left: 3px solid var(--success);
+        }
+
+        .field-item.empty {
+            border-left: 3px solid var(--warning);
+            opacity: 0.7;
+        }
+
+        .field-name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.125rem;
+        }
+
+        .field-value {
+            font-size: 0.9rem;
+            color: var(--gray-800);
+            word-break: break-word;
+        }
+
+        .field-value.null {
+            color: var(--gray-300);
+            font-style: italic;
+        }
+
+        .field-value .resolved-value {
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .field-value .original-id {
+            color: var(--gray-400);
+            font-size: 0.75rem;
+            display: block;
+            margin-top: 0.125rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .data-table th {
+            background: var(--gray-50);
+            font-weight: 600;
+            color: var(--gray-600);
+            position: sticky;
+            top: 0;
+        }
+
+        .data-table tr:hover {
+            background: var(--gray-50);
+        }
+
+        .data-table .resolved-cell {
+            color: var(--success);
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            color: var(--gray-600);
+        }
+
+        .loading::before {
+            content: '';
+            width: 2rem;
+            height: 2rem;
+            border: 3px solid var(--gray-200);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray-600);
+        }
+
+        .category-header {
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .category-header:first-child {
+            margin-top: 0;
+        }
+
+        .category-header h2 {
+            font-size: 1.25rem;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-header .category-count {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            font-weight: normal;
+        }
+
+        /* Grouped/Collapsible records */
+        .record-group {
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+            overflow: hidden;
+        }
+
+        .record-group.has-duplicates {
+            border-left-color: var(--warning);
+        }
+
+        .record-group-header {
+            padding: 0.75rem 1rem;
+            background: var(--gray-100);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .record-group-header:hover {
+            background: var(--gray-200);
+        }
+
+        .record-group-title {
+            font-weight: 600;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .record-group-title .group-toggle {
+            font-size: 0.75rem;
+            transition: transform 0.2s;
+        }
+
+        .record-group-header.collapsed .group-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .record-group-subtitle {
+            font-weight: 400;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+        }
+
+        .record-group-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .duplicate-badge {
+            background: var(--warning);
+            color: white;
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .record-group-content {
+            padding: 1rem;
+        }
+
+        .record-group-content.collapsed {
+            display: none;
+        }
+
+        .duplicate-records {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--gray-300);
+        }
+
+        .duplicate-records-header {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .duplicate-record {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .duplicate-record:last-child {
+            margin-bottom: 0;
+        }
+
+        .duplicate-record-header {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .duplicate-record-header .dup-toggle {
+            font-size: 0.6rem;
+            transition: transform 0.2s;
+        }
+
+        .duplicate-record-header.collapsed .dup-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .duplicate-record-fields {
+            padding-top: 0.5rem;
+        }
+
+        .duplicate-record-fields.collapsed {
+            display: none;
+        }
+
+        .diff-highlight {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--warning);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Employee Inspector <span class="version-badge">v2.0</span></h1>
+        <p>Visualizza tutti i dati correlati a un dipendente con risoluzione automatica dei riferimenti</p>
+        <div class="nav-links">
+            <a href="tenant-inspector-v2.html">Tenant Inspector v2</a>
+            <a href="employee-inspector-v2.html" class="active">Employee Inspector v2</a>
+            <a href="employee-inspector.html">v1 (Legacy)</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="filter-section">
+            <h2>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                Filtri Cascata
+            </h2>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="tenant-select">1. Tenant</label>
+                    <select id="tenant-select" onchange="onTenantChange()">
+                        <option value="">-- Seleziona Tenant --</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="cost-center-select">2. Centro di Costo</label>
+                    <select id="cost-center-select" onchange="onFilterChange()" disabled>
+                        <option value="">-- Tutti --</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="org-unit-select">3. Unita Organizzativa</label>
+                    <select id="org-unit-select" onchange="onFilterChange()" disabled>
+                        <option value="">-- Tutte --</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="job-title-select">4. Job Title</label>
+                    <select id="job-title-select" onchange="onFilterChange()" disabled>
+                        <option value="">-- Tutti --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-row" style="margin-top: 1rem;">
+                <div class="filter-group" style="flex: 2;">
+                    <label for="employee-select">5. Dipendente</label>
+                    <select id="employee-select" disabled>
+                        <option value="">-- Seleziona Dipendente --</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="loadEmployeeData()">Carica Dati</button>
+            </div>
+        </div>
+
+        <div id="employee-card-container" style="display: none;"></div>
+
+        <div id="stats-container" class="stats-grid" style="display: none;"></div>
+
+        <div id="data-container"></div>
+    </div>
+
+    <script>
+        const API_BASE = `${window.location.protocol}//${window.location.host}/api`;
+
+        // Lookup caches for FK resolution
+        let lookupCache = {
+            employees: {},
+            departments: {},
+            cost_centers: {},
+            org_units: {},
+            locations: {},  // Unified sede entity (replaces branches)
+            tenants: {},
+            goals: {},
+            courses: {},
+            learning_paths: {},
+            salary_bands: {},
+            review_cycles: {},
+            surveys: {},
+            certifications: {},
+            skills: {}
+        };
+
+        // Field mappings for display names - FK resolution
+        const DISPLAY_FIELD_MAP = {
+            'tenant_id': { lookup: 'tenants', display: 'name', label: 'Tenant' },
+            'employee_id': { lookup: 'employees', display: 'fullName', label: 'Dipendente' },
+            'manager_id': { lookup: 'employees', display: 'fullName', label: 'Manager' },
+            'reviewer_id': { lookup: 'employees', display: 'fullName', label: 'Revisore' },
+            'owner_id': { lookup: 'employees', display: 'fullName', label: 'Proprietario' },
+            'giver_id': { lookup: 'employees', display: 'fullName', label: 'Da' },
+            'receiver_id': { lookup: 'employees', display: 'fullName', label: 'A' },
+            'from_employee_id': { lookup: 'employees', display: 'fullName', label: 'Da' },
+            'to_employee_id': { lookup: 'employees', display: 'fullName', label: 'A' },
+            'target_employee_id': { lookup: 'employees', display: 'fullName', label: 'Destinatario' },
+            'reviewer_employee_id': { lookup: 'employees', display: 'fullName', label: 'Revisore' },
+            'created_by_employee_id': { lookup: 'employees', display: 'fullName', label: 'Creato da' },
+            'approved_by_employee_id': { lookup: 'employees', display: 'fullName', label: 'Approvato da' },
+            'assigned_by_employee_id': { lookup: 'employees', display: 'fullName', label: 'Assegnato da' },
+            'assigned_by': { lookup: 'employees', display: 'fullName', label: 'Assegnato da' },
+            'mentor_id': { lookup: 'employees', display: 'fullName', label: 'Mentor' },
+            'mentee_id': { lookup: 'employees', display: 'fullName', label: 'Mentee' },
+            'department_id': { lookup: 'departments', display: 'name', label: 'Dipartimento' },
+            'cost_center_id': { lookup: 'cost_centers', display: 'name', label: 'Centro di Costo' },
+            'org_unit_id': { lookup: 'org_units', display: 'name', label: 'Unita Organizzativa' },
+            'branch_id': { lookup: 'locations', display: 'name', label: 'Sede' },
+            'location_id': { lookup: 'locations', display: 'name', label: 'Sede' },
+            'parent_goal_id': { lookup: 'goals', display: 'title', label: 'Obiettivo Padre' },
+            'goal_id': { lookup: 'goals', display: 'title', label: 'Obiettivo' },
+            'course_id': { lookup: 'courses', display: 'title', label: 'Corso' },
+            'learning_path_id': { lookup: 'learning_paths', display: 'title', label: 'Percorso Formativo' },
+            'band_id': { lookup: 'salary_bands', display: 'name', label: 'Fascia Salariale' },
+            'salary_band_id': { lookup: 'salary_bands', display: 'name', label: 'Fascia Salariale' },
+            'review_cycle_id': { lookup: 'review_cycles', display: 'name', label: 'Ciclo di Review' },
+            'survey_id': { lookup: 'surveys', display: 'title', label: 'Survey' },
+            'certification_id': { lookup: 'certifications', display: 'name', label: 'Certificazione' },
+            'skill_id': { lookup: 'skills', display: 'name', label: 'Competenza' }
+        };
+
+        // Tables related to employee with record title generators
+        const EMPLOYEE_RELATED_TABLES = {
+            // Core Employee Data
+            'employees': {
+                name: 'Dati Anagrafici',
+                category: 'Anagrafica',
+                getTitle: (r) => `${r.first_name} ${r.last_name}`,
+                getSubtitle: (r) => r.job_title || r.email
+            },
+            'users': {
+                name: 'Account Utente',
+                category: 'Anagrafica',
+                getTitle: (r) => r.username || r.email || 'Account'
+            },
+
+            // Organization
+            'org_units': {
+                name: 'Unita Organizzativa',
+                category: 'Organizzazione',
+                joinField: 'org_unit_id',
+                getTitle: (r) => r.name || r.code || 'Unita'
+            },
+            'cost_centers': {
+                name: 'Centro di Costo',
+                category: 'Organizzazione',
+                joinField: 'cost_center_id',
+                getTitle: (r) => `${r.name || ''} (${r.code || ''})`.trim()
+            },
+            'departments': {
+                name: 'Dipartimento',
+                category: 'Organizzazione',
+                joinField: 'department',
+                getTitle: (r) => r.name || r.code || 'Dipartimento'
+            },
+
+            // Performance
+            'goals': {
+                name: 'Obiettivi',
+                category: 'Performance',
+                getTitle: (r) => r.title || 'Obiettivo senza titolo',
+                getSubtitle: (r) => r.status ? `Stato: ${r.status}` : null
+            },
+            'performance_reviews': {
+                name: 'Valutazioni',
+                category: 'Performance',
+                getTitle: (r) => r.review_type || r.title || `Valutazione ${r.period || ''}`.trim(),
+                getSubtitle: (r) => r.rating ? `Rating: ${r.rating}` : null
+            },
+            'check_ins': {
+                name: 'Check-ins',
+                category: 'Performance',
+                getTitle: (r) => r.title || `Check-in del ${formatDate(r.check_in_date || r.created_at)}`
+            },
+            'continuous_feedback': {
+                name: 'Feedback Continuo',
+                category: 'Performance',
+                getTitle: (r) => r.title || r.feedback_type || truncate(r.content || r.message || 'Feedback', 50)
+            },
+            'feedback_360': {
+                name: 'Feedback 360',
+                category: 'Performance',
+                getTitle: (r) => r.title || `Feedback 360 - ${formatDate(r.created_at)}`
+            },
+            'calibration_discussions': {
+                name: 'Discussioni Calibrazione',
+                category: 'Performance',
+                getTitle: (r) => r.topic || `Calibrazione ${formatDate(r.created_at)}`
+            },
+            'employee_kpi_targets': {
+                name: 'Target KPI',
+                category: 'Performance',
+                getTitle: (r) => r.kpi_name || r.metric_name || 'KPI',
+                getSubtitle: (r) => r.target_value ? `Target: ${r.target_value}` : null
+            },
+
+            // Compensation
+            'bonus_allocations': {
+                name: 'Allocazioni Bonus',
+                category: 'Compensation',
+                getTitle: (r) => r.bonus_type || r.plan_name || 'Bonus',
+                getSubtitle: (r) => r.amount ? `Importo: ${formatCurrency(r.amount)}` : null
+            },
+            'merit_recommendations': {
+                name: 'Raccomandazioni Merito',
+                category: 'Compensation',
+                getTitle: (r) => `Merito ${r.year || formatDate(r.created_at)}`,
+                getSubtitle: (r) => r.percentage ? `${r.percentage}%` : null
+            },
+            'salary_band_assignments': {
+                name: 'Fascia Salariale',
+                category: 'Compensation',
+                getTitle: (r) => r.band_name || `Fascia assegnata ${formatDate(r.effective_date || r.created_at)}`
+            },
+            'employee_pay_stubs': {
+                name: 'Cedolini',
+                category: 'Compensation',
+                getTitle: (r) => `Cedolino ${r.pay_period || r.month || ''} ${r.year || ''}`.trim(),
+                getSubtitle: (r) => r.net_amount ? `Netto: ${formatCurrency(r.net_amount)}` : null
+            },
+
+            // Learning
+            'course_enrollments': {
+                name: 'Iscrizioni Corsi',
+                category: 'Formazione',
+                getTitle: (r) => r.course_title || r.course_name || 'Corso',
+                getSubtitle: (r) => r.status || r.completion_status
+            },
+            'learning_path_enrollments': {
+                name: 'Percorsi Formativi',
+                category: 'Formazione',
+                getTitle: (r) => r.path_title || r.path_name || 'Percorso',
+                getSubtitle: (r) => r.progress ? `Progresso: ${r.progress}%` : null
+            },
+            'employee_certifications': {
+                name: 'Certificazioni',
+                category: 'Formazione',
+                getTitle: (r) => r.certification_name || r.name || 'Certificazione',
+                getSubtitle: (r) => r.expiry_date ? `Scade: ${formatDate(r.expiry_date)}` : null
+            },
+            'learning_bookmarks': {
+                name: 'Bookmark Formazione',
+                category: 'Formazione',
+                getTitle: (r) => r.resource_title || r.title || 'Risorsa salvata'
+            },
+            'learning_ratings': {
+                name: 'Valutazioni Corsi',
+                category: 'Formazione',
+                getTitle: (r) => r.course_title || 'Valutazione corso',
+                getSubtitle: (r) => r.rating ? `Rating: ${r.rating}/5` : null
+            },
+            'learning_recommendations': {
+                name: 'Raccomandazioni',
+                category: 'Formazione',
+                getTitle: (r) => r.resource_title || r.course_title || 'Raccomandazione'
+            },
+
+            // Skills
+            'employee_skill_assessments': {
+                name: 'Assessment Competenze',
+                category: 'Competenze',
+                getTitle: (r) => r.skill_name || 'Competenza',
+                getSubtitle: (r) => r.level ? `Livello: ${r.level}` : null
+            },
+            'skill_development_paths': {
+                name: 'Piani Sviluppo',
+                category: 'Competenze',
+                getTitle: (r) => r.path_name || r.skill_name || 'Piano sviluppo'
+            },
+            'employee_occupations': {
+                name: 'Occupazioni ESCO',
+                category: 'Competenze',
+                getTitle: (r) => r.occupation_title || r.esco_code || 'Occupazione'
+            },
+
+            // Career
+            'employee_career_paths': {
+                name: 'Percorsi Carriera',
+                category: 'Carriera',
+                getTitle: (r) => r.path_name || r.target_role || 'Percorso carriera',
+                getSubtitle: (r) => r.status
+            },
+            'internal_applications': {
+                name: 'Candidature Interne',
+                category: 'Carriera',
+                getTitle: (r) => r.job_title || r.position_title || 'Candidatura',
+                getSubtitle: (r) => r.status || r.application_status
+            },
+            'internal_job_alerts': {
+                name: 'Alert Job Interni',
+                category: 'Carriera',
+                getTitle: (r) => r.search_criteria || r.job_category || 'Alert'
+            },
+            'saved_jobs': {
+                name: 'Job Salvati',
+                category: 'Carriera',
+                getTitle: (r) => r.job_title || 'Posizione salvata'
+            },
+
+            // Time & Benefits
+            'employee_time_off_requests': {
+                name: 'Richieste Ferie',
+                category: 'Time & Benefits',
+                getTitle: (r) => `${r.leave_type || 'Ferie'} - ${formatDate(r.start_date)}`,
+                getSubtitle: (r) => r.status
+            },
+            'employee_time_off_balances': {
+                name: 'Saldi Ferie',
+                category: 'Time & Benefits',
+                getTitle: (r) => r.leave_type || 'Saldo',
+                getSubtitle: (r) => r.balance !== undefined ? `Saldo: ${r.balance} giorni` : null
+            },
+            'employee_benefit_enrollments': {
+                name: 'Benefit Attivi',
+                category: 'Time & Benefits',
+                getTitle: (r) => r.benefit_name || r.benefit_type || 'Benefit',
+                getSubtitle: (r) => r.status || (r.is_active ? 'Attivo' : 'Inattivo')
+            },
+            'employee_requests': {
+                name: 'Richieste HR',
+                category: 'Time & Benefits',
+                getTitle: (r) => r.request_type || r.title || 'Richiesta',
+                getSubtitle: (r) => r.status
+            },
+
+            // Wellbeing
+            'wellbeing_checkins': {
+                name: 'Check-in Wellbeing',
+                category: 'Wellbeing',
+                getTitle: (r) => `Check-in del ${formatDate(r.created_at || r.checkin_date)}`,
+                getSubtitle: (r) => r.mood_score ? `Mood: ${r.mood_score}/10` : null
+            },
+            'wellbeing_goals': {
+                name: 'Obiettivi Wellbeing',
+                category: 'Wellbeing',
+                getTitle: (r) => r.goal_title || r.title || 'Obiettivo wellbeing',
+                getSubtitle: (r) => r.status
+            },
+            'wellbeing_program_enrollments': {
+                name: 'Programmi Wellbeing',
+                category: 'Wellbeing',
+                getTitle: (r) => r.program_name || r.program_title || 'Programma'
+            },
+            'burnout_assessments': {
+                name: 'Assessment Burnout',
+                category: 'Wellbeing',
+                getTitle: (r) => `Assessment del ${formatDate(r.created_at || r.assessment_date)}`,
+                getSubtitle: (r) => r.risk_level ? `Rischio: ${r.risk_level}` : null
+            },
+            'pulse_checks': {
+                name: 'Pulse Checks',
+                category: 'Wellbeing',
+                getTitle: (r) => `Pulse del ${formatDate(r.created_at || r.check_date)}`,
+                getSubtitle: (r) => r.score ? `Score: ${r.score}` : null
+            },
+
+            // Engagement
+            'survey_responses': {
+                name: 'Risposte Survey',
+                category: 'Engagement',
+                getTitle: (r) => r.survey_title || `Risposta del ${formatDate(r.submitted_at || r.created_at)}`
+            },
+            'social_likes': {
+                name: 'Social Likes',
+                category: 'Engagement',
+                getTitle: (r) => `Like del ${formatDate(r.created_at)}`
+            },
+
+            // Onboarding
+            'onboarding_instances': {
+                name: 'Onboarding',
+                category: 'Onboarding',
+                getTitle: (r) => r.template_name || `Onboarding ${formatDate(r.start_date || r.created_at)}`,
+                getSubtitle: (r) => r.status || r.progress ? `${r.progress}%` : null
+            }
+        };
+
+        let selectedTenantId = null;
+        let selectedEmployeeId = null;
+        let allEmployees = [];
+        let costCenters = [];
+        let orgUnits = [];
+        let jobTitles = [];
+        let employeeData = {};
+
+        // Utility functions
+        function formatDate(dateStr) {
+            if (!dateStr) return 'N/D';
+            try {
+                const date = new Date(dateStr);
+                return date.toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            } catch {
+                return dateStr;
+            }
+        }
+
+        function formatCurrency(amount) {
+            if (amount === null || amount === undefined) return 'N/D';
+            return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(amount);
+        }
+
+        function truncate(str, maxLen) {
+            if (!str) return '';
+            return str.length > maxLen ? str.substring(0, maxLen) + '...' : str;
+        }
+
+        function formatValue(value) {
+            if (value === null || value === undefined) return 'NULL';
+            if (typeof value === 'boolean') return value ? 'Si' : 'No';
+            if (typeof value === 'object') {
+                if (value instanceof Date) return formatDate(value);
+                return JSON.stringify(value);
+            }
+            if (typeof value === 'string' && value.match(/^\d{4}-\d{2}-\d{2}/)) {
+                return formatDate(value);
+            }
+            return String(value);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadTenants();
+        });
+
+        async function loadTenants() {
+            try {
+                const response = await fetch(`${API_BASE}/tenants`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const tenants = await response.json();
+                if (!tenants || tenants.length === 0) {
+                    showError('Nessun tenant trovato nel database');
+                    return;
+                }
+                // Cache tenants
+                tenants.forEach(t => lookupCache.tenants[t.id] = t);
+                populateSelect('tenant-select', tenants, 'id', 'name');
+            } catch (error) {
+                console.error('Error loading tenants:', error);
+                showError(`Errore nel caricamento dei tenant: ${error.message}`);
+            }
+        }
+
+        function populateSelect(selectId, items, valueField, labelField, defaultOption = null) {
+            const select = document.getElementById(selectId);
+            select.innerHTML = defaultOption || '<option value="">-- Seleziona --</option>';
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[valueField];
+                option.textContent = item[labelField];
+                select.appendChild(option);
+            });
+        }
+
+        function showError(message) {
+            document.getElementById('data-container').innerHTML = `
+                <div class="empty-state" style="color: var(--danger);">
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        async function onTenantChange() {
+            selectedTenantId = document.getElementById('tenant-select').value;
+
+            // Reset cascading filters
+            document.getElementById('cost-center-select').innerHTML = '<option value="">-- Tutti --</option>';
+            document.getElementById('org-unit-select').innerHTML = '<option value="">-- Tutte --</option>';
+            document.getElementById('job-title-select').innerHTML = '<option value="">-- Tutti --</option>';
+            document.getElementById('employee-select').innerHTML = '<option value="">-- Seleziona Dipendente --</option>';
+
+            if (!selectedTenantId) {
+                disableSelects(['cost-center-select', 'org-unit-select', 'job-title-select', 'employee-select']);
+                return;
+            }
+
+            try {
+                // Load all filter data in parallel
+                const [costCentersRes, orgUnitsRes, employeesRes] = await Promise.all([
+                    fetch(`${API_BASE}/inspector/tenant/${selectedTenantId}/cost-centers`),
+                    fetch(`${API_BASE}/inspector/tenant/${selectedTenantId}/org-units`),
+                    fetch(`${API_BASE}/inspector/tenant/${selectedTenantId}/employees`)
+                ]);
+
+                costCenters = costCentersRes.ok ? await costCentersRes.json() : [];
+                orgUnits = orgUnitsRes.ok ? await orgUnitsRes.json() : [];
+                allEmployees = employeesRes.ok ? await employeesRes.json() : [];
+
+                // Cache employees for FK resolution
+                allEmployees.forEach(e => {
+                    lookupCache.employees[e.id] = {
+                        ...e,
+                        fullName: `${e.first_name} ${e.last_name}`
+                    };
+                });
+
+                // Cache cost centers and org units
+                costCenters.forEach(c => lookupCache.cost_centers[c.id] = c);
+                orgUnits.forEach(o => lookupCache.org_units[o.id] = o);
+
+                // Extract unique job titles
+                jobTitles = [...new Set(allEmployees.map(e => e.job_title).filter(Boolean))].sort();
+
+                // Populate dropdowns
+                populateSelect('cost-center-select', costCenters, 'id', 'name', '<option value="">-- Tutti --</option>');
+                populateSelect('org-unit-select', orgUnits, 'id', 'name', '<option value="">-- Tutte --</option>');
+                populateSelect('job-title-select', jobTitles.map(j => ({ id: j, name: j })), 'id', 'name', '<option value="">-- Tutti --</option>');
+
+                updateEmployeeList();
+
+                enableSelects(['cost-center-select', 'org-unit-select', 'job-title-select', 'employee-select']);
+
+                // Load additional lookup data
+                await loadAdditionalLookupData(selectedTenantId);
+
+            } catch (error) {
+                console.error('Error loading filter data:', error);
+            }
+        }
+
+        async function loadAdditionalLookupData(tenantId) {
+            // Load departments
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/table/departments`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(d => lookupCache.departments[d.id] = d);
+                }
+            } catch {}
+
+            // Load locations (unified sede entity - replaces branches)
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/table/locations`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(l => lookupCache.locations[l.id] = l);
+                }
+            } catch {}
+
+            // Load goals for parent resolution
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/table/goals`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(g => lookupCache.goals[g.id] = g);
+                }
+            } catch {}
+
+            // Load courses
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/table/courses`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(c => lookupCache.courses[c.id] = c);
+                }
+            } catch {}
+
+            // Load certifications
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/table/certifications`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(c => lookupCache.certifications[c.id] = c);
+                }
+            } catch {}
+        }
+
+        function onFilterChange() {
+            updateEmployeeList();
+        }
+
+        function updateEmployeeList() {
+            const costCenterId = document.getElementById('cost-center-select').value;
+            const orgUnitId = document.getElementById('org-unit-select').value;
+            const jobTitle = document.getElementById('job-title-select').value;
+
+            let filtered = allEmployees;
+
+            if (costCenterId) {
+                filtered = filtered.filter(e => e.cost_center_id === costCenterId);
+            }
+            if (orgUnitId) {
+                filtered = filtered.filter(e => e.org_unit_id === orgUnitId);
+            }
+            if (jobTitle) {
+                filtered = filtered.filter(e => e.job_title === jobTitle);
+            }
+
+            const employeeSelect = document.getElementById('employee-select');
+            employeeSelect.innerHTML = '<option value="">-- Seleziona Dipendente --</option>';
+
+            filtered.sort((a, b) => `${a.last_name} ${a.first_name}`.localeCompare(`${b.last_name} ${b.first_name}`));
+
+            filtered.forEach(emp => {
+                const option = document.createElement('option');
+                option.value = emp.id;
+                option.textContent = `${emp.last_name}, ${emp.first_name} - ${emp.job_title || 'N/A'}`;
+                employeeSelect.appendChild(option);
+            });
+        }
+
+        function disableSelects(ids) {
+            ids.forEach(id => document.getElementById(id).disabled = true);
+        }
+
+        function enableSelects(ids) {
+            ids.forEach(id => document.getElementById(id).disabled = false);
+        }
+
+        function resolveFKValue(fieldName, value) {
+            if (!value) return null;
+
+            const mapping = DISPLAY_FIELD_MAP[fieldName];
+            if (!mapping) return null;
+
+            const cache = lookupCache[mapping.lookup];
+            if (!cache) return null;
+
+            const record = cache[value];
+            if (!record) return null;
+
+            return record[mapping.display] || record.name || record.title || null;
+        }
+
+        async function loadEmployeeData() {
+            const employeeId = document.getElementById('employee-select').value;
+            if (!employeeId) {
+                alert('Seleziona un dipendente');
+                return;
+            }
+
+            selectedEmployeeId = employeeId;
+            const container = document.getElementById('data-container');
+            const cardContainer = document.getElementById('employee-card-container');
+            const statsContainer = document.getElementById('stats-container');
+
+            container.innerHTML = '<div class="loading">Caricamento dati in corso...</div>';
+            cardContainer.style.display = 'none';
+            statsContainer.style.display = 'none';
+
+            try {
+                // Load employee base data first
+                const empResponse = await fetch(`${API_BASE}/inspector/employee/${employeeId}`);
+                if (!empResponse.ok) throw new Error('Dipendente non trovato');
+                const employee = await empResponse.json();
+
+                // Render employee card with resolved FK values
+                renderEmployeeCard(employee);
+
+                // Load all related data
+                const results = {};
+                const stats = {};
+
+                for (const [tableName, config] of Object.entries(EMPLOYEE_RELATED_TABLES)) {
+                    try {
+                        const response = await fetch(`${API_BASE}/inspector/employee/${employeeId}/table/${tableName}`);
+                        if (response.ok) {
+                            const data = await response.json();
+                            results[tableName] = data;
+                            stats[tableName] = Array.isArray(data) ? data.length : (data ? 1 : 0);
+                        } else {
+                            results[tableName] = [];
+                            stats[tableName] = 0;
+                        }
+                    } catch (e) {
+                        results[tableName] = [];
+                        stats[tableName] = 0;
+                    }
+                }
+
+                // Add employee base data
+                results['employees'] = [employee];
+                stats['employees'] = 1;
+
+                employeeData = results;
+
+                // Render stats
+                renderStats(stats);
+
+                // Render data sections
+                renderDataSections(results);
+
+            } catch (error) {
+                console.error('Error loading employee data:', error);
+                container.innerHTML = `
+                    <div class="empty-state" style="color: var(--danger);">
+                        <p>Errore nel caricamento dei dati: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderEmployeeCard(employee) {
+            const container = document.getElementById('employee-card-container');
+            const initials = `${(employee.first_name || '')[0] || ''}${(employee.last_name || '')[0] || ''}`.toUpperCase();
+
+            // Resolve FK values for display
+            const managerName = resolveFKValue('manager_id', employee.manager_id) || 'N/A';
+            const costCenterName = resolveFKValue('cost_center_id', employee.cost_center_id) || 'N/A';
+            const orgUnitName = resolveFKValue('org_unit_id', employee.org_unit_id) || 'N/A';
+            const departmentName = resolveFKValue('department_id', employee.department_id) || employee.department || 'N/A';
+
+            container.innerHTML = `
+                <div class="employee-card">
+                    <div class="employee-avatar">${initials}</div>
+                    <div class="employee-info">
+                        <div class="employee-name">${employee.first_name} ${employee.last_name}</div>
+                        <div class="employee-title">${employee.job_title || 'N/A'} - ${departmentName}</div>
+                        <div class="employee-meta">
+                            <div class="employee-meta-item">
+                                <span class="employee-meta-label">Email</span>
+                                <span class="employee-meta-value">${employee.email || 'N/A'}</span>
+                            </div>
+                            <div class="employee-meta-item">
+                                <span class="employee-meta-label">Matricola</span>
+                                <span class="employee-meta-value">${employee.pernr || 'N/A'}</span>
+                            </div>
+                            <div class="employee-meta-item">
+                                <span class="employee-meta-label">Manager</span>
+                                <span class="employee-meta-value ${managerName !== 'N/A' ? 'resolved' : ''}">${managerName}</span>
+                            </div>
+                            <div class="employee-meta-item">
+                                <span class="employee-meta-label">Centro di Costo</span>
+                                <span class="employee-meta-value ${costCenterName !== 'N/A' ? 'resolved' : ''}">${costCenterName}</span>
+                            </div>
+                            <div class="employee-meta-item">
+                                <span class="employee-meta-label">Unita Organizzativa</span>
+                                <span class="employee-meta-value ${orgUnitName !== 'N/A' ? 'resolved' : ''}">${orgUnitName}</span>
+                            </div>
+                            <div class="employee-meta-item">
+                                <span class="employee-meta-label">Data Assunzione</span>
+                                <span class="employee-meta-value">${employee.hire_date ? formatDate(employee.hire_date) : 'N/A'}</span>
+                            </div>
+                            <div class="employee-meta-item">
+                                <span class="employee-meta-label">Performance</span>
+                                <span class="employee-meta-value">${employee.performance_rating || 'N/A'}</span>
+                            </div>
+                            <div class="employee-meta-item">
+                                <span class="employee-meta-label">Potenziale</span>
+                                <span class="employee-meta-value">${employee.potential || 'N/A'}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.style.display = 'block';
+        }
+
+        function renderStats(stats) {
+            const container = document.getElementById('stats-container');
+
+            // Metriche singole e significative - NO aggregazioni arbitrarie
+            container.innerHTML = `
+                <div class="stat-card">
+                    <div class="label">Obiettivi</div>
+                    <div class="value">${(stats.goals || 0).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        ${stats.employee_kpi_targets || 0} KPI target
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Valutazioni</div>
+                    <div class="value">${(stats.performance_reviews || 0).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        ${stats.check_ins || 0} check-in registrati
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Feedback</div>
+                    <div class="value">${((stats.continuous_feedback || 0) + (stats.feedback_360 || 0)).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        ${stats.continuous_feedback || 0} continui, ${stats.feedback_360 || 0} 360°
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Corsi Iscritti</div>
+                    <div class="value">${(stats.course_enrollments || 0).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        ${stats.employee_certifications || 0} certificazioni ottenute
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Cedolini</div>
+                    <div class="value">${(stats.employee_pay_stubs || 0).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        ${stats.bonus_allocations || 0} bonus assegnati
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Skill Assessment</div>
+                    <div class="value">${(stats.employee_skill_assessments || 0).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        ${stats.employee_career_paths || 0} percorsi carriera
+                    </div>
+                </div>
+            `;
+            container.style.display = 'grid';
+        }
+
+        function renderDataSections(results) {
+            const container = document.getElementById('data-container');
+            container.innerHTML = '';
+
+            // Group by category
+            const categories = {};
+            for (const [tableName, config] of Object.entries(EMPLOYEE_RELATED_TABLES)) {
+                const category = config.category || 'Altri';
+                if (!categories[category]) {
+                    categories[category] = [];
+                }
+                if (results[tableName] && (Array.isArray(results[tableName]) ? results[tableName].length > 0 : results[tableName])) {
+                    categories[category].push({ tableName, config, data: results[tableName] });
+                }
+            }
+
+            // Render each category
+            for (const [category, tables] of Object.entries(categories)) {
+                if (tables.length === 0) continue;
+
+                const totalRecords = tables.reduce((sum, t) => sum + (Array.isArray(t.data) ? t.data.length : 1), 0);
+
+                container.innerHTML += `
+                    <div class="category-header">
+                        <h2>${category} <span class="category-count">(${totalRecords} record in ${tables.length} tabelle)</span></h2>
+                    </div>
+                `;
+
+                for (const { tableName, config, data } of tables) {
+                    const dataArray = Array.isArray(data) ? data : [data];
+                    const section = document.createElement('div');
+                    section.className = 'data-section';
+                    section.innerHTML = `
+                        <div class="section-header" onclick="toggleSection(this)">
+                            <h3>
+                                <span class="toggle-icon">&#9660;</span>
+                                ${config.name}
+                            </h3>
+                            <span class="badge">${dataArray.length} record</span>
+                        </div>
+                        <div class="section-content">
+                            ${renderTableRecords(tableName, config, dataArray)}
+                        </div>
+                    `;
+                    container.appendChild(section);
+                }
+            }
+
+            if (container.innerHTML === '') {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <p>Nessun dato correlato trovato per questo dipendente</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderTableRecords(tableName, config, data) {
+            if (!data || data.length === 0) {
+                return '<div class="empty-state">Nessun record</div>';
+            }
+
+            // Group records by ID to detect duplicates
+            const groupedById = groupRecordsById(data);
+            const uniqueGroups = Object.values(groupedById);
+            const hasDuplicates = uniqueGroups.some(group => group.length > 1);
+
+            // Use grouped cards view
+            if (uniqueGroups.length <= 10 || hasDuplicates) {
+                return uniqueGroups.map((group, idx) => {
+                    const primaryRecord = group[0];
+                    const duplicates = group.slice(1);
+                    const title = config.getTitle ? config.getTitle(primaryRecord) : `Record ${idx + 1}`;
+                    const subtitle = config.getSubtitle ? config.getSubtitle(primaryRecord) : null;
+                    const groupId = `group-${tableName}-${idx}`;
+                    const hasDups = duplicates.length > 0;
+
+                    return `
+                        <div class="record-group ${hasDups ? 'has-duplicates' : ''}">
+                            <div class="record-group-header" onclick="toggleRecordGroup('${groupId}')">
+                                <div class="record-group-title">
+                                    <span class="group-toggle">&#9660;</span>
+                                    ${title}
+                                    ${subtitle ? `<span class="record-group-subtitle">${subtitle}</span>` : ''}
+                                </div>
+                                <div class="record-group-meta">
+                                    ${hasDups ? `<span class="duplicate-badge">${group.length} referenze</span>` : ''}
+                                </div>
+                            </div>
+                            <div id="${groupId}" class="record-group-content">
+                                <div class="field-grid">
+                                    ${renderRecordFields(primaryRecord)}
+                                </div>
+                                ${hasDups ? renderDuplicateRecords(duplicates, primaryRecord, tableName, idx) : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Use table for larger datasets without duplicates
+            const columns = Object.keys(data[0]);
+            const displayColumns = columns.slice(0, 6);
+
+            return `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Identificativo</th>
+                            ${displayColumns.filter(c => c !== 'id').slice(0, 5).map(col =>
+                                `<th>${getFieldLabel(col)}</th>`
+                            ).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.slice(0, 30).map(row => {
+                            const title = config.getTitle ? config.getTitle(row) : truncate(row.id || '', 8);
+                            return `
+                                <tr onclick="showRecordDetail('${tableName}', '${row.id}')">
+                                    <td><strong>${title}</strong></td>
+                                    ${displayColumns.filter(c => c !== 'id').slice(0, 5).map(col => {
+                                        const resolved = resolveFKValue(col, row[col]);
+                                        return `<td class="${resolved ? 'resolved-cell' : ''}">${resolved || formatValue(row[col])}</td>`;
+                                    }).join('')}
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+                ${data.length > 30 ? `<p style="padding: 1rem; color: var(--gray-600); text-align: center;">Mostrati 30 di ${data.length} record</p>` : ''}
+            `;
+        }
+
+        function groupRecordsById(records) {
+            const groups = {};
+            for (const record of records) {
+                const id = record.id || JSON.stringify(record);
+                if (!groups[id]) {
+                    groups[id] = [];
+                }
+                groups[id].push(record);
+            }
+            return groups;
+        }
+
+        function renderDuplicateRecords(duplicates, primaryRecord, tableName, groupIdx) {
+            return `
+                <div class="duplicate-records">
+                    <div class="duplicate-records-header">
+                        Referenze multiple (${duplicates.length} aggiuntive) - stesso record raggiunto da FK diverse:
+                    </div>
+                    ${duplicates.map((dup, dupIdx) => {
+                        const dupId = `dup-${tableName}-${groupIdx}-${dupIdx}`;
+                        const diffFields = findDifferentFields(primaryRecord, dup);
+                        return `
+                            <div class="duplicate-record">
+                                <div class="duplicate-record-header collapsed" onclick="toggleDuplicateRecord('${dupId}', this)">
+                                    <span class="dup-toggle">&#9660;</span>
+                                    Referenza #${dupIdx + 2}
+                                    ${diffFields.length > 0 ? `<span style="color: var(--warning); font-size: 0.7rem;">(${diffFields.length} campi diversi)</span>` : '<span style="color: var(--gray-400); font-size: 0.7rem;">(identico)</span>'}
+                                </div>
+                                <div id="${dupId}" class="duplicate-record-fields collapsed">
+                                    <div class="field-grid">
+                                        ${renderRecordFieldsWithDiff(dup, primaryRecord)}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function findDifferentFields(record1, record2) {
+            const diffFields = [];
+            for (const key of Object.keys(record1)) {
+                if (JSON.stringify(record1[key]) !== JSON.stringify(record2[key])) {
+                    diffFields.push(key);
+                }
+            }
+            return diffFields;
+        }
+
+        function renderRecordFieldsWithDiff(row, primaryRecord) {
+            return Object.entries(row).map(([key, value]) => {
+                const resolved = resolveFKValue(key, value);
+                const isFK = resolved !== null;
+                const isEmpty = value === null || value === undefined;
+                const isDifferent = JSON.stringify(value) !== JSON.stringify(primaryRecord[key]);
+
+                return `
+                    <div class="field-item ${isFK ? 'fk-resolved' : ''} ${isEmpty ? 'empty' : ''} ${isDifferent ? 'diff-highlight' : ''}">
+                        <span class="field-name">${getFieldLabel(key)}</span>
+                        <span class="field-value ${isEmpty ? 'null' : ''}">
+                            ${isFK ? `
+                                <span class="resolved-value">${resolved}</span>
+                                <span class="original-id">ID: ${truncate(String(value), 20)}</span>
+                            ` : formatValue(value)}
+                        </span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleRecordGroup(groupId) {
+            const content = document.getElementById(groupId);
+            const header = content.previousElementSibling;
+            header.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        }
+
+        function toggleDuplicateRecord(dupId, headerEl) {
+            const content = document.getElementById(dupId);
+            headerEl.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        }
+
+        function renderRecordFields(row) {
+            return Object.entries(row).map(([key, value]) => {
+                const resolved = resolveFKValue(key, value);
+                const isFK = resolved !== null;
+                const isEmpty = value === null || value === undefined;
+
+                return `
+                    <div class="field-item ${isFK ? 'fk-resolved' : ''} ${isEmpty ? 'empty' : ''}">
+                        <span class="field-name">${getFieldLabel(key)}</span>
+                        <span class="field-value ${isEmpty ? 'null' : ''}">
+                            ${isFK ? `
+                                <span class="resolved-value">${resolved}</span>
+                                <span class="original-id">ID: ${truncate(String(value), 20)}</span>
+                            ` : formatValue(value)}
+                        </span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getFieldLabel(fieldName) {
+            // Check if we have a display mapping
+            const mapping = DISPLAY_FIELD_MAP[fieldName];
+            if (mapping) return mapping.label;
+
+            // Convert snake_case to Title Case
+            return fieldName
+                .replace(/_/g, ' ')
+                .replace(/\b\w/g, l => l.toUpperCase())
+                .replace(/Id$/, 'ID');
+        }
+
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            header.nextElementSibling.classList.toggle('collapsed');
+        }
+
+        function showRecordDetail(tableName, recordId) {
+            const data = employeeData[tableName];
+            if (!data) return;
+
+            const row = Array.isArray(data) ? data.find(r => r.id === recordId) : data;
+            if (!row) return;
+
+            const config = EMPLOYEE_RELATED_TABLES[tableName];
+            const title = config?.getTitle ? config.getTitle(row) : 'Dettaglio Record';
+
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;';
+            modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+
+            modal.innerHTML = `
+                <div style="background: white; border-radius: 0.75rem; max-width: 900px; max-height: 85vh; overflow-y: auto; padding: 2rem; margin: 1rem;">
+                    <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">${title}</h3>
+                    <p style="color: var(--gray-500); margin-bottom: 1.5rem; font-size: 0.875rem;">${config?.name || tableName}</p>
+                    <div class="field-grid">
+                        ${renderRecordFields(row)}
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" style="margin-top: 1.5rem;" class="btn btn-primary">Chiudi</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+    </script>
+</body>
+</html>

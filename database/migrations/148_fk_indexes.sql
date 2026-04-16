@@ -1,0 +1,36 @@
+-- Migration 148: Create indexes on foreign key columns
+-- Generated from live schema: 33 FK columns without index
+
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_ai_usage_log_user_id ON ai_usage_log (user_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_analysis_sessions_created_by ON analysis_sessions (created_by);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_analytics_events_user_id ON analytics_events (user_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_calibration_participants_manager_id ON calibration_participants (manager_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_compliance_training_requirements_course_id ON compliance_training_requirements (course_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_course_enrollments_semantic_course_id ON course_enrollments_semantic (course_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_course_esco_skills_course_id ON course_esco_skills (course_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_course_modules_course_id ON course_modules (course_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_cross_entity_searches_user_id ON cross_entity_searches (user_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_employee_benefit_enrollments_employee_id ON employee_benefit_enrollments (employee_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_employee_pay_stubs_employee_id ON employee_pay_stubs (employee_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_employee_requests_approver_id ON employee_requests (approver_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_employee_requests_employee_id ON employee_requests (employee_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_employees_staging_manager_id ON employees_staging (manager_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_employees_staging_department_id ON employees_staging (department_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_internal_job_alerts_employee_id ON internal_job_alerts (employee_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_internal_job_views_employee_id ON internal_job_views (employee_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_job_postings_department_id ON job_postings (department_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_learning_bookmarks_course_id ON learning_bookmarks (course_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_learning_bookmarks_employee_id ON learning_bookmarks (employee_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_learning_path_courses_course_id ON learning_path_courses (course_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_learning_ratings_course_id ON learning_ratings (course_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_learning_ratings_employee_id ON learning_ratings (employee_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_learning_recommendations_course_id ON learning_recommendations (course_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_org_scenarios_base_org_unit_id ON org_scenarios (base_org_unit_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_org_scenarios_created_by ON org_scenarios (created_by);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_preboarding_sessions_manager_id ON preboarding_sessions (manager_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_pulse_checks_employee_id ON pulse_checks (employee_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_recruiting_interviews_job_posting_id ON recruiting_interviews (job_posting_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_semantic_search_log_user_id ON semantic_search_log (user_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_skill_development_paths_employee_id ON skill_development_paths (employee_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_survey_responses_employee_id ON survey_responses (employee_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_wellbeing_program_enrollments_employee_id ON wellbeing_program_enrollments (employee_id);

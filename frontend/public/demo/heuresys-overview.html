@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heuresys - Platform Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Exo+2:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0e14;
+    --surface: #12151e;
+    --surface-2: #1a1e2b;
+    --border: #2a2f42;
+    --border-subtle: #1e2233;
+    --text: #e2e5ef;
+    --text-dim: #7d829a;
+    --text-faint: #555a70;
+    --primary: #6366f1;
+    --primary-dim: rgba(99,102,241,0.12);
+    --primary-glow: rgba(99,102,241,0.06);
+    --accent: #818cf8;
+    --green: #22c55e;
+    --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .header {
+    position: relative;
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-subtle);
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, var(--primary-dim) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+  .header h1 {
+    font-family: 'Exo 2', var(--font);
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 0.5rem;
+  }
+  .header h1 .logo-primary { color: hsl(221, 83%, 53%); }
+  .header h1 .logo-accent { color: #a855f7; }
+  .header .subtitle { font-size: 1.05rem; color: var(--text-dim); max-width: 560px; margin: 0 auto 1rem; }
+  .header .tagline {
+    display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); background: var(--primary-dim);
+    padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid rgba(99,102,241,0.2);
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+  .section { margin-bottom: 3rem; }
+  .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .section-title { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 0.75rem; }
+  .section-desc { font-size: 0.92rem; color: var(--text-dim); max-width: 640px; margin-bottom: 1.5rem; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
+  .stat { background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.1rem 1rem; text-align: center; }
+  .stat-value { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+  .stat-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); margin-top: 0.2rem; }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .pillar { background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s; }
+  .pillar:hover { border-color: var(--border); }
+  .pillar-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--primary-dim); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+  .pillar-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .pillar h3 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+  .pillar p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.55; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .card { background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.4rem; transition: border-color 0.2s, box-shadow 0.2s; }
+  .card:hover { border-color: var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+  .card-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--primary-dim); display: flex; align-items: center; justify-content: center; margin-bottom: 0.85rem; }
+  .card-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .card h3 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; }
+  .card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.55; }
+  .table-wrap { background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; }
+  .comp-table { width: 100%; border-collapse: collapse; }
+  .comp-table th { background: var(--surface-2); padding: 0.75rem 1.1rem; text-align: left; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border-subtle); }
+  .comp-table td { padding: 0.7rem 1.1rem; font-size: 0.85rem; border-bottom: 1px solid var(--border-subtle); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr:hover td { background: var(--primary-glow); }
+  .comp-table .feature { color: var(--text); font-weight: 500; }
+  .comp-table .yes { color: var(--green); font-weight: 600; font-size: 0.82rem; }
+  .comp-table .no { color: var(--text-faint); font-size: 0.82rem; }
+  .stack-group { margin-bottom: 1rem; }
+  .stack-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.4rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; padding: 0.3rem 0.7rem; border-radius: 6px; border: 1px solid var(--border-subtle); background: var(--surface-2); color: var(--text-dim); }
+  .chain { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; padding: 1.25rem; background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 12px; margin-bottom: 1.5rem; }
+  .chain-node { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; padding: 0.4rem 0.8rem; border-radius: 6px; background: var(--primary-dim); color: var(--accent); border: 1px solid rgba(99,102,241,0.2); }
+  .chain-arrow { color: var(--text-faint); font-size: 0.75rem; }
+  .quote { border-left: 3px solid var(--primary); padding: 1rem 1.25rem; background: var(--primary-glow); border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+  .quote p { font-size: 0.95rem; color: var(--text); font-style: italic; font-weight: 500; }
+  .footer { border-top: 1px solid var(--border-subtle); padding: 2rem; text-align: center; }
+  .footer p { font-size: 0.78rem; color: var(--text-faint); }
+  .footer strong { color: var(--text-dim); font-weight: 600; }
+  @media (max-width: 640px) { .pillars { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2, 1fr); } .header h1 { font-size: 1.5rem; } .chain { justify-content: center; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-content">
+    <h1><span class="logo-primary">Heures</span><span class="logo-accent">y</span><span class="logo-primary">s</span></h1>
+    <p class="subtitle">Organizational Intelligence &amp; Workforce Orchestration &#8212; il layer mancante tra ERP, HR e BI.</p>
+    <span class="tagline">Enterprise Multi-Tenant &#183; EU Standard &#183; Knowledge Graph ESCO</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <div class="section-label">Positioning</div>
+    <div class="section-title">Il Problema che Risolviamo</div>
+    <p class="section-desc">Le organizzazioni non sanno quali capability hanno, quali servono e come colmare il gap. ERP governa l'esecuzione, HR gestisce le persone, BI produce report. Nessuno governa la capability organizzativa come costrutto integrato.</p>
+    <div class="quote">
+      <p>&#8220;SAP manages how the company runs. Heuresys manages the company&#8217;s ability to run.&#8221;</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Architettura a 7 Layer</div>
+    <div class="section-title">La Catena Ontologica</div>
+    <p class="section-desc">Ogni entit&#224; determina quella successiva. Cambia un nodo e l'intero grafo si adatta.</p>
+    <div class="chain">
+      <span class="chain-node">Organization</span><span class="chain-arrow">&#8594;</span>
+      <span class="chain-node">Process</span><span class="chain-arrow">&#8594;</span>
+      <span class="chain-node">OrgUnit</span><span class="chain-arrow">&#8594;</span>
+      <span class="chain-node">Role</span><span class="chain-arrow">&#8594;</span>
+      <span class="chain-node">Skill</span><span class="chain-arrow">&#8594;</span>
+      <span class="chain-node">KPI</span><span class="chain-arrow">&#8594;</span>
+      <span class="chain-node">Assessment</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Tre Prospettive, Un Modello</div>
+    <div class="section-title">Lo stesso grafo, tre punti d'accesso</div>
+    <p class="section-desc">Ogni stakeholder accede alla governance organizzativa dalla propria prospettiva. Un cambiamento da una prospettiva si propaga automaticamente alle altre.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h3>Process Owner</h3>
+        <p>Modella i processi, definisce risorse, skill, team, KPI e budget. Vede l'impatto sui ruoli e sulle competenze.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>Dir. Organizzazione &amp; Sistemi</h3>
+        <p>Governa la struttura, ridisegna org unit, simula scenari. Classifica per NACE/ATECO a 6 livelli.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Dir. Risorse Umane</h3>
+        <p>Talent governance, career pathing, succession planning, performance review, skill gap analysis con matching ESCO.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Knowledge Graph</div>
+    <div class="section-title">ESCO Knowledge Graph Nativo</div>
+    <p class="section-desc">Un grafo semantico con lo standard europeo ESCO, arricchito con embeddings bilingue IT+EN per ricerca e matching AI-powered.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-value">14.011</div><div class="stat-label">Skill ESCO</div></div>
+      <div class="stat"><div class="stat-value">3.040</div><div class="stat-label">Occupazioni</div></div>
+      <div class="stat"><div class="stat-value">126K</div><div class="stat-label">Relazioni Skill-Occ</div></div>
+      <div class="stat"><div class="stat-value">3.276</div><div class="stat-label">Codici NACE/ATECO</div></div>
+      <div class="stat"><div class="stat-value">1.536</div><div class="stat-label">Dim. Embedding</div></div>
+      <div class="stat"><div class="stat-value">4.565</div><div class="stat-label">Crosswalk ESCO-NACE</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Capabilities</div>
+    <div class="section-title">Funzionalit&#224; Chiave</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M5 20V9l7-6 7 6v11"/><path d="M9 20v-5h6v5"/></svg></div>
+        <h3>Blueprint Generator</h3>
+        <p>Genera strutture organizzative ottimali per settore e dimensione. Greenfield o overlay. Risultati in &lt;200ms.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+        <h3>Skill Gap Analysis</h3>
+        <p>Confronta profilo competenze attuale con quello richiesto. Calcola gap, suggerisce formazione, traccia progressi.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg></div>
+        <h3>Graph Navigation</h3>
+        <p>Da processo a skill, da skill a persone, da ruolo a formazione. Ogni nodo connesso all'intero grafo.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3>Multi-Tenant + RLS</h3>
+        <p>Row-Level Security su 260 tabelle. Field policies (SHOW/MASK/HIDE). 8 ruoli con scope gerarchici.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Career Intelligence</h3>
+        <p>Percorsi calcolati dal grafo. Es: &#8220;Da Analista Crediti a Risk Manager&#8221; &#8212; skill da acquisire, formazione, tempo stimato.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <h3>Export &amp; Integrazione</h3>
+        <p>Export Excel (org chart, skill inventory, gap analysis). API REST. Import CSV/API. Integrabile con SAP, Workday, qualsiasi ERP.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Posizionamento</div>
+    <div class="section-title">Heuresys vs. Approccio Tradizionale</div>
+    <div class="table-wrap">
+      <table class="comp-table">
+        <tr><th style="width:40%">Caratteristica</th><th style="width:30%">Heuresys</th><th style="width:30%">Approccio Tradizionale</th></tr>
+        <tr><td class="feature">Knowledge Graph ESCO nativo</td><td class="yes">14K+ skill con embeddings bilingue</td><td class="no">Tassonomie proprietarie o assenti</td></tr>
+        <tr><td class="feature">Blueprint Generator self-service</td><td class="yes">Risultati in millisecondi</td><td class="no">Consulenza esterna, settimane di attesa</td></tr>
+        <tr><td class="feature">Multi-tenant con RLS nativa</td><td class="yes">260 tabelle protette, 8 livelli di ruolo</td><td class="no">Database condiviso, permessi applicativi</td></tr>
+        <tr><td class="feature">Career Intelligence AI-powered</td><td class="yes">Gap analysis e career bridging automatico</td><td class="no">Mappature manuali, fogli Excel</td></tr>
+        <tr><td class="feature">Standard EU (ESCO/NACE/ATECO)</td><td class="yes">Compliance nativa, 6 livelli gerarchici</td><td class="no">Adattamento post-hoc, costi di integrazione</td></tr>
+        <tr><td class="feature">Process-to-Skill mapping</td><td class="yes">Grafo navigabile, propagazione automatica</td><td class="no">Silos separati, nessun collegamento</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Architettura</div>
+    <div class="section-title">Stack Tecnologico</div>
+    <div class="stack-group"><div class="stack-label">Backend</div><div class="tags"><span class="tag">Node.js 20</span><span class="tag">Express 5</span><span class="tag">TypeScript</span><span class="tag">JWT + RBP Framework</span><span class="tag">Zod Validation</span></div></div>
+    <div class="stack-group"><div class="stack-label">Frontend</div><div class="tags"><span class="tag">Next.js 16</span><span class="tag">React</span><span class="tag">TailwindCSS</span><span class="tag">shadcn/ui</span><span class="tag">Framer Motion</span></div></div>
+    <div class="stack-group"><div class="stack-label">Data</div><div class="tags"><span class="tag">PostgreSQL 16</span><span class="tag">pgvector</span><span class="tag">Redis 7</span><span class="tag">635 tabelle</span><span class="tag">353 funzioni DB</span></div></div>
+    <div class="stack-group"><div class="stack-label">AI &amp; Embeddings</div><div class="tags"><span class="tag">OpenAI text-embedding-3-small</span><span class="tag">1536-dim bilingue IT+EN</span><span class="tag">Semantic Search</span><span class="tag">Skill Matching</span></div></div>
+    <div class="stack-group"><div class="stack-label">Infra</div><div class="tags"><span class="tag">Docker</span><span class="tag">OCI ARM64</span><span class="tag">Cloud-agnostic</span><span class="tag">CI/CD ready</span></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Numeri</div>
+    <div class="section-title">Il Modello in Numeri</div>
+    <div class="stats">
+      <div class="stat"><div class="stat-value">635</div><div class="stat-label">Tabelle DB</div></div>
+      <div class="stat"><div class="stat-value">260</div><div class="stat-label">Tabelle con RLS</div></div>
+      <div class="stat"><div class="stat-value">116</div><div class="stat-label">View</div></div>
+      <div class="stat"><div class="stat-value">353</div><div class="stat-label">Funzioni DB</div></div>
+      <div class="stat"><div class="stat-value">78</div><div class="stat-label">Route con RBP</div></div>
+      <div class="stat"><div class="stat-value">178</div><div class="stat-label">Pagine Frontend</div></div>
+      <div class="stat"><div class="stat-value">150+</div><div class="stat-label">Endpoint API</div></div>
+      <div class="stat"><div class="stat-value">4</div><div class="stat-label">Tenant Attivi</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p><strong>Heuresys</strong> &#8212; Organizational Intelligence &amp; Workforce Orchestration</p>
+  <p style="margin-top:0.4rem;">ESCO Native &#183; Enterprise Multi-Tenant &#183; EU Standard Compliant</p>
+  <p style="margin-top:0.75rem;">&#169; 2026 Heuresys &#183; Milano, Italia</p>
+</div>
+
+</body>
+</html>

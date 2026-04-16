@@ -1,0 +1,31 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "51cdf11b-2e20-45c2-8f0f-660e04a709b8",
+      "title": "Process 500 loan applications monthly - Q4 2025",
+      "description": "Increase loan processing efficiency and volume",
+      "goal_type": "performance",
+      "status": "in_progress",
+      "priority": "medium",
+      "progress_percent": 90,
+      "start_date": "2025-10-01T00:00:00.000Z",
+      "due_date": "2025-12-31T00:00:00.000Z",
+      "completed_at": null,
+      "category": "Operations",
+      "weight": "0.21",
+      "employee_id": "00b9c9e7-d699-4e43-8ad9-e2f53f653ace",
+      "owner_id": "00b9c9e7-d699-4e43-8ad9-e2f53f653ace",
+      "parent_goal_id": "b853d27c-2411-473f-b649-099a6a803445",
+      "created_at": "2025-10-03T21:29:22.270Z",
+      "updated_at": "2025-12-02T01:55:08.410Z",
+      "employee_name": "Matteo Lombardi",
+      "parent_title": "Cross-sell 3 products per customer interaction - Q4 2025"
+    }
+  ],
+  "meta": {
+    "total": 470,
+    "limit": 1,
+    "offset": 0
+  }
+}

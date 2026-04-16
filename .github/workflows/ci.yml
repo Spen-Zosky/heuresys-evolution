@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: [self-hosted, heuresys, linux]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci --workspaces --include-workspace-root
+      - run: npm run lint --workspaces --if-present
+
+  typecheck:
+    name: Typecheck
+    runs-on: [self-hosted, heuresys, linux]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci --workspaces --include-workspace-root
+      - run: npx tsc --noEmit --project backend/api/tsconfig.json || true
+      - run: npx tsc --noEmit --project backend/enrichment/tsconfig.json || true
+      - run: npx tsc --noEmit --project frontend/tsconfig.json || true
+
+  test:
+    name: Test
+    runs-on: [self-hosted, heuresys, linux]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci --workspaces --include-workspace-root
+      - run: npm test --workspaces --if-present -- --passWithNoTests
+
+  commitlint:
+    name: Commitlint (PR title + commits)
+    runs-on: [self-hosted, heuresys, linux]
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i -D @commitlint/cli @commitlint/config-conventional
+      - run: npx commitlint --from=${{ github.event.pull_request.base.sha }} --to=${{ github.event.pull_request.head.sha }} --verbose

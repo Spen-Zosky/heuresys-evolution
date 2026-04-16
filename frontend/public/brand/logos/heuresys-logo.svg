@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <!-- Heuresys Logo - Primary Horizontal -->
+  <!-- Symbol: Discovery icon (stylized compass/insight) -->
+  <g id="symbol">
+    <circle cx="24" cy="24" r="20" stroke="#2563EB" stroke-width="2.5" fill="none"/>
+    <circle cx="24" cy="24" r="8" fill="#2563EB"/>
+    <path d="M24 8 L26 20 L24 24 L22 20 Z" fill="#2563EB"/>
+    <path d="M24 40 L22 28 L24 24 L26 28 Z" fill="#2563EB" opacity="0.6"/>
+    <path d="M8 24 L20 22 L24 24 L20 26 Z" fill="#2563EB" opacity="0.6"/>
+    <path d="M40 24 L28 26 L24 24 L28 22 Z" fill="#2563EB"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="56" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="#0F172A" letter-spacing="0.5">
+    HEURESYS
+  </text>
+</svg>

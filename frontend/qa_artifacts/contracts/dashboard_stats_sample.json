@@ -1,0 +1,21 @@
+{
+  "success": false,
+  "error": {
+    "errorId": "ERR-MJQD13FG-8Q9WXDK9W",
+    "code": "ERR-API-1005",
+    "category": "API",
+    "severity": "ERROR",
+    "message": "Endpoint non trovato: GET /api/v1/dashboard/stats",
+    "httpStatus": 404,
+    "timestamp": "2025-12-28T23:28:01.180Z",
+    "retryable": false,
+    "details": {
+      "resource": "Endpoint",
+      "id": "GET /api/v1/dashboard/stats"
+    }
+  },
+  "meta": {
+    "requestId": "ERR-MJQD13FG-8Q9WXDK9W",
+    "timestamp": "2025-12-28T23:28:01.180Z"
+  }
+}

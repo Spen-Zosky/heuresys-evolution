@@ -1,0 +1,334 @@
+/**
+ * Tenant Context Middleware
+ * Extracts and validates tenant information from requests
+ * Sets the tenant context for Row-Level Security
+ * Validates tenant access against authenticated user's JWT claims
+ */
+
+import { Request, Response, NextFunction } from 'express';
+import type { PoolClient } from 'pg';
+import { pool, appPool } from '../config/database.js';
+import { createAppError } from './errorHandler.js';
+import { ErrorCodes } from '@heuresys/shared';
+import type { JWTPayload } from './auth.js';
+import { logger } from '../config/logger.js';
+
+// Extend Express Request to include tenant info and per-request DB client
+declare global {
+  namespace Express {
+    interface Request {
+      tenantId?: string;
+      tenantCode?: string;
+      tenant?: {
+        id: string;
+        code: string;
+        name: string;
+        status: string;
+      };
+      /**
+       * When true, SUPERUSER has selected "All Tenants" — no tenant filter applied.
+       * Routes should aggregate across all tenants instead of filtering by tenant_id.
+       */
+      allTenants?: boolean;
+      /**
+       * Per-request database client from appPool with transaction-scoped
+       * tenant context (app.current_tenant_id set via set_config(..., true)).
+       *
+       * Available after tenantContextMiddleware runs successfully.
+       * Automatically released when the response finishes.
+       * Routes can use this for RLS-enforced queries instead of pool.query().
+       */
+      dbClient?: PoolClient;
+    }
+  }
+}
+
+// Cache tenant info for performance (TTL: 5 minutes)
+const tenantCache = new Map<string, { tenant: Express.Request['tenant']; timestamp: number }>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+/**
+ * Get tenant from cache or database
+ */
+async function getTenant(
+  identifier: string,
+  type: 'id' | 'code'
+): Promise<Express.Request['tenant'] | null> {
+  const cacheKey = `${type}:${identifier}`;
+  const cached = tenantCache.get(cacheKey);
+
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.tenant;
+  }
+
+  const query =
+    type === 'id'
+      ? 'SELECT id, code, name, status FROM tenants WHERE id = $1'
+      : 'SELECT id, code, name, status FROM tenants WHERE code = $1';
+
+  const result = await pool.query(query, [identifier]);
+
+  if (result.rows.length === 0) {
+    return null;
+  }
+
+  const tenant = result.rows[0] as Express.Request['tenant'];
+  tenantCache.set(cacheKey, { tenant, timestamp: Date.now() });
+
+  // Also cache by both id and code for future lookups
+  if (tenant) {
+    tenantCache.set(`id:${tenant.id}`, { tenant, timestamp: Date.now() });
+    tenantCache.set(`code:${tenant.code}`, { tenant, timestamp: Date.now() });
+  }
+
+  return tenant;
+}
+
+/**
+ * Set tenant context in PostgreSQL session for RLS (legacy, session-scoped).
+ * Kept for backward compatibility with routes still using pool.query().
+ */
+async function setTenantRLS(tenantId: string): Promise<void> {
+  await pool.query(`SELECT set_config('app.current_tenant_id', $1, false)`, [tenantId]);
+}
+
+/**
+ * Acquire a per-request client from appPool and set tenant context
+ * as session-scoped (the `false` param to set_config).
+ *
+ * Each client is dedicated to a single HTTP request and released when the
+ * response finishes. Session-scoped setting ensures the tenant ID persists
+ * across all queries within the request, even without an explicit transaction.
+ *
+ * Returns the PoolClient; caller must release it (handled by middleware
+ * via the response 'finish' event).
+ */
+async function acquireTenantClient(tenantId: string): Promise<PoolClient> {
+  const client = await appPool.connect();
+  try {
+    // Use session-scoped (false) since each client is dedicated to a single request
+    // and released on response finish. Transaction-local (true) requires an active
+    // transaction which routes may not always use.
+    await client.query("SELECT set_config('app.current_tenant_id', $1, false)", [tenantId]);
+    return client;
+  } catch (error) {
+    // If setting the tenant context fails, release immediately to avoid leaks
+    client.release();
+    throw error;
+  }
+}
+
+/**
+ * Middleware to extract tenant from request
+ * Supports multiple methods:
+ * - Header: X-Tenant-ID or X-Tenant-Code
+ * - Path parameter: /tenants/:tenantId/* or /tenants/:code/*
+ * - Query parameter: ?tenant_id= or ?tenant_code=
+ * - JWT token (when implemented)
+ */
+// Export type for use in routes
+export interface TenantRequest extends Request {
+  tenantId: string;
+  tenantCode: string;
+  tenant: {
+    id: string;
+    code: string;
+    name: string;
+    status: string;
+  };
+}
+
+export async function tenantContextMiddleware(
+  req: Request,
+  _res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    let tenantId: string | undefined;
+    let tenantCode: string | undefined;
+
+    // 1. Check headers first (highest priority)
+    tenantId = req.headers['x-tenant-id'] as string;
+    tenantCode = req.headers['x-tenant-code'] as string;
+
+    // 2. Check path parameters
+    if (!tenantId && !tenantCode) {
+      tenantId = req.params['tenantId'] as string | undefined;
+      tenantCode = (req.params['tenantCode'] || req.params['code']) as string | undefined;
+    }
+
+    // 3. Check query parameters
+    if (!tenantId && !tenantCode) {
+      tenantId = req.query['tenant_id'] as string;
+      tenantCode = req.query['tenant_code'] as string;
+    }
+
+    // If no tenant identifier found, try JWT fallback for authenticated users
+    if (!tenantId && !tenantCode) {
+      const user = (req as Request & { user?: JWTPayload }).user;
+      if (user?.role === 'SUPERUSER') {
+        // SUPERUSER without explicit tenant = "All Tenants" mode
+        req.allTenants = true;
+        return next();
+      } else if (user?.tenantId) {
+        tenantId = user.tenantId;
+      } else {
+        return next(); // public route or no tenant context needed
+      }
+    }
+
+    // Lookup tenant
+    // Validate UUID format before querying by ID to prevent PostgreSQL cast errors
+    const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    let tenant: Express.Request['tenant'] | null = null;
+
+    if (tenantId) {
+      if (UUID_REGEX.test(tenantId)) {
+        tenant = await getTenant(tenantId, 'id');
+      } else {
+        // Graceful fallback: treat non-UUID value as tenant code
+        tenant = await getTenant(tenantId, 'code');
+      }
+    } else if (tenantCode) {
+      tenant = await getTenant(tenantCode, 'code');
+    }
+
+    if (!tenant) {
+      throw createAppError('Tenant not found', 404, ErrorCodes.TENANT_NOT_FOUND);
+    }
+
+    // Check tenant status
+    if (tenant.status !== 'active' && tenant.status !== 'configuring') {
+      throw createAppError('Tenant is not active', 403, ErrorCodes.TENANT_INACTIVE);
+    }
+
+    // Validate tenant access against authenticated user's JWT claims
+    // req.user is set by authMiddleware which runs before tenantContextMiddleware
+    // on all /api/v1/* routes (except public paths)
+    const user = (req as Request & { user?: JWTPayload }).user;
+    if (user) {
+      const isSuperuser = user.role === 'SUPERUSER';
+      const userTenantId = user.tenantId;
+
+      // Only SUPERUSER can access cross-tenant; all others are tenant-bound
+      if (!isSuperuser && userTenantId && userTenantId !== tenant.id) {
+        logger.warn(
+          `[SECURITY] Cross-tenant access attempt blocked: ` +
+            `user=${user.userId} (${user.username}), ` +
+            `jwt_tenant=${userTenantId}, ` +
+            `requested_tenant=${tenant.id} (${tenant.code}), ` +
+            `ip=${req.ip || req.socket?.remoteAddress || 'unknown'}, ` +
+            `path=${req.method} ${req.originalUrl}, ` +
+            `timestamp=${new Date().toISOString()}`
+        );
+        throw createAppError(
+          'Cross-tenant access denied: you do not have permission to access this tenant',
+          403,
+          ErrorCodes.FORBIDDEN,
+          {
+            requestedTenant: tenant.code,
+            hint: 'You can only access data within your assigned tenant',
+          }
+        );
+      }
+    }
+    // If no user is set (public routes), skip validation - tenant context
+    // is allowed without authentication for unauthenticated endpoints
+
+    // Set tenant context on request
+    req.tenantId = tenant.id;
+    req.tenantCode = tenant.code;
+    req.tenant = tenant;
+
+    // Set RLS context in database (legacy session-scoped for pool.query())
+    await setTenantRLS(tenant.id);
+
+    // Acquire per-request client with transaction-scoped tenant context
+    const dbClient = await acquireTenantClient(tenant.id);
+    req.dbClient = dbClient;
+
+    // Release the client when the response finishes (or closes early)
+    let released = false;
+    const releaseClient = (): void => {
+      if (!released && req.dbClient) {
+        released = true;
+        clearTimeout(safetyTimer);
+        req.dbClient.release();
+        delete req.dbClient;
+      }
+    };
+
+    // Safety net: release after 30s max (prevents permanent leaks)
+    const safetyTimer = setTimeout(() => {
+      if (!released) {
+        logger.warn('[tenantContext] Safety timeout: releasing leaked client');
+        releaseClient();
+      }
+    }, 30000);
+
+    _res.on('finish', releaseClient);
+    _res.on('close', releaseClient);
+    req.on('close', releaseClient); // handles aborted/cancelled requests
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+
+/**
+ * Middleware that requires tenant context
+ * Use this for routes that must have a valid tenant
+ */
+export function requireTenant(req: Request, _res: Response, next: NextFunction): void {
+  if (!req.tenantId && !req.allTenants) {
+    return next(
+      createAppError('Tenant context required', 400, ErrorCodes.VALIDATION_ERROR, {
+        hint: 'Provide tenant via X-Tenant-ID header, path parameter, or query parameter',
+      })
+    );
+  }
+  next();
+}
+
+/**
+ * Clear tenant cache (call when tenant is updated)
+ */
+export function clearTenantCache(tenantId?: string, tenantCode?: string): void {
+  if (tenantId) {
+    tenantCache.delete(`id:${tenantId}`);
+  }
+  if (tenantCode) {
+    tenantCache.delete(`code:${tenantCode}`);
+  }
+  if (!tenantId && !tenantCode) {
+    tenantCache.clear();
+  }
+}
+
+/**
+ * Get tenant ID from request or throw error
+ */
+export function getTenantIdOrThrow(req: Request): string {
+  if (!req.tenantId) {
+    throw createAppError('Tenant context required', 400, ErrorCodes.VALIDATION_ERROR);
+  }
+  return req.tenantId;
+}
+
+/**
+ * Get tenant ID or null when SUPERUSER has "All Tenants" selected.
+ * Returns null ONLY if the user is a SUPERUSER with allTenants flag.
+ * For any other role, always returns the tenant ID or throws.
+ */
+export function getTenantIdOrAll(req: Request): string | null {
+  if (req.allTenants) {
+    // Safety check: only SUPERUSER can operate cross-tenant
+    const userRole = (req as Request & { user?: JWTPayload }).user?.role;
+    if (userRole !== 'SUPERUSER') {
+      throw new Error(`Cross-tenant access denied: role ${userRole} cannot use allTenants mode`);
+    }
+    return null;
+  }
+  return req.tenantId || null;
+}

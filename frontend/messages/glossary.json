@@ -1,0 +1,26 @@
+{
+  "_comment": "Protected terms that remain in English even in Italian UI. Reference only, not used at runtime.",
+  "hr_core": [
+    "skills", "soft skills", "hard skills", "assessment", "feedback",
+    "performance review", "onboarding", "offboarding", "KPI", "OKR"
+  ],
+  "recruiting": [
+    "job posting", "pipeline", "screening", "shortlist", "hiring manager"
+  ],
+  "tech_platform": [
+    "dashboard", "widget", "login", "logout", "admin", "settings",
+    "template", "layout", "drag & drop"
+  ],
+  "analytics": [
+    "benchmark", "report", "trend", "score", "ranking", "gap analysis"
+  ],
+  "career": [
+    "career path", "mentoring", "coaching", "reskilling", "upskilling"
+  ],
+  "compliance": [
+    "GDPR", "compliance", "audit", "data retention"
+  ],
+  "process": [
+    "workflow", "sprint", "backlog", "milestone"
+  ]
+}

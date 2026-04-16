@@ -1,0 +1,7 @@
+# Default: everything requires review from the owner
+*                           @Spen-Zosky
+
+# Critical infra / CI
+/.github/                   @Spen-Zosky
+/infra/                     @Spen-Zosky
+/scripts/                   @Spen-Zosky

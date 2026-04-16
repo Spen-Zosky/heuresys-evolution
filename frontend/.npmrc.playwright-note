@@ -1,0 +1,2 @@
+# Skip automatic Playwright browser download on npm install
+# I browser sono gestiti centralmente in ~/.cache/ms-playwright/

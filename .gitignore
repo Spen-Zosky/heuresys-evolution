@@ -1,0 +1,87 @@
+# ====== Dependencies ======
+node_modules/
+.pnp
+.pnp.js
+.yarn/
+
+# ====== Builds / Caches ======
+dist/
+build/
+out/
+.next/
+.turbo/
+.cache/
+*.tsbuildinfo
+coverage/
+.nyc_output/
+
+# ====== Env & Secrets ======
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+!*.pub
+
+# ====== Logs ======
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ====== OS / Editor ======
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.sublime-*
+
+# ====== Test / Tmp ======
+tmp/
+temp/
+*.tmp
+
+# ====== Database & Backups ======
+backups/
+*.dump
+*.sql.gz
+*.tar.gz
+
+# ====== Project-specific (excluded) ======
+cowork_code_exchange/
+sessioni/
+.auto-memory/
+.claude/
+
+# ====== Runner / CI local state ======
+_work/
+runner-state/
+
+# ====== Node reports ======
+report.*.json
+.eslintcache
+
+# ====== Local caches (should never be committed) ======
+.config/
+.npm/
+
+# ====== Playwright / E2E artifacts ======
+**/playwright-report/
+**/test-results/
+frontend/e2e/re-audit/screenshots/
+frontend/e2e/re-audit/**/*.png
+frontend/e2e/re-audit/**/*.webm
+
+# ====== Internal-only — excluded from public repo ======
+/docs/
+/.bmad/
+
+# ====== AI assistant internal instructions (not for public repo) ======
+CLAUDE.md
+CLAUDE.md.legacy
+CLAUDE_EXCHANGE_PROTOCOL.md

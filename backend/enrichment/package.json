@@ -1,0 +1,44 @@
+{
+  "name": "@heuresys/enrichment-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Heuresys Semantic Enrichment Engine — prototype service (SEE-P1)",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "smoke": "tsx src/smoke-test.ts",
+    "mcp": "node dist/mcp/cli.js",
+    "mcp:dev": "tsx src/mcp/cli.ts",
+    "mcp:smoke": "node scripts/mcp-smoke.mjs",
+    "test": "DATABASE_URL=postgresql://stub:stub@localhost:5432/stub node --test tests/fact-hash.test.mjs tests/idempotency-key.test.mjs tests/providers.test.mjs tests/firecrawl.test.mjs tests/extraction-validation.test.mjs tests/match-keys.test.mjs tests/merge-strategies.test.mjs tests/verification.test.mjs tests/identity-verification.test.mjs",
+    "test:integration": "node --test tests/mcp-tools.test.mjs"
+  },
+  "bin": {
+    "heuresys-enrichment-mcp": "dist/mcp/cli.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.32.1",
+    "@google/generative-ai": "^0.24.1",
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "bullmq": "5.73.4",
+    "dotenv": "16.6.1",
+    "express": "5.2.1",
+    "openai": "^6.34.0",
+    "pg": "8.13.1",
+    "pino": "9.5.0",
+    "turndown": "7.2.0",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.0",
+    "@types/node": "22.10.2",
+    "@types/pg": "8.11.10",
+    "@types/turndown": "5.0.5",
+    "tsx": "4.19.2",
+    "typescript": "5.7.2"
+  }
+}

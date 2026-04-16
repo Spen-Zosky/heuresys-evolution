@@ -1,0 +1,37 @@
+[Unit]
+Description=Heuresys API Gateway
+Documentation=file:///opt/heuresys/backend/api/README.md
+After=network.target postgresql@16-heuresys.service pgbouncer.service redis-server.service
+Requires=pgbouncer.service redis-server.service
+PartOf=heuresys.target
+
+[Service]
+Type=simple
+User=heuresys
+Group=heuresys
+WorkingDirectory=/opt/heuresys/backend/api
+EnvironmentFile=/etc/heuresys/env
+Environment=NODE_ENV=production
+Environment=API_GATEWAY_PORT=3000
+ExecStart=/usr/bin/node --enable-source-maps dist/index.js
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=60
+StartLimitBurst=5
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/log/heuresys/api /var/lib/heuresys
+MemoryMax=1G
+CPUQuota=200%
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=heuresys-api
+
+[Install]
+WantedBy=heuresys.target

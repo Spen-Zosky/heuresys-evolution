@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant Inspector v2 - Heuresys Platform</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .nav-links {
+            margin-top: 1rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            background: rgba(255,255,255,0.1);
+            margin-right: 0.5rem;
+            font-size: 0.875rem;
+            transition: background 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .nav-links a.active {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-section h2 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card .label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .data-section {
+            background: white;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 1rem 1.5rem;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-header:hover {
+            background: var(--gray-200);
+        }
+
+        .section-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-header .badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .section-header .toggle-icon {
+            transition: transform 0.2s;
+        }
+
+        .section-header.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            padding: 1.5rem;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        .section-content.collapsed {
+            display: none;
+        }
+
+        .record-card {
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .record-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .record-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .record-title .record-subtitle {
+            font-weight: 400;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .field-item {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0.75rem;
+            background: white;
+            border-radius: 0.375rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .field-item.fk-resolved {
+            border-left: 3px solid var(--success);
+        }
+
+        .field-item.empty {
+            border-left: 3px solid var(--warning);
+            opacity: 0.7;
+        }
+
+        .field-name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.125rem;
+        }
+
+        .field-value {
+            font-size: 0.9rem;
+            color: var(--gray-800);
+            word-break: break-word;
+        }
+
+        .field-value.null {
+            color: var(--gray-300);
+            font-style: italic;
+        }
+
+        .field-value .resolved-value {
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .field-value .original-id {
+            color: var(--gray-400);
+            font-size: 0.75rem;
+            display: block;
+            margin-top: 0.125rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .data-table th {
+            background: var(--gray-50);
+            font-weight: 600;
+            color: var(--gray-600);
+            position: sticky;
+            top: 0;
+        }
+
+        .data-table tr:hover {
+            background: var(--gray-50);
+        }
+
+        .data-table .resolved-cell {
+            color: var(--success);
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            color: var(--gray-600);
+        }
+
+        .loading::before {
+            content: '';
+            width: 2rem;
+            height: 2rem;
+            border: 3px solid var(--gray-200);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray-600);
+        }
+
+        .category-header {
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .category-header h2 {
+            font-size: 1.25rem;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-header .category-count {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            font-weight: normal;
+        }
+
+        /* Grouped/Collapsible records */
+        .record-group {
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+            overflow: hidden;
+        }
+
+        .record-group.has-duplicates {
+            border-left-color: var(--warning);
+        }
+
+        .record-group-header {
+            padding: 0.75rem 1rem;
+            background: var(--gray-100);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .record-group-header:hover {
+            background: var(--gray-200);
+        }
+
+        .record-group-title {
+            font-weight: 600;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .record-group-title .group-toggle {
+            font-size: 0.75rem;
+            transition: transform 0.2s;
+        }
+
+        .record-group-header.collapsed .group-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .record-group-subtitle {
+            font-weight: 400;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+        }
+
+        .record-group-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .duplicate-badge {
+            background: var(--warning);
+            color: white;
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .record-group-content {
+            padding: 1rem;
+        }
+
+        .record-group-content.collapsed {
+            display: none;
+        }
+
+        .duplicate-records {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--gray-300);
+        }
+
+        .duplicate-records-header {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .duplicate-record {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .duplicate-record:last-child {
+            margin-bottom: 0;
+        }
+
+        .duplicate-record-header {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .duplicate-record-header .dup-toggle {
+            font-size: 0.6rem;
+            transition: transform 0.2s;
+        }
+
+        .duplicate-record-header.collapsed .dup-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .duplicate-record-fields {
+            padding-top: 0.5rem;
+        }
+
+        .duplicate-record-fields.collapsed {
+            display: none;
+        }
+
+        .diff-highlight {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--warning);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Tenant Inspector <span class="version-badge">v2.0</span></h1>
+        <p>Visualizza tutti i dati correlati a un tenant con risoluzione automatica dei riferimenti</p>
+        <div class="nav-links">
+            <a href="tenant-inspector-v2.html" class="active">Tenant Inspector v2</a>
+            <a href="employee-inspector-v2.html">Employee Inspector v2</a>
+            <a href="tenant-inspector.html">v1 (Legacy)</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="filter-section">
+            <h2>Filtri</h2>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="tenant-select">Seleziona Tenant</label>
+                    <select id="tenant-select">
+                        <option value="">-- Seleziona un tenant --</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="loadTenantData()">Carica Dati</button>
+            </div>
+        </div>
+
+        <div id="stats-container" class="stats-grid" style="display: none;"></div>
+
+        <div id="data-container"></div>
+    </div>
+
+    <script>
+        const API_BASE = `${window.location.protocol}//${window.location.host}/api`;
+
+        // Lookup caches for FK resolution
+        let lookupCache = {
+            employees: {},
+            departments: {},
+            cost_centers: {},
+            org_units: {},
+            locations: {},  // Unified sede entity (replaces branches)
+            tenants: {},
+            goals: {},
+            courses: {},
+            learning_paths: {},
+            salary_bands: {},
+            review_cycles: {},
+            surveys: {}
+        };
+
+        // Field mappings for display names
+        const DISPLAY_FIELD_MAP = {
+            'tenant_id': { lookup: 'tenants', display: 'name', label: 'Tenant' },
+            'employee_id': { lookup: 'employees', display: 'fullName', label: 'Dipendente' },
+            'manager_id': { lookup: 'employees', display: 'fullName', label: 'Manager' },
+            'reviewer_id': { lookup: 'employees', display: 'fullName', label: 'Revisore' },
+            'owner_id': { lookup: 'employees', display: 'fullName', label: 'Proprietario' },
+            'giver_id': { lookup: 'employees', display: 'fullName', label: 'Da' },
+            'receiver_id': { lookup: 'employees', display: 'fullName', label: 'A' },
+            'from_employee_id': { lookup: 'employees', display: 'fullName', label: 'Da' },
+            'to_employee_id': { lookup: 'employees', display: 'fullName', label: 'A' },
+            'target_employee_id': { lookup: 'employees', display: 'fullName', label: 'Destinatario' },
+            'reviewer_employee_id': { lookup: 'employees', display: 'fullName', label: 'Revisore' },
+            'created_by_employee_id': { lookup: 'employees', display: 'fullName', label: 'Creato da' },
+            'approved_by_employee_id': { lookup: 'employees', display: 'fullName', label: 'Approvato da' },
+            'assigned_by_employee_id': { lookup: 'employees', display: 'fullName', label: 'Assegnato da' },
+            'responsible_id': { lookup: 'employees', display: 'fullName', label: 'Responsabile' },
+            'facilitator_id_employee_id': { lookup: 'employees', display: 'fullName', label: 'Facilitatore' },
+            'hr_contact_id_employee_id': { lookup: 'employees', display: 'fullName', label: 'Contatto HR' },
+            'department_id': { lookup: 'departments', display: 'name', label: 'Dipartimento' },
+            'cost_center_id': { lookup: 'cost_centers', display: 'name', label: 'Centro di Costo' },
+            'org_unit_id': { lookup: 'org_units', display: 'name', label: 'Unita Organizzativa' },
+            'branch_id': { lookup: 'locations', display: 'name', label: 'Sede' },
+            'location_id': { lookup: 'locations', display: 'name', label: 'Sede' },
+            'parent_goal_id': { lookup: 'goals', display: 'title', label: 'Obiettivo Padre' },
+            'course_id': { lookup: 'courses', display: 'title', label: 'Corso' },
+            'learning_path_id': { lookup: 'learning_paths', display: 'title', label: 'Percorso Formativo' },
+            'band_id': { lookup: 'salary_bands', display: 'name', label: 'Fascia Salariale' },
+            'review_cycle_id': { lookup: 'review_cycles', display: 'name', label: 'Ciclo di Review' },
+            'survey_id': { lookup: 'surveys', display: 'title', label: 'Survey' }
+        };
+
+        // Tables configuration with record title generators
+        const TENANT_TABLES = {
+            'tenants': {
+                name: 'Tenant',
+                category: 'Core',
+                getTitle: (r) => r.name || r.code
+            },
+            'locations': {
+                name: 'Sedi',
+                category: 'Core',
+                getTitle: (r) => `${r.name || r.code}${r.city ? ` - ${r.city}` : ''}`,
+                getSubtitle: (r) => r.location_type ? `Tipo: ${r.location_type}` : null
+            },
+            'departments': {
+                name: 'Dipartimenti',
+                category: 'Core',
+                getTitle: (r) => r.name || r.code
+            },
+            'org_units': {
+                name: 'Unita Organizzative',
+                category: 'Core',
+                getTitle: (r) => r.name || r.code
+            },
+            'cost_centers': {
+                name: 'Centri di Costo',
+                category: 'Core',
+                getTitle: (r) => `${r.name} (${r.code})`
+            },
+            'employees': {
+                name: 'Dipendenti',
+                category: 'HR',
+                getTitle: (r) => `${r.first_name} ${r.last_name}`,
+                getSubtitle: (r) => r.job_title || r.email
+            },
+            'employee_benefits': {
+                name: 'Benefit',
+                category: 'HR',
+                getTitle: (r) => r.benefit_type || r.name || `Benefit #${r.id?.substring(0,8)}`
+            },
+            'salary_bands': {
+                name: 'Fasce Salariali',
+                category: 'HR',
+                getTitle: (r) => r.name || r.band_name || `Banda ${r.level || ''}`
+            },
+            'goals': {
+                name: 'Obiettivi',
+                category: 'Performance',
+                getTitle: (r) => r.title || 'Obiettivo senza titolo',
+                getSubtitle: (r) => r.status ? `Stato: ${r.status}` : null
+            },
+            'okrs': {
+                name: 'OKRs',
+                category: 'Performance',
+                getTitle: (r) => r.objective || r.title || 'OKR'
+            },
+            'performance_reviews': {
+                name: 'Valutazioni',
+                category: 'Performance',
+                getTitle: (r) => r.review_type || r.title || 'Valutazione',
+                getSubtitle: (r) => r.period || r.review_period
+            },
+            'review_cycles': {
+                name: 'Cicli di Review',
+                category: 'Performance',
+                getTitle: (r) => r.name || r.cycle_name || `Ciclo ${r.year || ''}`
+            },
+            'calibration_sessions': {
+                name: 'Calibrazioni',
+                category: 'Performance',
+                getTitle: (r) => r.name || r.session_name || 'Sessione di calibrazione'
+            },
+            'check_ins': {
+                name: 'Check-ins',
+                category: 'Performance',
+                getTitle: (r) => r.title || `Check-in del ${formatDate(r.check_in_date || r.created_at)}`
+            },
+            'continuous_feedback': {
+                name: 'Feedback Continuo',
+                category: 'Performance',
+                getTitle: (r) => r.title || r.feedback_type || 'Feedback'
+            },
+            'feedback_360': {
+                name: 'Feedback 360',
+                category: 'Performance',
+                getTitle: (r) => r.title || r.feedback_type || 'Feedback 360'
+            },
+            'recruiting_requisitions': {
+                name: 'Requisizioni',
+                category: 'Recruiting',
+                getTitle: (r) => r.job_title || r.title || 'Posizione aperta'
+            },
+            'recruiting_candidates': {
+                name: 'Candidati',
+                category: 'Recruiting',
+                getTitle: (r) => `${r.first_name || ''} ${r.last_name || ''}`.trim() || r.email || 'Candidato'
+            },
+            'recruiting_interviews': {
+                name: 'Colloqui',
+                category: 'Recruiting',
+                getTitle: (r) => `Colloquio del ${formatDate(r.interview_date || r.scheduled_at || r.created_at)}`
+            },
+            'recruiting_offers': {
+                name: 'Offerte',
+                category: 'Recruiting',
+                getTitle: (r) => r.position_title || r.job_title || 'Offerta di lavoro'
+            },
+            'internal_job_postings': {
+                name: 'Job Interni',
+                category: 'Recruiting',
+                getTitle: (r) => r.title || r.job_title || 'Posizione interna'
+            },
+            'courses': {
+                name: 'Corsi',
+                category: 'Learning',
+                getTitle: (r) => r.title || r.name || 'Corso'
+            },
+            'learning_paths': {
+                name: 'Percorsi Formativi',
+                category: 'Learning',
+                getTitle: (r) => r.title || r.name || 'Percorso'
+            },
+            'certifications': {
+                name: 'Certificazioni',
+                category: 'Learning',
+                getTitle: (r) => r.name || r.title || 'Certificazione'
+            },
+            'bonus_plans': {
+                name: 'Piani Bonus',
+                category: 'Compensation',
+                getTitle: (r) => r.name || r.plan_name || `Piano ${r.year || ''}`
+            },
+            'merit_cycles': {
+                name: 'Cicli Merito',
+                category: 'Compensation',
+                getTitle: (r) => r.name || r.cycle_name || `Ciclo ${r.year || ''}`
+            },
+            'market_salary_data': {
+                name: 'Dati Mercato',
+                category: 'Compensation',
+                getTitle: (r) => r.job_title || r.role || 'Benchmark'
+            },
+            'wellbeing_resources': {
+                name: 'Risorse Wellbeing',
+                category: 'Wellbeing',
+                getTitle: (r) => r.title || r.name || 'Risorsa'
+            },
+            'pulse_checks': {
+                name: 'Pulse Checks',
+                category: 'Wellbeing',
+                getTitle: (r) => `Pulse del ${formatDate(r.created_at || r.check_date)}`
+            },
+            'burnout_assessments': {
+                name: 'Burnout Assessment',
+                category: 'Wellbeing',
+                getTitle: (r) => `Assessment del ${formatDate(r.created_at || r.assessment_date)}`
+            },
+            'recognition': {
+                name: 'Riconoscimenti',
+                category: 'Engagement',
+                getTitle: (r) => r.title || r.recognition_type || 'Riconoscimento'
+            },
+            'surveys': {
+                name: 'Survey',
+                category: 'Engagement',
+                getTitle: (r) => r.title || r.name || 'Survey'
+            },
+            'social_posts': {
+                name: 'Post Sociali',
+                category: 'Engagement',
+                getTitle: (r) => truncate(r.content || r.title || 'Post', 50)
+            },
+            'onboarding_templates': {
+                name: 'Template Onboarding',
+                category: 'Administration',
+                getTitle: (r) => r.name || r.title || 'Template'
+            },
+            'preboarding_templates': {
+                name: 'Template Preboarding',
+                category: 'Administration',
+                getTitle: (r) => r.name || r.title || 'Template'
+            },
+            'career_paths': {
+                name: 'Percorsi Carriera',
+                category: 'Administration',
+                getTitle: (r) => r.name || r.title || 'Percorso'
+            },
+            'critical_roles': {
+                name: 'Ruoli Critici',
+                category: 'Administration',
+                getTitle: (r) => r.role_name || r.title || 'Ruolo'
+            },
+            'mentorship_programs': {
+                name: 'Mentorship',
+                category: 'Administration',
+                getTitle: (r) => r.name || r.program_name || 'Programma'
+            },
+            'audit_logs': {
+                name: 'Audit Logs',
+                category: 'System',
+                getTitle: (r) => `${r.action || r.event_type || 'Evento'} - ${formatDate(r.created_at)}`
+            },
+            'notifications': {
+                name: 'Notifiche',
+                category: 'System',
+                getTitle: (r) => r.title || r.subject || truncate(r.message || 'Notifica', 40)
+            },
+            'rag_documents': {
+                name: 'Documenti RAG',
+                category: 'System',
+                getTitle: (r) => r.title || r.filename || r.name || 'Documento'
+            },
+            'report_definitions': {
+                name: 'Report',
+                category: 'System',
+                getTitle: (r) => r.name || r.title || 'Report'
+            }
+        };
+
+        let selectedTenantId = null;
+        let tenantData = {};
+
+        // Utility functions
+        function formatDate(dateStr) {
+            if (!dateStr) return 'N/D';
+            try {
+                const date = new Date(dateStr);
+                return date.toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            } catch {
+                return dateStr;
+            }
+        }
+
+        function truncate(str, maxLen) {
+            if (!str) return '';
+            return str.length > maxLen ? str.substring(0, maxLen) + '...' : str;
+        }
+
+        function formatValue(value) {
+            if (value === null || value === undefined) return 'NULL';
+            if (typeof value === 'boolean') return value ? 'Si' : 'No';
+            if (typeof value === 'object') {
+                if (value instanceof Date) return formatDate(value);
+                return JSON.stringify(value);
+            }
+            return String(value);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadTenants();
+        });
+
+        async function loadTenants() {
+            try {
+                const response = await fetch(`${API_BASE}/tenants`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const tenants = await response.json();
+                if (!tenants || tenants.length === 0) {
+                    showError('Nessun tenant trovato nel database');
+                    return;
+                }
+                // Cache tenants
+                tenants.forEach(t => lookupCache.tenants[t.id] = t);
+                populateTenantSelect(tenants);
+            } catch (error) {
+                console.error('Error loading tenants:', error);
+                showError(`Errore nel caricamento dei tenant: ${error.message}`);
+            }
+        }
+
+        function populateTenantSelect(tenants) {
+            const select = document.getElementById('tenant-select');
+            tenants.forEach(tenant => {
+                const option = document.createElement('option');
+                option.value = tenant.id;
+                option.textContent = tenant.name;
+                select.appendChild(option);
+            });
+        }
+
+        function showError(message) {
+            document.getElementById('data-container').innerHTML = `
+                <div class="empty-state" style="color: var(--danger);">
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        async function loadTenantData() {
+            const tenantId = document.getElementById('tenant-select').value;
+            if (!tenantId) {
+                alert('Seleziona un tenant');
+                return;
+            }
+
+            selectedTenantId = tenantId;
+            const container = document.getElementById('data-container');
+            const statsContainer = document.getElementById('stats-container');
+
+            container.innerHTML = '<div class="loading">Caricamento dati in corso...</div>';
+            statsContainer.style.display = 'none';
+
+            try {
+                // First, load lookup data for FK resolution
+                await loadLookupData(tenantId);
+
+                // Load all table data
+                const results = {};
+                const stats = {};
+
+                for (const tableName of Object.keys(TENANT_TABLES)) {
+                    try {
+                        const response = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/table/${tableName}`);
+                        if (response.ok) {
+                            const data = await response.json();
+                            results[tableName] = data;
+                            stats[tableName] = data.length;
+                        } else {
+                            results[tableName] = [];
+                            stats[tableName] = 0;
+                        }
+                    } catch {
+                        results[tableName] = [];
+                        stats[tableName] = 0;
+                    }
+                }
+
+                tenantData = results;
+                renderStats(stats);
+                renderDataSections(results);
+
+            } catch (error) {
+                console.error('Error loading tenant data:', error);
+                showError(`Errore nel caricamento: ${error.message}`);
+            }
+        }
+
+        async function loadLookupData(tenantId) {
+            // Load employees for FK resolution
+            try {
+                const empRes = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/employees`);
+                if (empRes.ok) {
+                    const employees = await empRes.json();
+                    employees.forEach(e => {
+                        lookupCache.employees[e.id] = {
+                            ...e,
+                            fullName: `${e.first_name} ${e.last_name}`
+                        };
+                    });
+                }
+            } catch {}
+
+            // Load departments
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/table/departments`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(d => lookupCache.departments[d.id] = d);
+                }
+            } catch {}
+
+            // Load cost centers
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/cost-centers`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(c => lookupCache.cost_centers[c.id] = c);
+                }
+            } catch {}
+
+            // Load org units
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/org-units`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(o => lookupCache.org_units[o.id] = o);
+                }
+            } catch {}
+
+            // Load locations (unified sede entity)
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/table/locations`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(l => lookupCache.locations[l.id] = l);
+                }
+            } catch {}
+
+            // Load goals for parent resolution
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/table/goals`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(g => lookupCache.goals[g.id] = g);
+                }
+            } catch {}
+
+            // Load courses
+            try {
+                const res = await fetch(`${API_BASE}/inspector/tenant/${tenantId}/table/courses`);
+                if (res.ok) {
+                    const data = await res.json();
+                    data.forEach(c => lookupCache.courses[c.id] = c);
+                }
+            } catch {}
+        }
+
+        function resolveFKValue(fieldName, value) {
+            if (!value) return null;
+
+            const mapping = DISPLAY_FIELD_MAP[fieldName];
+            if (!mapping) return null;
+
+            const cache = lookupCache[mapping.lookup];
+            if (!cache) return null;
+
+            const record = cache[value];
+            if (!record) return null;
+
+            return record[mapping.display] || record.name || record.title || null;
+        }
+
+        function renderStats(stats) {
+            const container = document.getElementById('stats-container');
+            const tablesWithData = Object.values(stats).filter(v => v > 0).length;
+            const totalTables = Object.keys(stats).length;
+
+            // Metriche singole e significative - NO aggregazioni arbitrarie
+            container.innerHTML = `
+                <div class="stat-card">
+                    <div class="label">Dipendenti</div>
+                    <div class="value">${(stats.employees || 0).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        Headcount attuale
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Struttura Organizzativa</div>
+                    <div class="value">${(stats.departments || 0) + (stats.org_units || 0)}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        ${stats.departments || 0} dipartimenti, ${stats.org_units || 0} unità org.
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Sedi</div>
+                    <div class="value">${(stats.locations || 0).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        Location aziendali
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Obiettivi Attivi</div>
+                    <div class="value">${(stats.goals || 0).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        ${stats.okrs || 0} OKR, ${stats.performance_reviews || 0} valutazioni
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Posizioni Aperte</div>
+                    <div class="value">${(stats.recruiting_requisitions || 0).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        ${stats.recruiting_candidates || 0} candidati in pipeline
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Catalogo Formativo</div>
+                    <div class="value">${(stats.courses || 0).toLocaleString()}</div>
+                    <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.25rem;">
+                        ${stats.learning_paths || 0} percorsi, ${stats.certifications || 0} certificazioni
+                    </div>
+                </div>
+            `;
+            container.style.display = 'grid';
+        }
+
+        function renderDataSections(results) {
+            const container = document.getElementById('data-container');
+            container.innerHTML = '';
+
+            // Group by category
+            const categories = {};
+            for (const [tableName, config] of Object.entries(TENANT_TABLES)) {
+                if (!results[tableName] || results[tableName].length === 0) continue;
+
+                const cat = config.category || 'Altro';
+                if (!categories[cat]) categories[cat] = [];
+                categories[cat].push({ tableName, config, data: results[tableName] });
+            }
+
+            // Render each category
+            for (const [category, tables] of Object.entries(categories)) {
+                const totalRecords = tables.reduce((sum, t) => sum + t.data.length, 0);
+
+                container.innerHTML += `
+                    <div class="category-header">
+                        <h2>${category} <span class="category-count">(${totalRecords} record in ${tables.length} tabelle)</span></h2>
+                    </div>
+                `;
+
+                for (const { tableName, config, data } of tables) {
+                    const section = document.createElement('div');
+                    section.className = 'data-section';
+                    section.innerHTML = `
+                        <div class="section-header" onclick="toggleSection(this)">
+                            <h3>
+                                <span class="toggle-icon">&#9660;</span>
+                                ${config.name}
+                            </h3>
+                            <span class="badge">${data.length} record</span>
+                        </div>
+                        <div class="section-content">
+                            ${renderTableRecords(tableName, config, data)}
+                        </div>
+                    `;
+                    container.appendChild(section);
+                }
+            }
+
+            if (container.innerHTML === '') {
+                container.innerHTML = '<div class="empty-state">Nessun dato trovato per questo tenant</div>';
+            }
+        }
+
+        function renderTableRecords(tableName, config, data) {
+            if (!data || data.length === 0) {
+                return '<div class="empty-state">Nessun record</div>';
+            }
+
+            // Group records by ID to detect duplicates
+            const groupedById = groupRecordsById(data);
+            const uniqueGroups = Object.values(groupedById);
+            const hasDuplicates = uniqueGroups.some(group => group.length > 1);
+
+            // Use grouped cards view
+            if (uniqueGroups.length <= 15 || hasDuplicates) {
+                return uniqueGroups.map((group, idx) => {
+                    const primaryRecord = group[0];
+                    const duplicates = group.slice(1);
+                    const title = config.getTitle ? config.getTitle(primaryRecord) : `Record ${idx + 1}`;
+                    const subtitle = config.getSubtitle ? config.getSubtitle(primaryRecord) : null;
+                    const groupId = `group-${tableName}-${idx}`;
+                    const hasDups = duplicates.length > 0;
+
+                    return `
+                        <div class="record-group ${hasDups ? 'has-duplicates' : ''}">
+                            <div class="record-group-header" onclick="toggleRecordGroup('${groupId}')">
+                                <div class="record-group-title">
+                                    <span class="group-toggle">&#9660;</span>
+                                    ${title}
+                                    ${subtitle ? `<span class="record-group-subtitle">${subtitle}</span>` : ''}
+                                </div>
+                                <div class="record-group-meta">
+                                    ${hasDups ? `<span class="duplicate-badge">${group.length} referenze</span>` : ''}
+                                </div>
+                            </div>
+                            <div id="${groupId}" class="record-group-content">
+                                <div class="field-grid">
+                                    ${renderRecordFields(primaryRecord)}
+                                </div>
+                                ${hasDups ? renderDuplicateRecords(duplicates, primaryRecord, tableName, idx) : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Use table for larger datasets without duplicates
+            const columns = Object.keys(data[0]);
+            const displayColumns = columns.slice(0, 6);
+
+            return `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Identificativo</th>
+                            ${displayColumns.filter(c => c !== 'id').slice(0, 5).map(col =>
+                                `<th>${getFieldLabel(col)}</th>`
+                            ).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.slice(0, 50).map(row => {
+                            const title = config.getTitle ? config.getTitle(row) : row.id?.substring(0,8);
+                            return `
+                                <tr onclick="showRecordDetail('${tableName}', '${row.id}')">
+                                    <td><strong>${title}</strong></td>
+                                    ${displayColumns.filter(c => c !== 'id').slice(0, 5).map(col => {
+                                        const resolved = resolveFKValue(col, row[col]);
+                                        return `<td class="${resolved ? 'resolved-cell' : ''}">${resolved || formatValue(row[col])}</td>`;
+                                    }).join('')}
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+                ${data.length > 50 ? `<p style="padding: 1rem; color: var(--gray-600); text-align: center;">Mostrati 50 di ${data.length} record</p>` : ''}
+            `;
+        }
+
+        function groupRecordsById(records) {
+            const groups = {};
+            for (const record of records) {
+                const id = record.id || JSON.stringify(record);
+                if (!groups[id]) {
+                    groups[id] = [];
+                }
+                groups[id].push(record);
+            }
+            return groups;
+        }
+
+        function renderDuplicateRecords(duplicates, primaryRecord, tableName, groupIdx) {
+            return `
+                <div class="duplicate-records">
+                    <div class="duplicate-records-header">
+                        Referenze multiple (${duplicates.length} aggiuntive) - stesso record raggiunto da FK diverse:
+                    </div>
+                    ${duplicates.map((dup, dupIdx) => {
+                        const dupId = `dup-${tableName}-${groupIdx}-${dupIdx}`;
+                        const diffFields = findDifferentFields(primaryRecord, dup);
+                        return `
+                            <div class="duplicate-record">
+                                <div class="duplicate-record-header collapsed" onclick="toggleDuplicateRecord('${dupId}', this)">
+                                    <span class="dup-toggle">&#9660;</span>
+                                    Referenza #${dupIdx + 2}
+                                    ${diffFields.length > 0 ? `<span style="color: var(--warning); font-size: 0.7rem;">(${diffFields.length} campi diversi)</span>` : '<span style="color: var(--gray-400); font-size: 0.7rem;">(identico)</span>'}
+                                </div>
+                                <div id="${dupId}" class="duplicate-record-fields collapsed">
+                                    <div class="field-grid">
+                                        ${renderRecordFieldsWithDiff(dup, primaryRecord)}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function findDifferentFields(record1, record2) {
+            const diffFields = [];
+            for (const key of Object.keys(record1)) {
+                if (JSON.stringify(record1[key]) !== JSON.stringify(record2[key])) {
+                    diffFields.push(key);
+                }
+            }
+            return diffFields;
+        }
+
+        function renderRecordFieldsWithDiff(row, primaryRecord) {
+            return Object.entries(row).map(([key, value]) => {
+                const resolved = resolveFKValue(key, value);
+                const isFK = resolved !== null;
+                const isEmpty = value === null || value === undefined;
+                const isDifferent = JSON.stringify(value) !== JSON.stringify(primaryRecord[key]);
+
+                return `
+                    <div class="field-item ${isFK ? 'fk-resolved' : ''} ${isEmpty ? 'empty' : ''} ${isDifferent ? 'diff-highlight' : ''}">
+                        <span class="field-name">${getFieldLabel(key)}</span>
+                        <span class="field-value ${isEmpty ? 'null' : ''}">
+                            ${isFK ? `
+                                <span class="resolved-value">${resolved}</span>
+                                <span class="original-id">ID: ${truncate(String(value), 20)}</span>
+                            ` : formatValue(value)}
+                        </span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleRecordGroup(groupId) {
+            const content = document.getElementById(groupId);
+            const header = content.previousElementSibling;
+            header.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        }
+
+        function toggleDuplicateRecord(dupId, headerEl) {
+            const content = document.getElementById(dupId);
+            headerEl.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        }
+
+        function renderRecordFields(row) {
+            return Object.entries(row).map(([key, value]) => {
+                const resolved = resolveFKValue(key, value);
+                const isFK = resolved !== null;
+                const isEmpty = value === null || value === undefined;
+
+                return `
+                    <div class="field-item ${isFK ? 'fk-resolved' : ''} ${isEmpty ? 'empty' : ''}">
+                        <span class="field-name">${getFieldLabel(key)}</span>
+                        <span class="field-value ${isEmpty ? 'null' : ''}">
+                            ${isFK ? `
+                                <span class="resolved-value">${resolved}</span>
+                                <span class="original-id">ID: ${truncate(String(value), 20)}</span>
+                            ` : formatValue(value)}
+                        </span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getFieldLabel(fieldName) {
+            // Check if we have a display mapping
+            const mapping = DISPLAY_FIELD_MAP[fieldName];
+            if (mapping) return mapping.label;
+
+            // Convert snake_case to Title Case
+            return fieldName
+                .replace(/_/g, ' ')
+                .replace(/\b\w/g, l => l.toUpperCase())
+                .replace(/Id$/, 'ID');
+        }
+
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            header.nextElementSibling.classList.toggle('collapsed');
+        }
+
+        function showRecordDetail(tableName, recordId) {
+            const data = tenantData[tableName];
+            if (!data) return;
+
+            const row = data.find(r => r.id === recordId);
+            if (!row) return;
+
+            const config = TENANT_TABLES[tableName];
+            const title = config?.getTitle ? config.getTitle(row) : 'Dettaglio Record';
+
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;';
+            modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+
+            modal.innerHTML = `
+                <div style="background: white; border-radius: 0.75rem; max-width: 900px; max-height: 85vh; overflow-y: auto; padding: 2rem; margin: 1rem;">
+                    <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">${title}</h3>
+                    <p style="color: var(--gray-500); margin-bottom: 1.5rem; font-size: 0.875rem;">${config?.name || tableName}</p>
+                    <div class="field-grid">
+                        ${renderRecordFields(row)}
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" style="margin-top: 1.5rem;" class="btn btn-primary">Chiudi</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+name: Bug report
+description: Something isn't working as expected
+title: "fix: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened? What did you expect?
+    validations: { required: true }
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1.
+        2.
+        3.
+    validations: { required: true }
+  - type: input
+    id: env
+    attributes: { label: Environment (vm-source / vm-default / local) }
+  - type: textarea
+    id: logs
+    attributes: { label: Relevant logs / screenshots }

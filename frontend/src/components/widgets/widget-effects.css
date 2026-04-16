@@ -1,0 +1,226 @@
+/* ============================================
+   WIDGET EFFECTS — Animated glow, spotlight,
+   avatar ring, career beam, badge shimmer
+   All hover effects originate from bottom-left
+   Uses CSS Houdini @property for --angle
+   ============================================ */
+
+/* ---- Houdini animated angle ---- */
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes widget-ring-spin {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* ---- Widget card base ---- */
+.widget-card {
+  position: relative;
+  border-radius: 14px;
+  backdrop-filter: blur(16px) saturate(1.1);
+  border: 1px solid hsl(var(--border));
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.widget-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px oklch(0 0 0 / 0.08), 0 2px 8px oklch(0 0 0 / 0.04);
+  border-color: hsl(var(--primary) / 0.25);
+}
+
+:is(.dark) .widget-card:hover {
+  box-shadow: 0 8px 24px oklch(0 0 0 / 0.4), 0 0 1px oklch(1 0 0 / 0.08);
+}
+
+/* ---- Layer 1: Spotlight (follows mouse) ---- */
+.widget-spot {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: radial-gradient(
+    600px circle at var(--spot-x, 0px) var(--spot-y, 100%),
+    hsl(var(--primary) / 0.12),
+    transparent 40%
+  );
+}
+
+.widget-card:hover .widget-spot {
+  opacity: 1;
+}
+
+/* ---- Layer 2: Animated border glow ---- */
+.widget-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 16px;
+  padding: 2px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: conic-gradient(
+    from calc(var(--angle) + 225deg),
+    transparent 50%,
+    hsl(var(--primary)) 60%,
+    oklch(0.638 0.200 310) 70%,
+    oklch(0.720 0.160 55) 75%,
+    transparent 85%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: widget-ring-spin 3s linear infinite;
+}
+
+.widget-card:hover .widget-glow {
+  opacity: 0.8;
+}
+
+:is(.dark) .widget-card:hover .widget-glow {
+  opacity: 1;
+}
+
+/* ---- Layer 3: Outer blur halo ---- */
+.widget-halo {
+  position: absolute;
+  inset: -8px;
+  border-radius: 16px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(16px);
+  background: conic-gradient(
+    from calc(var(--angle) + 225deg),
+    transparent 50%,
+    hsl(var(--primary)) 60%,
+    oklch(0.638 0.200 310) 70%,
+    oklch(0.720 0.160 55) 75%,
+    transparent 85%
+  );
+  animation: widget-ring-spin 3s linear infinite;
+}
+
+.widget-card:hover .widget-halo {
+  opacity: 0.25;
+}
+
+/* ---- Animated avatar ring ---- */
+.avatar-ring {
+  position: relative;
+  padding: 3px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from var(--angle),
+    oklch(0.488 0.18 264),
+    oklch(0.638 0.2 310),
+    oklch(0.72 0.16 55),
+    oklch(0.488 0.18 264)
+  );
+  animation: widget-ring-spin 3s linear infinite;
+}
+
+.avatar-ring::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  filter: blur(14px);
+  opacity: 0.35;
+  z-index: -1;
+  background: conic-gradient(
+    from var(--angle),
+    oklch(0.488 0.18 264),
+    oklch(0.638 0.2 310),
+    oklch(0.72 0.16 55),
+    oklch(0.488 0.18 264)
+  );
+  animation: widget-ring-spin 3s linear infinite;
+}
+
+/* ---- Career beam ---- */
+.career-beam {
+  position: relative;
+  overflow: hidden;
+}
+
+.career-beam::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(0.638 0.2 310 / 0.15),
+    transparent
+  );
+  animation: career-beam-sweep 2s ease-in-out infinite;
+}
+
+@keyframes career-beam-sweep {
+  from {
+    transform: translateX(-60%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ---- Badge shimmer ---- */
+.badge-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 85, 247, 0.12),
+    transparent
+  );
+  animation: badge-shimmer-sweep 2.5s ease-in-out infinite;
+}
+
+@keyframes badge-shimmer-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ---- Widget mount animation ---- */
+@keyframes widgetIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---- Workspace grid responsive ---- */
+@media (max-width: 767px) {
+  .workspace-grid > .workspace-widget-cell {
+    grid-column: span 12 !important;
+  }
+}

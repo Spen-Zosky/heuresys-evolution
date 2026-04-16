@@ -1,0 +1,631 @@
+@import "tailwindcss";
+@import '../components/widgets/widget-effects.css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================
+   HEURESYS AI-PLATFORM DESIGN SYSTEM V2.0
+   World-Class Minimal UI
+   Inspired by: Linear, Vercel, Stripe
+   ============================================ */
+
+@theme inline {
+  /* Color mappings */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Sidebar colors */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Chart colors - 8 color palette */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
+
+  /* Typography - Plus Jakarta Sans for body, Sora for display, Exo 2 for brand */
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: var(--font-sora), 'Exo 2', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), 'SF Mono', 'Fira Code', ui-monospace, monospace;
+  --font-brand: 'Exo 2', system-ui, sans-serif;
+
+  /* Border radius - Modern, slightly more rounded for cards */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
+}
+
+/* ============================================
+   LIGHT THEME - "Paper"
+   Clean, sophisticated, NOT generic
+   ============================================ */
+:root {
+  /* Base radius */
+  --radius: 8px;
+
+  /* Background Layers */
+  --background: oklch(0.985 0.002 250);           /* #FAFAFA - Main canvas */
+  --card: oklch(1 0 0);                            /* #FFFFFF - Cards */
+  --popover: oklch(1 0 0);                         /* #FFFFFF - Popovers */
+  --muted: oklch(0.965 0.003 250);                 /* #F4F4F5 - Subtle backgrounds */
+  --accent: oklch(0.965 0.003 250);                /* Same as muted */
+
+  /* Foreground */
+  --foreground: oklch(0.145 0.015 260);            /* #18181B - Primary text */
+  --card-foreground: oklch(0.145 0.015 260);
+  --popover-foreground: oklch(0.145 0.015 260);
+  --muted-foreground: oklch(0.45 0.015 260);       /* #71717A - Secondary text */
+  --accent-foreground: oklch(0.145 0.015 260);
+
+  /* Secondary */
+  --secondary: oklch(0.965 0.003 250);
+  --secondary-foreground: oklch(0.24 0.015 260);
+
+  /* Brand Primary - Deep Indigo (sophisticated, NOT generic AI blue) */
+  --primary: oklch(0.488 0.180 264);               /* Refined indigo */
+  --primary-foreground: oklch(1 0 0);
+
+  /* Brand Accent - Purple (for the "y" in Heuresys logo) */
+  --brand-accent: oklch(0.638 0.200 310);          /* #a855f7 - Purple */
+  --brand-accent-dark: oklch(0.553 0.230 305);     /* #7c3aed */
+  --brand-accent-light: oklch(0.810 0.120 315);    /* #d8b4fe */
+
+  /* Warm Accent - Copper/Amber for CTAs and highlights */
+  --accent-warm: oklch(0.720 0.160 55);            /* Warm copper */
+  --accent-warm-foreground: oklch(0.145 0.015 260);
+
+  /* Semantic Colors - Sophisticated palette */
+  --destructive: oklch(0.577 0.215 27);            /* Refined crimson */
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.596 0.170 149);               /* Forest green */
+  --success-foreground: oklch(1 0 0);
+
+  --warning: oklch(0.750 0.160 70);                /* Warm amber */
+  --warning-foreground: oklch(0.145 0.015 260);
+
+  --info: oklch(0.540 0.150 245);                  /* Slate blue */
+  --info-foreground: oklch(1 0 0);
+
+  /* Border & Input - Subtle, not harsh */
+  --border: oklch(0.918 0.005 250);                /* #E4E4E7 */
+  --input: oklch(0.918 0.005 250);
+  --ring: oklch(0.488 0.180 264);                  /* Same as primary */
+
+  /* Sidebar - Subtle distinction */
+  --sidebar: oklch(0.975 0.003 250);               /* Slightly darker than bg */
+  --sidebar-foreground: oklch(0.145 0.015 260);
+  --sidebar-primary: oklch(0.488 0.180 264);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.955 0.005 250);
+  --sidebar-accent-foreground: oklch(0.145 0.015 260);
+  --sidebar-border: oklch(0.918 0.005 250);
+  --sidebar-ring: oklch(0.488 0.180 264);
+
+  /* Charts - 8-color palette, colorblind safe */
+  --chart-1: oklch(0.488 0.180 264);               /* Indigo */
+  --chart-2: oklch(0.596 0.150 180);               /* Teal */
+  --chart-3: oklch(0.596 0.170 149);               /* Green */
+  --chart-4: oklch(0.750 0.160 70);                /* Amber */
+  --chart-5: oklch(0.577 0.215 27);                /* Coral */
+  --chart-6: oklch(0.550 0.180 320);               /* Magenta */
+  --chart-7: oklch(0.500 0.140 280);               /* Purple */
+  --chart-8: oklch(0.580 0.120 200);               /* Cyan */
+
+  /* Animation timing */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-slow: 400ms;
+}
+
+/* ============================================
+   DARK THEME - "Soft Dark"
+   NEVER pure black - warm dark grays
+   ============================================ */
+.dark {
+  /* Background Layers - Soft dark with subtle blue tint */
+  --background: oklch(0.145 0.015 265);            /* #18181B - NOT pure black */
+  --card: oklch(0.190 0.018 265);                  /* #27272A - Elevated */
+  --popover: oklch(0.190 0.018 265);
+  --muted: oklch(0.230 0.018 265);                 /* #3F3F46 - Subtle */
+  --accent: oklch(0.230 0.018 265);
+
+  /* Foreground - NOT pure white, slightly warm */
+  --foreground: oklch(0.965 0.003 250);            /* #FAFAFA */
+  --card-foreground: oklch(0.965 0.003 250);
+  --popover-foreground: oklch(0.965 0.003 250);
+  --muted-foreground: oklch(0.685 0.015 260);      /* #A1A1AA */
+  --accent-foreground: oklch(0.965 0.003 250);
+
+  /* Secondary */
+  --secondary: oklch(0.270 0.018 265);
+  --secondary-foreground: oklch(0.965 0.003 250);
+
+  /* Brand Primary - Brighter for dark mode */
+  --primary: oklch(0.610 0.180 262);               /* Lighter indigo */
+  --primary-foreground: oklch(0.145 0.015 265);
+
+  /* Warm Accent - Brighter for dark mode */
+  --accent-warm: oklch(0.780 0.150 55);
+  --accent-warm-foreground: oklch(0.145 0.015 265);
+
+  /* Semantic - Adjusted for dark backgrounds */
+  --destructive: oklch(0.650 0.200 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.680 0.160 149);
+  --success-foreground: oklch(0.145 0.015 265);
+
+  --warning: oklch(0.800 0.150 70);
+  --warning-foreground: oklch(0.145 0.015 265);
+
+  --info: oklch(0.640 0.140 245);
+  --info-foreground: oklch(0.145 0.015 265);
+
+  /* Border & Input - Visible but not harsh */
+  --border: oklch(0.320 0.012 265);                /* Subtle border */
+  --input: oklch(0.320 0.012 265);
+  --ring: oklch(0.610 0.180 262);
+
+  /* Sidebar */
+  --sidebar: oklch(0.165 0.018 265);               /* Slightly lighter than bg */
+  --sidebar-foreground: oklch(0.965 0.003 250);
+  --sidebar-primary: oklch(0.610 0.180 262);
+  --sidebar-primary-foreground: oklch(0.965 0.003 250);
+  --sidebar-accent: oklch(0.250 0.018 265);
+  --sidebar-accent-foreground: oklch(0.965 0.003 250);
+  --sidebar-border: oklch(0.320 0.012 265);
+  --sidebar-ring: oklch(0.610 0.180 262);
+
+  /* Charts - Brighter for dark mode */
+  --chart-1: oklch(0.610 0.180 262);
+  --chart-2: oklch(0.680 0.140 180);
+  --chart-3: oklch(0.680 0.160 149);
+  --chart-4: oklch(0.800 0.150 70);
+  --chart-5: oklch(0.650 0.200 25);
+  --chart-6: oklch(0.620 0.170 320);
+  --chart-7: oklch(0.580 0.140 280);
+  --chart-8: oklch(0.660 0.120 200);
+}
+
+/* ============================================
+   EXCALIDRAW BRAND CUSTOMIZATION
+   ============================================ */
+.excalidraw {
+  --color-primary: #4f46e5;
+  --color-primary-darker: #4338ca;
+  --color-primary-darkest: #3730a3;
+  --color-primary-light: #818cf8;
+}
+
+.excalidraw.theme--dark {
+  --color-primary: #818cf8;
+  --color-primary-darker: #a5b4fc;
+  --color-primary-darkest: #c7d2fe;
+  --color-primary-light: #6366f1;
+}
+
+/* ============================================
+   BASE LAYER
+   ============================================ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Tabular numbers for data */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Focus visible styles - subtle ring */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring/50 ring-offset-1 ring-offset-background;
+  }
+
+  /* Selection - brand color */
+  ::selection {
+    @apply bg-primary/15 text-foreground;
+  }
+
+  /* Scrollbar styling - minimal */
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/30;
+  }
+
+  /* Employee layout - larger base font */
+  .employee-layout {
+    font-size: 16px;
+  }
+
+  /* Admin layout - compact font */
+  .admin-layout {
+    font-size: 14px;
+  }
+
+  /* Display font for headings */
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  /* Brand font for logo/hero text */
+  .font-brand {
+    font-family: var(--font-brand);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+}
+
+/* ============================================
+   COMPONENT UTILITIES
+   ============================================ */
+@layer utilities {
+  /* Text balance for headings */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Gradient text - subtle */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80;
+  }
+
+  /* Card hover effect - MINIMAL, no heavy shadows */
+  .card-hover {
+    @apply transition-all duration-200;
+  }
+
+  .card-hover:hover {
+    @apply border-border/80;
+    transform: translateY(-1px);
+  }
+
+  /* Status dot indicator */
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+  }
+
+  .status-dot-pending {
+    @apply bg-warning;
+  }
+
+  .status-dot-approved {
+    @apply bg-success;
+  }
+
+  .status-dot-rejected {
+    @apply bg-destructive;
+  }
+
+  /* Loading shimmer - subtle */
+  .shimmer {
+    @apply animate-pulse bg-muted;
+  }
+
+  /* Safe area padding for mobile */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+
+  /* Glass effect - modern */
+  .glass {
+    @apply bg-background/80 backdrop-blur-md;
+  }
+
+  /* ---- Elevation System (4 levels) ---- */
+
+  /* Level 1: Subtle resting state */
+  .shadow-subtle {
+    box-shadow: 0 1px 3px oklch(0 0 0 / 0.04), 0 1px 2px oklch(0 0 0 / 0.02);
+  }
+
+  /* Level 2: Raised (hover, active cards) */
+  .shadow-raised {
+    box-shadow: 0 2px 8px oklch(0 0 0 / 0.06), 0 1px 3px oklch(0 0 0 / 0.04);
+  }
+
+  /* Level 3: Floating (dropdowns, popovers) */
+  .shadow-floating {
+    box-shadow: 0 8px 24px oklch(0 0 0 / 0.08), 0 2px 8px oklch(0 0 0 / 0.04);
+  }
+
+  /* Level 4: Overlay (modals, dialogs) */
+  .shadow-overlay {
+    box-shadow: 0 16px 48px oklch(0 0 0 / 0.12), 0 4px 16px oklch(0 0 0 / 0.06);
+  }
+
+  /* Hover lift with primary tint */
+  .hover\:shadow-lift:hover {
+    box-shadow: 0 4px 16px oklch(0 0 0 / 0.06), 0 0 0 1px var(--primary) / 0.05;
+  }
+
+  /* Dark mode: glow instead of drop shadow */
+  :is(.dark) .shadow-raised {
+    box-shadow: 0 2px 8px oklch(0 0 0 / 0.3), 0 0 1px oklch(1 0 0 / 0.05);
+  }
+
+  :is(.dark) .shadow-floating {
+    box-shadow: 0 8px 24px oklch(0 0 0 / 0.4), 0 0 1px oklch(1 0 0 / 0.08);
+  }
+
+  :is(.dark) .shadow-overlay {
+    box-shadow: 0 16px 48px oklch(0 0 0 / 0.5), 0 0 1px oklch(1 0 0 / 0.1);
+  }
+
+  :is(.dark) .hover\:shadow-lift:hover {
+    box-shadow: 0 4px 16px oklch(0 0 0 / 0.3), 0 0 12px var(--primary) / 0.08;
+  }
+
+  /* ---- Grain Texture Overlay ---- */
+  .bg-grain {
+    position: relative;
+  }
+
+  .bg-grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    mix-blend-mode: overlay;
+  }
+
+  :is(.dark) .bg-grain::after {
+    opacity: 0.05;
+    mix-blend-mode: soft-light;
+  }
+
+  /* ---- Warm Accent Utilities ---- */
+  .text-accent-warm {
+    color: var(--accent-warm);
+  }
+
+  .bg-accent-warm {
+    background-color: var(--accent-warm);
+    color: var(--accent-warm-foreground);
+  }
+
+  .border-accent-warm {
+    border-color: var(--accent-warm);
+  }
+
+  /* ---- Mesh Gradient Backgrounds ---- */
+  .bg-mesh-hero {
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 30%, oklch(0.488 0.12 264 / 0.12), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 20%, oklch(0.638 0.12 310 / 0.08), transparent),
+      radial-gradient(ellipse 50% 70% at 50% 80%, oklch(0.720 0.10 55 / 0.06), transparent);
+  }
+
+  :is(.dark) .bg-mesh-hero {
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 30%, oklch(0.610 0.12 262 / 0.10), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 20%, oklch(0.638 0.14 310 / 0.08), transparent),
+      radial-gradient(ellipse 50% 70% at 50% 80%, oklch(0.780 0.10 55 / 0.05), transparent);
+  }
+
+  .bg-mesh-login {
+    background:
+      radial-gradient(ellipse 70% 50% at 30% 40%, oklch(0.488 0.10 264 / 0.10), transparent),
+      radial-gradient(ellipse 50% 60% at 70% 60%, oklch(0.638 0.10 310 / 0.06), transparent);
+  }
+
+  :is(.dark) .bg-mesh-login {
+    background:
+      radial-gradient(ellipse 70% 50% at 30% 40%, oklch(0.610 0.10 262 / 0.08), transparent),
+      radial-gradient(ellipse 50% 60% at 70% 60%, oklch(0.638 0.10 310 / 0.06), transparent);
+  }
+}
+
+/* ============================================
+   ANIMATIONS - Smooth, purposeful
+   ============================================ */
+@layer utilities {
+  /* Fade animations */
+  .animate-fade-in {
+    animation: fade-in var(--duration-normal) var(--ease-out);
+  }
+
+  .animate-fade-out {
+    animation: fade-out var(--duration-normal) var(--ease-out);
+  }
+
+  /* Slide animations */
+  .animate-slide-in-right {
+    animation: slide-in-right var(--duration-slow) var(--ease-out);
+  }
+
+  .animate-slide-in-bottom {
+    animation: slide-in-bottom var(--duration-slow) var(--ease-out);
+  }
+
+  .animate-slide-up {
+    animation: slide-up var(--duration-normal) var(--ease-out);
+  }
+
+  /* Scale animation */
+  .animate-scale-in {
+    animation: scale-in var(--duration-fast) var(--ease-out);
+  }
+
+  /* Button press effect */
+  .active\:scale-98:active {
+    transform: scale(0.98);
+  }
+
+  /* Stagger animation helper */
+  .stagger-1 { animation-delay: 50ms; }
+  .stagger-2 { animation-delay: 100ms; }
+  .stagger-3 { animation-delay: 150ms; }
+  .stagger-4 { animation-delay: 200ms; }
+  .stagger-5 { animation-delay: 250ms; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-in-bottom {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.96); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+@layer utilities {
+  /* Touch target minimum size - WCAG 2.5.5 */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Admin compact touch target */
+  .touch-target-sm {
+    @apply min-h-[36px] min-w-[36px];
+  }
+
+  /* Container with max-width */
+  .container-narrow {
+    @apply max-w-3xl mx-auto px-4;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 md:px-6;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   CHART TOOLTIP STYLES
+   ============================================ */
+.chart-tooltip {
+  @apply bg-popover text-popover-foreground border border-border rounded-md shadow-lg p-3;
+  @apply text-sm;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.chart-tooltip-title {
+  @apply font-medium mb-1;
+}
+
+.chart-tooltip-value {
+  @apply tabular-nums font-semibold;
+}
+
+/* Nivo chart overrides */
+.nivo-tooltip {
+  @apply bg-popover text-popover-foreground border border-border rounded-md shadow-lg;
+}
