@@ -1,5 +1,14 @@
 # Heuresys Evolution
 
+[![CI](https://github.com/Spen-Zosky/heuresys-evolution/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Spen-Zosky/heuresys-evolution/actions/workflows/ci.yml)
+[![Security](https://github.com/Spen-Zosky/heuresys-evolution/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/Spen-Zosky/heuresys-evolution/actions/workflows/security.yml)
+[![Release](https://github.com/Spen-Zosky/heuresys-evolution/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/Spen-Zosky/heuresys-evolution/actions/workflows/release.yml)
+[![License: Proprietary](https://img.shields.io/badge/license-Proprietary-red.svg)](./LICENSE)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://www.conventionalcommits.org)
+[![Node](https://img.shields.io/badge/node-20%20LTS-339933.svg?logo=node.js)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?logo=typescript)](https://www.typescriptlang.org/)
+
+
 **Organizational Intelligence & Workforce Orchestration Platform**
 
 Multi-tenant enterprise platform that governs organizational capability as a

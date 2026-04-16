@@ -1,0 +1,171 @@
+# Dependabot config — automated dependency updates
+# Docs: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates
+version: 2
+
+updates:
+  # ---------- npm: root ----------
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Rome
+    open-pull-requests-limit: 5
+    reviewers:
+      - Spen-Zosky
+    assignees:
+      - Spen-Zosky
+    labels:
+      - dependencies
+      - npm
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+      include: scope
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - minor
+          - patch
+
+  # ---------- npm: frontend (Next.js) ----------
+  - package-ecosystem: npm
+    directory: "/frontend"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Rome
+    open-pull-requests-limit: 5
+    reviewers:
+      - Spen-Zosky
+    labels:
+      - dependencies
+      - npm
+      - frontend
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+      include: scope
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - minor
+          - patch
+
+  # ---------- npm: api-gateway ----------
+  - package-ecosystem: npm
+    directory: "/services/api-gateway"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Rome
+    open-pull-requests-limit: 5
+    reviewers:
+      - Spen-Zosky
+    labels:
+      - dependencies
+      - npm
+      - backend
+    commit-message:
+      prefix: "chore(deps)"
+      include: scope
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - minor
+          - patch
+
+  # ---------- npm: enrichment-engine ----------
+  - package-ecosystem: npm
+    directory: "/services/enrichment-engine"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Rome
+    open-pull-requests-limit: 3
+    reviewers:
+      - Spen-Zosky
+    labels:
+      - dependencies
+      - npm
+      - enrichment
+    commit-message:
+      prefix: "chore(deps)"
+      include: scope
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - minor
+          - patch
+
+  # ---------- docker: backend/api ----------
+  - package-ecosystem: docker
+    directory: "/backend/api"
+    schedule:
+      interval: monthly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Rome
+    open-pull-requests-limit: 2
+    reviewers:
+      - Spen-Zosky
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: "chore(docker)"
+
+  # ---------- docker: backend/enrichment ----------
+  - package-ecosystem: docker
+    directory: "/backend/enrichment"
+    schedule:
+      interval: monthly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Rome
+    open-pull-requests-limit: 2
+    reviewers:
+      - Spen-Zosky
+    labels:
+      - dependencies
+      - docker
+
+  # ---------- docker: frontend ----------
+  - package-ecosystem: docker
+    directory: "/frontend"
+    schedule:
+      interval: monthly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Rome
+    open-pull-requests-limit: 2
+    reviewers:
+      - Spen-Zosky
+    labels:
+      - dependencies
+      - docker
+
+  # ---------- github-actions ----------
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Rome
+    open-pull-requests-limit: 3
+    reviewers:
+      - Spen-Zosky
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: "chore(ci)"
