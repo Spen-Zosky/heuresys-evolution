@@ -1,0 +1,5 @@
+# gitleaks false-positive suppressions
+# 12× excalidraw vendored bundle (minified patterns match token regex — not real secrets)
+# 2×  excalidraw firebase public config (vendored from upstream, public by design)
+# 3×  test placeholders with 'abcdef...' patterns (fake fixtures)
+
